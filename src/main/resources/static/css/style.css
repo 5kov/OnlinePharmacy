@@ -1,0 +1,257 @@
+@import url('https://fonts.cdnfonts.com/css/pt-serif');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "PT Serif", serif;
+}
+footer {
+    font-family: "PT Sans", sans-serif;
+}
+
+.container {
+    max-width: 75em;
+    margin: auto;
+    background-image: url(../img/background.jpg);
+    background-repeat: no-repeat;
+    background-size: 75em;
+    background-position: top
+;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 1.5em;
+    overflow: hidden;
+    transform: scaleY(1.2);
+}
+
+header nav ul li {
+    float: left;
+}
+
+header nav ul li a {
+    color: white;
+    padding: 1em;
+    text-decoration: none;
+    font-size: 0.65em;
+    font-family: "PT Sans", sans-serif;
+    text-transform: uppercase;
+    
+}
+
+header img {
+    display: block;
+    width: 4.5em;
+    margin-top: 0em;
+    margin-left: 0em;
+}
+
+header .logo-container {
+    width: 6em;
+    height: 6em;
+    background-color: #FFFFFF;
+    border-radius: 10em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 5em;
+
+}
+
+.section-1 {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.section-1 article {
+    padding-left: 8.5em;
+    padding-top: 4em;
+    max-width: 38.5em;
+}
+
+.section-1 article h1 {
+    font-size: 2.82em;
+    padding-bottom: 0.6em;
+    font-weight: 100;
+}
+.section-1 article p {
+    font-family: "PT Sans", sans-serif;
+    font-size: 0.95em;
+    line-height: 1.5em;
+    padding-bottom: 1em;
+}
+
+.section-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #FFFFFF;
+    gap: 2em;
+}
+
+.section-2 article {
+    max-width: 28em;
+    padding-top: 5em;
+    padding-bottom: 5em;
+}
+.section-2 article h2 {
+    color: #37282B;
+    font-size: 2.5em;
+    padding-bottom: 0.5em;
+    font-weight: 100;
+}
+.section-2 article p {
+    color: #37282B;
+    font-family: "PT Sans", sans-serif;
+    font-size: 0.77em;
+    line-height: 1.55em;
+    padding-bottom: 2em;
+}
+.section-2 article a {
+    display: block;
+    width: max-content;
+    color: #B0825C;
+    font-family: "PT Sans", sans-serif;
+    font-size: 0.77em;
+    border: 0.15em solid #B0825C;
+    padding: 0.8em 1em 0.8em 1em;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.section-2 {
+    border-bottom: 0.15em solid #CCCCCC;
+}
+
+.section-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-3 article {
+    text-align: center;
+}
+
+.section-3 article h2 {
+    color: #B0825C;
+    font-size: 2.5em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-weight: 100;
+
+}
+
+.section-3 article p {
+    display: block;
+    color: #716567;
+    max-width: 75em;
+    font-family: "PT Sans", sans-serif;
+    font-size: 0.75em;
+    padding-bottom: 4em;
+}
+
+.section-3 article .container-all {
+    display: flex;
+    gap: 3em;
+}
+.section-3 article .container-all .image-container img {
+    width: 5em;
+}
+.section-3 article .container-all .image-container {
+    width: 7em;
+    height: 7em;
+    background-color: #DDDDDD;
+    border-radius: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.section-3 article {
+    padding-bottom: 4em;
+}
+
+.section-4 {
+    display: flex;
+    gap: 3 em;
+    justify-content: center;
+    background-color: #171720;
+    color: white;
+    border-bottom: 0.2em solid #CCCCCC;
+    padding-top: 3em;
+    padding-bottom: 3em;
+    gap: 3.7em;
+}
+
+#a-1 {
+    width: 12em;
+}
+
+#a-1 p {
+    margin-bottom: 4em;
+}
+
+#a-2 {
+    width: 13em;
+}
+
+#a-2 p {
+    margin-bottom: 4em;
+}
+#a-3 {
+    width: 15em;
+}
+
+#a-3 p {
+    margin-bottom: 4em;
+}
+
+#a-4 {
+    width: 9.8em;
+}
+.section-4 article h3 {
+    font-size: 1em;
+    padding-bottom: 1.5em;
+    font-weight: 100;
+}
+
+.section-4 article p {
+    font-size: 0.5em;
+    font-family: "PT Sans", sans-serif;
+    text-transform: uppercase;
+    color: #B3A6A8;
+    line-height: 2.5em;
+    transform: scaleY(1.2);
+
+}
+
+
+.section-5 {
+    background-color: #171720;
+    color: #B3A6A8;
+    font-size: 0.5em;
+    font-family: "PT Sans", sans-serif;
+    padding: 1em;
+    padding-bottom: 1em;
+    padding-left: 14.1em;
+    transform: scaleY(1.2);
+}
