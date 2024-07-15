@@ -192,14 +192,13 @@ header .logo-container {
 
 .section-4 {
     display: flex;
-    gap: 3 em;
+    gap: 3.7em;
     justify-content: center;
     background-color: #171720;
     color: white;
     border-bottom: 0.2em solid #CCCCCC;
     padding-top: 3em;
     padding-bottom: 3em;
-    gap: 3.7em;
 }
 
 #a-1 {
