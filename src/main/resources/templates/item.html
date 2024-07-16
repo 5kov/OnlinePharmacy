@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<div class="container">
+    <header th:replace="fragments/commons::header"></header>
+
+    <div class="form">
+
+        <div class ="flex-container">
+            <div class="drug-picture">
+                <img src="https://sopharmacy.bg/media/sys_master/haf/h37/9093013340190.jpg" alt="Helicid">
+            </div>
+            <div>
+                <p>Хелицид 20 мг х28 капсули Zentiva</p>
+                <p>8,12 лв.</p>
+                <input class="button-show-more" id="id_form-0-quantity" min="1" name="form-0-quantity" value="1" type="number">
+                <button type="button" class="button-show-more">Add to Cart</button>
+            </div>
+        </div>
+        <div id="description">
+            <p>
+                Omeprazole is a widely used medication primarily known for its role in treating certain conditions associated with the stomach and esophagus. Below is detailed information about omeprazole, including its uses, mechanism of action, dosage, side effects, and precautions:
+
+                General Information:
+                Brand Names: Prilosec, Losec, Zegerid (combined with sodium bicarbonate), among others.
+                Drug Class: Proton Pump Inhibitor (PPI).
+                Availability: Prescription and over-the-counter.
+                Uses:
+                Omeprazole is used to treat various gastrointestinal conditions, including:
+                Gastroesophageal Reflux Disease (GERD): A condition where stomach acid frequently flows back into the esophagus, causing irritation.
+                Erosive Esophagitis: Inflammation and damage to the esophagus caused by stomach acid.
+                Peptic Ulcers: Sores that develop on the lining of the stomach, small intestine, or esophagus.
+                Zollinger-Ellison Syndrome: A rare condition where the stomach produces too much acid due to tumors in the pancreas or duodenum.
+                H. pylori Infection: Used in combination with antibiotics to treat this bacterial infection, which can cause ulcers.
+                Mechanism of Action:
+                Omeprazole works by inhibiting the hydrogen-potassium adenosine triphosphatase enzyme system (proton pump) in the stomach lining. This action blocks the final step of acid production, thereby reducing gastric acidity.
+
+                Dosage:
+                Typical Adult Dosage:
+                GERD: 20 mg once daily for 4-8 weeks.
+                Erosive Esophagitis: 20 mg once daily for 4-8 weeks; maintenance therapy may be required.
+                Peptic Ulcer: 20 mg once daily for 4-8 weeks.
+                Zollinger-Ellison Syndrome: Dosages vary; typically 60 mg daily, but can be adjusted based on patient needs.
+                Administration: Oral, usually taken before a meal. Available as delayed-release capsules, tablets, and oral suspension.
+                Side Effects:
+                Common side effects include:
+
+                Headache
+                Abdominal pain
+                Nausea
+                Diarrhea
+                Vomiting
+                Gas (flatulence)
+                Less common but serious side effects:
+                Severe allergic reactions (rash, itching/swelling, severe dizziness, trouble breathing)
+                Low magnesium levels (rare, but serious)
+                Vitamin B12 deficiency (with long-term use)
+                Clostridium difficile-associated diarrhea (CDAD)
+                Precautions:
+                Allergies: Inform your doctor if you have any allergies to omeprazole or similar medications.
+                Medical History: Discuss your medical history with your healthcare provider, especially liver disease, lupus, and mineral imbalances.
+                Pregnancy and Breastfeeding: Use only if clearly needed; discuss risks and benefits with your doctor.
+                Long-term Use: Prolonged use may increase the risk of fractures, vitamin B12 deficiency, and certain infections.
+                Drug Interactions:
+                Omeprazole can interact with several other medications, potentially altering their effects. Some interactions include:
+
+                Clopidogrel: Omeprazole may reduce its effectiveness.
+                Warfarin: Increased risk of bleeding.
+                Methotrexate: Increased risk of toxicity.
+                Antifungals (like ketoconazole): Reduced absorption of these drugs.
+                Monitoring:
+                Patients on long-term omeprazole therapy may require monitoring for magnesium levels, bone density (due to the risk of fractures), and vitamin B12 levels.
+
+                Additional Information:
+                Storage: Store at room temperature away from light and moisture.
+                Missed Dose: Take the missed dose as soon as you remember, but skip it if it's near the time of the next dose. Do not double the dose to catch up.
+                Conclusion:
+                Omeprazole is an effective medication for managing various acid-related gastrointestinal conditions. Patients should follow their healthcare provider’s instructions carefully, be aware of potential side effects and drug interactions, and attend regular follow-up appointments to ensure safe and effective use of the medication.
+            </p>
+        </div>
+        <div>
+            <li><a onclick="myFunction()" id="show-more3" class="button-show-more">More information</a></li>
+            <script>
+                let content = document.getElementById("description");
+                let button = document.getElementById("show-more3");
+
+                function myFunction() {
+                    if(content.className === "open"){
+                        content.className = "";
+                        button.innerHTML = "More information";
+
+                    } else {
+                        content.className = "open";
+                        button.innerHTML = "Less information";
+                    }
+                }
+            </script>
+        </div>
+    </div>
+    <footer th:replace="fragments/commons::footer"></footer>
+</div>
+</body>
+</html>

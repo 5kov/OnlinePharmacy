@@ -18,13 +18,70 @@
     <div class="section-2">
         <article>
             <h2>Business Aims</h2>
-            <p>PharmEase aims to revolutionize healthcare access by providing a convenient, reliable, and secure online pharmacy platform. Their mission is to simplify medication management through an extensive catalog of prescription and over-the-counter drugs, detailed product information, and 24/7 AI-powered assistance. Committed to enhancing customer experience, PharmEase ensures swift, discreet delivery and offers subscription options, automatic refills, and reminders for seamless chronic condition management. Upholding stringent data protection and fostering trust in digital healthcare, PharmEase strives to set a new standard for online pharmacies, making quality healthcare accessible to all.</p>
-                <a href="#" class="button">More information</a>
+            <div id="aims">
+                <p>PharmEase aims to revolutionize healthcare access by providing a convenient, reliable, and secure online pharmacy platform. Their mission is to simplify medication management through an extensive catalog of prescription and over-the-counter drugs, detailed product information, and 24/7 AI-powered assistance. Committed to enhancing customer experience, PharmEase ensures swift, discreet delivery and offers subscription options, automatic refills, and reminders for seamless chronic condition management. Upholding stringent data protection and fostering trust in digital healthcare, PharmEase strives to set a new standard for online pharmacies, making quality healthcare accessible to all.</p>
+                <p>PharmEase aims to transform the landscape of healthcare access by creating a seamless, reliable, and secure online pharmacy experience. The company is dedicated to addressing the needs of modern consumers who seek convenience and efficiency in managing their health. By offering an extensive catalog of prescription medications, over-the-counter drugs, and health supplements, PharmEase ensures that customers have a comprehensive selection of products at their fingertips.
+
+                    A key aim of PharmEase is to empower users with detailed product information, including dosage guidelines, potential side effects, and transparent pricing. This empowers customers to make informed decisions about their healthcare. To further enhance this experience, PharmEase integrates an AI-powered chatbot available 24/7, providing instant assistance and answering medical queries, thereby ensuring users receive expert guidance whenever needed.
+
+                    PharmEase is committed to providing swift and discreet delivery services, ensuring that medications reach customers promptly and securely. The company recognizes the importance of continuity in healthcare, especially for those managing chronic conditions. To this end, PharmEase offers subscription options, automatic refills, and timely reminders, simplifying the management of long-term health needs.
+
+                    Data protection and user privacy are paramount to PharmEase, with stringent measures in place to safeguard customer information. The user-friendly interface is designed to make navigation and purchasing effortless, fostering a sense of trust and reliability. By combining advanced technology with expert healthcare services, PharmEase aims to set a new standard for online pharmacies.
+
+                    Ultimately, PharmEase strives to make quality healthcare accessible to all, irrespective of geographic location or mobility constraints. By bridging the gap between traditional pharmacy services and digital innovation, PharmEase is not just an online pharmacy but a comprehensive healthcare partner dedicated to enhancing the overall well-being of its customers.</p>
+            </div>
+
+            <li><a onclick="myFunction()" id="show-more" class="button-show-more">More information</a></li>
+            <script>
+                let content = document.getElementById("aims");
+                let button = document.getElementById("show-more");
+
+                function myFunction() {
+                    if(content.className === "open"){
+                        content.className = "";
+                        button.innerHTML = "More information";
+
+                    } else {
+                        content.className = "open";
+                        button.innerHTML = "Less information";
+                    }
+                }
+            </script>
         </article>
         <article>
             <h2>Objectives</h2>
-            <p>PharmEase's objectives are to provide convenient and accessible healthcare solutions through a comprehensive online pharmacy platform. The company aims to offer a wide range of prescription medications, over-the-counter drugs, and health supplements with detailed information to empower informed decisions. By ensuring swift, discreet delivery and incorporating features like 24/7 AI-powered assistance, subscription options, and automatic refills, PharmEase strives to enhance customer experience and simplify medication management. Additionally, PharmEase is committed to stringent data protection and fostering trust, setting a new standard in digital healthcare accessibility.</p>
-            <a href="#" class="button">More information</a>
+            <div id="objectives">
+                <p>PharmEase's objectives are to provide convenient and accessible healthcare solutions through a comprehensive online pharmacy platform. The company aims to offer a wide range of prescription medications, over-the-counter drugs, and health supplements with detailed information to empower informed decisions. By ensuring swift, discreet delivery and incorporating features like 24/7 AI-powered assistance, subscription options, and automatic refills, PharmEase strives to enhance customer experience and simplify medication management. Additionally, PharmEase is committed to stringent data protection and fostering trust, setting a new standard in digital healthcare accessibility.</p>
+                <p>PharmEase's objectives center on transforming healthcare accessibility and convenience through a robust online pharmacy platform. One primary objective is to offer a comprehensive range of prescription medications, over-the-counter drugs, and health supplements, ensuring that customers have a vast selection to meet their diverse healthcare needs. By providing detailed product descriptions, dosage guidelines, and transparent information about potential side effects, PharmEase empowers customers to make well-informed decisions regarding their health.
+
+                    Another crucial objective is to enhance the overall customer experience through innovative technology and services. PharmEase incorporates an AI-powered chatbot available 24/7 to offer instant assistance and answer medical queries, ensuring expert guidance is always within reach. The platform is designed to be user-friendly, making it easy for customers to navigate, upload prescriptions, and complete purchases efficiently.
+
+                    PharmEase is dedicated to ensuring prompt and discreet delivery of medications, recognizing the importance of timely access to healthcare products. To support individuals managing chronic conditions, the company offers subscription services, automatic refills, and reminders, simplifying the process of maintaining long-term treatment plans and reducing the risk of missed doses.
+
+                    Data protection and user privacy are paramount objectives for PharmEase. The company employs stringent security measures to safeguard customer information, fostering a sense of trust and reliability. By maintaining high standards of data protection, PharmEase aims to reassure customers that their personal and medical information is secure.
+
+                    Additionally, PharmEase strives to bridge the gap between traditional pharmacy services and the digital age, making quality healthcare accessible to all, regardless of geographic location or mobility constraints. By continuously innovating and adapting to the evolving needs of its customers, PharmEase aims to set a new standard in the online pharmacy industry, becoming a trusted partner in healthcare management and enhancing the overall well-being of its users.
+
+                </p>
+            </div>
+            <div>
+                <li><a onclick="myFunction2()" id="show-more2" class="button-show-more">More information</a></li>
+                <script>
+                    let content2 = document.getElementById("objectives");
+                    let button2 = document.getElementById("show-more2");
+
+                    function myFunction2() {
+                        if(content2.className === "open"){
+                            content2.className = "";
+                            button2.innerHTML = "More information";
+
+                        } else {
+                            content2.className = "open";
+                            button2.innerHTML = "Less information";
+                        }
+                    }
+                </script>
+            </div>
         </article>
     </div>
     <div class="section-3">
@@ -35,26 +92,26 @@
         <article>
             <div class="container-all">
                 <div class="image-container">
-                    <img src="img/pfizer_logo.gif" alt="Pfizer">
+                    <a href="https://www.pfizer.com/"><img src="img/pfizer_logo.gif" alt="Pfizer"></a>
                     
                 </div>
                 <div class="image-container">
-                    <img src="img/novartis_logo.gif" alt="Novartis">
+                    <a href="https://www.novartis.com/"><img src="img/novartis_logo.gif" alt="Novartis"></a>
                 </div>
                 <div class="image-container">
-                    <img src="img/bayer_logo.gif" alt="Bayer">
+                    <a href="https://www.bayer.com/"><img src="img/bayer_logo.gif" alt="Bayer"></a>
                 </div>
                 <div class="image-container">
-                    <img src="img/abbott_logo.gif" alt="Abbott">
+                    <a href="https://www.abbott.com/"><img src="img/abbott_logo.gif" alt="Abbott"></a>
                 </div>
                 <div class="image-container">
-                    <img src="img/sanofi_logo.gif" alt="Sanofi">
+                    <a href="https://www.sanofi.com/"><img src="img/sanofi_logo.gif" alt="Sanofi"></a>
                 </div>
                 <div class="image-container">
-                    <img src="img/merck_logo.gif" alt="Merck">
+                    <a href="https://www.merck.com/"><img src="img/merck_logo.gif" alt="Merck"></a>
                 </div>
                 <div class="image-container">
-                    <img src="img/actavis_logo.gif" alt="Actavis">
+                    <a href="https://www.teva.com/"><img src="img/teva_logo.gif" alt="Teva"></a>
                 </div>
             </div>
         </article>
@@ -65,11 +122,11 @@
         <article>
             <div class="container-all">
                 <div class="image-container">
-                    <img src="img/drugs_logo.gif" alt="Drugs.com">
+                    <a href="https://www.drugs.com/"><img src="img/drugs_logo.gif" alt="Drugs.com"></a>
                     
                 </div>
                 <div class="image-container">
-                    <img src="img/fda_logo.gif" alt="FDA">
+                    <a href="https://www.fda.gov/"><img src="img/fda_logo.gif" alt="FDA"></a>
                 </div>
             </div>
         </article>

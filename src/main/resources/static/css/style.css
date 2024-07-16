@@ -65,6 +65,7 @@ header .logo-container {
     height: 6em;
     background-color: #FFFFFF;
     border-radius: 10em;
+    border: 0.15em solid black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -124,16 +125,9 @@ header .logo-container {
     line-height: 1.55em;
     padding-bottom: 2em;
 }
-.section-2 article a {
-    display: block;
-    width: max-content;
-    color: #B0825C;
-    font-family: "PT Sans", sans-serif;
-    font-size: 0.77em;
-    border: 0.15em solid #B0825C;
-    padding: 0.8em 1em 0.8em 1em;
-    text-decoration: none;
-    font-weight: bold;
+
+li::marker {
+    color: white;
 }
 
 .section-2 {
@@ -243,7 +237,6 @@ header .logo-container {
 
 }
 
-
 .section-5 {
     background-color: #171720;
     color: #B3A6A8;
@@ -252,4 +245,251 @@ header .logo-container {
     padding: 1em;
     padding-left: 14.1em;
     transform: scaleY(1.2);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    color: black;
+    background: white;
+    padding-top: 10em;
+    padding-bottom: 10em;
+    font-family: "PT Serif", serif;
+
+}
+
+.form-border {
+    width: 30em;
+    padding-bottom: 3em;
+    padding-top: 3em;
+    background-color: white;
+
+    border: 0.07em solid #B0825C;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    color: black;
+}
+
+.form-group button {
+    color: #B0825C;
+    font-family: "PT Sans", sans-serif;
+    font-size: 0.77em;
+    border: 0.15em solid #B0825C;
+    text-decoration: none;
+    font-weight: bold;
+    width: 15.5em;
+    height: 3.2em;
+}
+.form-control {
+    color: #B0825C;
+    font-family: "PT Sans", sans-serif;
+    font-size: 0.77em;
+    border: 0.07em solid #B0825C;
+    width: 15.5em;
+    height: 3.2em;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+}
+::placeholder {
+    text-align: center;
+}
+.register-link {
+        color: #B0825C;
+        text-decoration: none;
+}
+.register-link:hover {
+        text-decoration: underline;
+}
+
+#objectives {
+    width: 28em;
+    float: left;
+    max-height: 12em;
+    overflow: hidden;
+
+
+    -webkit-transition: max-height 0.7s;
+    -moz-transition: max-height 0.7s;
+    transition: max-heigth 0.7s;
+
+}
+
+#objectives.open {
+    max-height: initial;
+
+    -webkit-transition: max-heigth 0.7s;
+    -moz-transition: max-heigth 0.7s;
+    transition: max-heigth 0.7s;
+}
+
+#aims {
+    width: 28em;
+    float: left;
+    max-height: 12em;
+    overflow: hidden;
+
+
+    -webkit-transition: max-height 0.7s;
+    -moz-transition: max-height 0.7s;
+    transition: max-heigth 0.7s;
+
+}
+
+#aims.open {
+    max-height: initial;
+
+    -webkit-transition: max-heigth 0.7s;
+    -moz-transition: max-heigth 0.7s;
+    transition: max-heigth 0.7s;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap; /* Allow items to wrap */
+    row-gap: 3em;
+    column-gap: 3em;
+    font-family: "PT Serif", serif;
+    align-items: center;
+
+
+}
+.flex-item {
+    display: flex;
+    flex-direction: column;
+    border: 0.07em solid white;
+    width: 16em;
+    overflow: auto;
+    padding: 1em;
+    align-items: center;
+    justify-content: center;
+    font-family: "PT Serif", serif;
+
+}
+.flex-item:hover {
+    border: 0.07em solid #B0825C;
+}
+.flex-item p {
+    margin-bottom: 1em;
+}
+
+.flex-item button {
+    color: white;
+    font-family: "PT Sans", sans-serif;
+    font-size: 0.77em;
+    border: 0.15em solid white;
+    text-decoration: none;
+    font-weight: bold;
+    width: 10.5em;
+    height: 3.2em;
+    background-color:white;
+
+}
+
+.flex-item:hover button {
+    color: #B0825C;
+    font-family: "PT Sans", sans-serif;
+    font-size: 0.77em;
+    border: 0.15em solid #B0825C;
+    text-decoration: none;
+    font-weight: bold;
+    width: 10.5em;
+    height: 3.2em;
+}
+
+
+
+#description {
+    width: 60em;
+    float: left;
+    max-height: 12.3em;
+    overflow: hidden;
+    font-family: "PT Serif", serif;
+
+
+    -webkit-transition: max-height 0.7s;
+    -moz-transition: max-height 0.7s;
+    transition: max-heigth 0.7s;
+
+}
+
+#description.open {
+    max-height: initial;
+    font-family: "PT Serif", serif;
+
+    -webkit-transition: max-heigth 0.7s;
+    -moz-transition: max-heigth 0.7s;
+    transition: max-heigth 0.7s;
+}
+
+
+.button-show-more {
+    display: block;
+    color: #B0825C;
+    font-family: "PT Sans", sans-serif;
+    font-size: 0.77em;
+    border: 0.15em solid #B0825C;
+    text-align: center;
+    padding: 0.8em 0;
+    width: 10em;
+    height: 3em;
+    background-color:white;
+    margin: 0.5em;
+
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.drug-picture {
+    width: 20em;
+    height: 20em;
+    margin-bottom: 2em;
+}
+
+.drug-picture img {
+    object-fit: contain;
+    width:100%;
+    height:100%;
+
+}
+.drug-picture-small {
+    width: 15em;
+}
+
+.flex-container-cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    flex-wrap: wrap; /* Allow items to wrap */
+    row-gap: 3em;
+    column-gap: 3em;
+    font-family: "PT Serif", serif;
+    align-items: center;
+}
+
+.flex-container-cart-2 {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 41em;
+
+    border-bottom: 0.1em solid #B0825C;
+    margin-bottom: 1em
+
+}
+.flex-container-cart-3 {
+    display: flex;
+    align-items: center;
 }

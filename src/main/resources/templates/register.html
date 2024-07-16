@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<div class="container">
+    <header th:replace="fragments/commons::header"></header>
+
+    <div class="form">
+        <div class="form-border">
+            <form class="welcome login">
+                <div class="form-group">
+                    <div class="label-holder textCol d-flex justify-content-center">
+                        <label for="username">Username</label>
+                    </div>
+
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username"/>
+                    <small class="invalid-feedback text-info" style="font-size: 15px">Username length must be between 3 and 20 characters!</small>
+                    <small class="text-info" >Username already exist</small>
+                </div>
+
+                <div class="form-group">
+                    <div class="label-holder text-white textCol d-flex justify-content-center">
+                        <label for="email" class="h4 mb-2">Email</label>
+                    </div>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email"/>
+                    <small class="invalid-feedback text-info">Email cannot be empty!</small>
+                    <small class="text-info" >Email already exist!</small>
+                </div>
+
+                <div class="form-group">
+                    <div class="label-holder text-white textCol d-flex justify-content-center">
+                        <label for="password" class="h4 mb-2">Password</label>
+                    </div>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
+                    <small class="invalid-feedback text-info">Password length must be between 3 and 20 characters!</small>
+                    <small class="text-info">Passwords do not match</small>
+                </div>
+
+                <div class="form-group">
+                    <div class="label-holder text-white textCol d-flex justify-content-center">
+                        <label for="confirmPassword" class="h4 mb-2">Confirm Password</label>
+                    </div>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password"/>
+                    <small class="invalid-feedback text-info">Password length must be between 3 and 20 characters!</small>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" value="Register">Register</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+
+
+    <footer th:replace="fragments/commons::footer"></footer>
+</div>
+</body>
+</html>
