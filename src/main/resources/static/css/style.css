@@ -61,18 +61,21 @@ header img {
 }
 
 header .logo-container {
-    width: 6em;
-    height: 6em;
-    background-color: #FFFFFF;
-    border-radius: 10em;
-    border: 0.15em solid black;
+    width: 7.5em;
+    height: 7.5em;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 1em;
     margin-bottom: 1em;
     margin-left: 5em;
+}
 
+header .logo-container img {
+    ; /* Scale the image to 1.5 times its original size */
+    display: block; /* Make sure the image behaves as a block element */
+    width: 100%; /* Make the image fill its container width */
+    height: auto; /* Maintain aspect ratio */
 }
 
 .section-1 {
@@ -83,7 +86,7 @@ header .logo-container {
 
 .section-1 article {
     padding-left: 8.5em;
-    padding-top: 4em;
+    padding-top: 1em;
     max-width: 38.5em;
 }
 
@@ -253,10 +256,11 @@ li::marker {
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     color: black;
-    background: white;
-    padding-top: 10em;
-    padding-bottom: 10em;
+
+    padding-top: 5em;
+    padding-bottom: 5em;
     font-family: "PT Serif", serif;
+    background-color: white;
 
 }
 
@@ -414,7 +418,7 @@ li::marker {
 #description {
     width: 60em;
     float: left;
-    max-height: 12.3em;
+    max-height: 12.1em;
     overflow: hidden;
     font-family: "PT Serif", serif;
 
@@ -492,4 +496,32 @@ li::marker {
 .flex-container-cart-3 {
     display: flex;
     align-items: center;
+}
+
+.outer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-family: 'PT Sans', sans-serif;
+}
+.content {
+    width: 80%;
+    max-width: 50em; /* Converted from 800px */
+    margin: 1.25em;
+    padding: 1.25em;
+    background-color: #fff;
+    box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1); /* Converted from 10px */
+}
+.section {
+    margin-bottom: 1.25em;
+}
+.main-heading {
+    font-family: 'PT Serif', serif;
+    color: #B0825C;
+}
+.sub-heading {
+    font-family: 'PT Serif', serif;
+    color: #B0825C;
 }
