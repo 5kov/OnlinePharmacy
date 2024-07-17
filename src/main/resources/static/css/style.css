@@ -294,6 +294,7 @@ li::marker {
     font-weight: bold;
     width: 15.5em;
     height: 3.2em;
+    background-color: white;
 }
 .form-control {
     color: #B0825C;
@@ -380,7 +381,10 @@ li::marker {
     align-items: center;
     justify-content: center;
     font-family: "PT Serif", serif;
-
+}
+.flex-item img {
+    width:100%;
+    object-fit: contain;
 }
 .flex-item:hover {
     border: 0.07em solid #B0825C;
@@ -525,3 +529,39 @@ li::marker {
     font-family: 'PT Serif', serif;
     color: #B0825C;
 }
+
+.input-container {
+    width: 31.5em; /* Same width as inputs */
+    margin: 0 auto;
+    background-color: white;
+}
+.input-field {
+    width: 100%; /* Full width of the container */
+    height: 3.2em;
+    padding: 0.5em;
+    margin: 0.5em 0;
+    border: 0.15em solid #B0825C;
+    box-sizing: border-box;
+    font-size: 0.77em;
+    text-align: center;
+    border-radius: 0; /* Remove rounded corners */
+}
+.button {
+    width: 100%; /* Full width of the container */
+    height: 3.2em;
+    margin-top: 1em;
+    background-color: white; /* White background */
+    color: #B0825C;
+    border: 0.15em solid #B0825C;
+    border-radius: 0; /* Remove rounded corners */
+    font-size: 0.77em;
+    cursor: default;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: white; /* White background on hover */
+    color: #9d684d; /* Change text color on hover */
+    cursor: default; /* Arrow cursor */
+}
+

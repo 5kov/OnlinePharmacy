@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<div class="container">
+    <header th:replace="fragments/commons::header"></header>
+
+    <div class="form">
+        <h1>Administrator Page</h1>
+        <h3>Add new medicine</h3>
+        <div class="input-container">
+            <input type="text" class="input-field" placeholder="Medicine Name (English)" />
+            <input type="text" class="input-field" placeholder="Medicine Name (Bulgarian)" />
+            <input type="text" class="input-field" placeholder="Active Ingredient" />
+            <input type="number" step="0.01" class="input-field" placeholder="Price" />
+            <input type="text" class="input-field" placeholder="Description (English)" />
+            <input type="text" class="input-field" placeholder="Description (Bulgarian)" />
+            <input type="text" class="input-field" placeholder="Image URL" />
+            <button class="button">Save</button>
+        </div>
+    </div>
+
+
+
+    <footer th:replace="fragments/commons::footer"></footer>
+</div>
+</body>
+</html>

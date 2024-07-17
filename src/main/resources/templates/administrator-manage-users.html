@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<div class="container">
+    <header th:replace="fragments/commons::header"></header>
+
+    <div class="form">
+        <h1>Administrator Page</h1>
+        <h3>Manage users</h3>
+        <div class="input-container">
+            <input type="text" class="input-field" placeholder="Search Username" />
+            <button class="button">Search</button>
+            <input type="text" class="input-field" placeholder="Username" disabled />
+            <button class="button">Delete</button>
+            <button class="button">Make Administrator</button>
+        </div>
+    </div>
+
+
+
+    <footer th:replace="fragments/commons::footer"></footer>
+</div>
+</body>
+</html>
