@@ -14,6 +14,9 @@ public class ActiveIngredient {
     @Column(unique = true, nullable = false)
     private String ingredientCode;
 
+    public ActiveIngredient() {
+    }
+
     public long getId() {
         return id;
     }

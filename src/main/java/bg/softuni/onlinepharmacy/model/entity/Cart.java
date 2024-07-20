@@ -13,13 +13,13 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToMany(mappedBy = "cart")
-    private Set<User> users;
-    @ManyToMany
-    private Set<Drug> drugsInCart;
+    @ManyToOne
+    private User user;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private List<CartItem> cartItems = new ArrayList<>();
+
     public Cart() {
-        this.users = new HashSet<>();
-        this.drugsInCart = new HashSet<>();
+        this.cartItems = new ArrayList<>();
     }
 
     public long getId() {
@@ -30,19 +30,19 @@ public class Cart {
         this.id = id;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Set<Drug> getDrugsInCart() {
-        return drugsInCart;
+    public List<CartItem> getCartItems() {
+        return cartItems;
     }
 
-    public void setDrugsInCart(Set<Drug> drugsInCart) {
-        this.drugsInCart = drugsInCart;
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 }

@@ -3,9 +3,7 @@ package bg.softuni.onlinepharmacy.model.entity;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,10 +22,6 @@ public class User {
     private Set<Drug> favouriteDrugs;
     @ManyToMany
     private Set<Drug> ratedDrugs;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
 
     @OneToMany(mappedBy = "user")
     private Set<Order> orders;
@@ -84,5 +78,13 @@ public class User {
 
     public void setRatedDrugs(Set<Drug> ratedDrugs) {
         this.ratedDrugs = ratedDrugs;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

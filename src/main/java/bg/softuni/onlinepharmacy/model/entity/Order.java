@@ -3,6 +3,7 @@ package bg.softuni.onlinepharmacy.model.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -14,9 +15,8 @@ public class Order {
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToMany
-    private Set<Drug> orderedDrugs;
-    private LocalDate orderDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date orderDate;
 
     public Order() {
     }
@@ -37,19 +37,11 @@ public class Order {
         this.user = user;
     }
 
-    public Set<Drug> getOrderedDrugs() {
-        return orderedDrugs;
-    }
-
-    public void setOrderedDrugs(Set<Drug> orderedDrugs) {
-        this.orderedDrugs = orderedDrugs;
-    }
-
-    public LocalDate getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 }
