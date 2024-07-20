@@ -4,8 +4,11 @@ package bg.softuni.onlinepharmacy.model.entity;
 import jakarta.persistence.*;
 import org.hibernate.validator.constraints.URL;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
-@Table(name = "users")
+@Table(name = "drugs")
 public class Drug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +28,15 @@ public class Drug {
     @Column(nullable = false)
     @URL
     private String imageUrl;
+    @Column(nullable = false)
+    private boolean isFavourite;
+    @Column(nullable = false)
+    private int votes;
+    @ManyToMany
+    private Set<ActiveIngredient> activeIngredients;
 
     public Drug() {
+        this.activeIngredients = new HashSet<>();
     }
 
     public long getId() {
@@ -91,5 +101,29 @@ public class Drug {
 
     public void setImageUrl(@URL String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
+    }
+
+    public Set<ActiveIngredient> getActiveIngredients() {
+        return activeIngredients;
+    }
+
+    public void setActiveIngredients(Set<ActiveIngredient> activeIngredients) {
+        this.activeIngredients = activeIngredients;
     }
 }

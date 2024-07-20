@@ -3,6 +3,11 @@ package bg.softuni.onlinepharmacy.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -15,8 +20,22 @@ public class User {
     private String password;
     @Column(unique = true, nullable = false)
     private String email;
+    @ManyToMany
+    private Set<Drug> favouriteDrugs;
+    @ManyToMany
+    private Set<Drug> ratedDrugs;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orders;
 
     public User() {
+        this.favouriteDrugs = new HashSet<>();
+        this.ratedDrugs = new HashSet<>();
+        this.orders = new HashSet<>();
     }
 
     public long getId() {
@@ -51,4 +70,19 @@ public class User {
         this.email = email;
     }
 
+    public Set<Drug> getFavouriteDrugs() {
+        return favouriteDrugs;
+    }
+
+    public void setFavouriteDrugs(Set<Drug> favouriteDrugs) {
+        this.favouriteDrugs = favouriteDrugs;
+    }
+
+    public Set<Drug> getRatedDrugs() {
+        return ratedDrugs;
+    }
+
+    public void setRatedDrugs(Set<Drug> ratedDrugs) {
+        this.ratedDrugs = ratedDrugs;
+    }
 }

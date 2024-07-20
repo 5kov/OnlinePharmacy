@@ -4,17 +4,18 @@ package bg.softuni.onlinepharmacy.model.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "interactions")
 public class Interaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @ManyToOne(optional = false)
+    private ActiveIngredient drugName;
+    @ManyToOne(optional = false)
+    private ActiveIngredient interactionDrug;
     @Column(nullable = false)
-    private String drugName;
-    @Column(nullable = false)
-    private String interactionDrug;
-    @Column(nullable = false)
-    private String interactionType;
+    @Enumerated(EnumType.STRING)
+    private InteractionTypeEnum interactionType;
 
     public Interaction() {
     }
@@ -27,27 +28,27 @@ public class Interaction {
         this.id = id;
     }
 
-    public String getDrugName() {
+    public ActiveIngredient getDrugName() {
         return drugName;
     }
 
-    public void setDrugName(String drugName) {
+    public void setDrugName(ActiveIngredient drugName) {
         this.drugName = drugName;
     }
 
-    public String getInteractionDrug() {
+    public ActiveIngredient getInteractionDrug() {
         return interactionDrug;
     }
 
-    public void setInteractionDrug(String interactionDrug) {
+    public void setInteractionDrug(ActiveIngredient interactionDrug) {
         this.interactionDrug = interactionDrug;
     }
 
-    public String getInteractionType() {
+    public InteractionTypeEnum getInteractionType() {
         return interactionType;
     }
 
-    public void setInteractionType(String interactionType) {
+    public void setInteractionType(InteractionTypeEnum interactionType) {
         this.interactionType = interactionType;
     }
 }
