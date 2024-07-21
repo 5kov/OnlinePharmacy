@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Pharmacy</title>
-    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css?version=51">
 </head>
 <body>
 <header>
@@ -14,16 +14,24 @@
     </div>
     <nav>
         <ul>
-            <li><a href="/pharmacy">OnlinePharmacy</a></li>
-            <li><a href="#">Promotions</a></li>
-            <li><a href="#">Health Library</a></li>
-            <li><a href="#">Diagnosis</a></li>
-            <li><a href="#">Health Help</a></li>
-            <li><a href="#">Health Media</a></li>
-            <li><a href="#">Health & Lifestyle</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contacts">Contacts</a></li>
-            <li><a href="/login">Sign in</a></li>
+            <li><a href="/pharmacy" th:unless="${@userSession.isAdmin()}">OnlinePharmacy</a></li>
+            <li><a href="#" th:unless="${@userSession.isAdmin()}">Promotions</a></li>
+            <li><a href="#" th:unless="${@userSession.isAdmin()}">Health Library</a></li>
+            <li><a href="#" th:unless="${@userSession.isAdmin()}">Diagnosis</a></li>
+            <li><a href="#" th:unless="${@userSession.isAdmin()}">Health Help</a></li>
+            <li><a href="#" th:unless="${@userSession.isAdmin()}">Health Media</a></li>
+            <li><a href="#" th:unless="${@userSession.isAdmin()}">Health & Lifestyle</a></li>
+            <li><a href="/about" th:unless="${@userSession.isAdmin()}">About</a></li>
+            <li><a href="/contacts" th:unless="${@userSession.isAdmin()}">Contacts</a></li>
+
+            <li><a href="/administrator-manage-users" th:if="${@userSession.isAdmin()}">Manage users</a></li>
+            <li><a href="/administrator-add-medicines" th:if="${@userSession.isAdmin()}">Add medicine</a></li>
+            <li><a href="/administrator-manage-medicines" th:if="${@userSession.isAdmin()}">Manage medicines</a></li>
+            <li><a href="/administrator-add-interactions" th:if="${@userSession.isAdmin()}">Add interaction</a></li>
+            <li><a href="/administrator-manage-interactions" th:if="${@userSession.isAdmin()}">Manage interactions</a></li>
+
+            <li><a href="/login" th:unless="${@userSession.isLoggedIn()}">Sign in</a></li>
+            <li><a href="/logout" th:if="${@userSession.isLoggedIn()}">Sign out</a></li>
         </ul>
     </nav>
 </header>

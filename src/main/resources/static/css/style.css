@@ -295,6 +295,7 @@ li::marker {
     width: 15.5em;
     height: 3.2em;
     background-color: white;
+    margin-top: 1em;
 }
 .form-control {
     color: #B0825C;
@@ -306,6 +307,7 @@ li::marker {
     text-decoration: none;
     font-weight: bold;
     text-align: center;
+    margin-top: 1em;
 }
 ::placeholder {
     text-align: center;
@@ -563,5 +565,14 @@ li::marker {
     background-color: white; /* White background on hover */
     color: #9d684d; /* Change text color on hover */
     cursor: default; /* Arrow cursor */
+}
+
+.error {
+    border: 1px solid red;
+    background-color: #fdd;
+}
+.error-message {
+    color: red;
+    font-size: 0.9em;
 }
 

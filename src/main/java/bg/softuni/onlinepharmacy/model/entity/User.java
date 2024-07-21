@@ -2,6 +2,8 @@ package bg.softuni.onlinepharmacy.model.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,10 +16,22 @@ public class User {
     private long id;
     @Column(unique = true, nullable = false)
     private String username;
-    @Column(nullable = false)
-    private String password;
     @Column(unique = true, nullable = false)
     private String email;
+    @Column(nullable = false)
+    private String country;
+    @Column(nullable = false)
+    private String city;
+    @Column(nullable = false)
+    private String street;
+    @Column(nullable = false)
+    private String postalCode;
+    @Column(nullable = false)
+    private String phoneNumber;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false)
+    private boolean administrator;
     @ManyToMany
     private Set<Drug> favouriteDrugs;
     @ManyToMany
@@ -48,6 +62,54 @@ public class User {
         this.username = username;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -56,12 +118,12 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public boolean isAdministrator() {
+        return administrator;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAdministrator(boolean administrator) {
+        this.administrator = administrator;
     }
 
     public Set<Drug> getFavouriteDrugs() {

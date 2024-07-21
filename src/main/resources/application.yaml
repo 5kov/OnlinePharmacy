@@ -16,6 +16,8 @@ spring:
     username: root
     password: qwerty
     url: jdbc:mysql://localhost:3306/online_pharmacy?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+  messages:
+    basename: messages
 logging:
   level:
     org:
@@ -27,3 +29,4 @@ logging:
     blog: WARN
 server:
   port: 8080
+
