@@ -9,10 +9,36 @@
         <h1>Administrator Page</h1>
         <h3>Add interaction</h3>
         <div class="input-container">
-            <input type="text" class="input-field" placeholder="Active Ingredient" />
-            <input type="text" class="input-field" placeholder="Аn ingredient with which there is an interaction" />
-            <input type="text" class="input-field" placeholder="Type of Interaction (e.g., major, moderate)" />
-            <button class="button">Save</button>
+
+            <form th:action="@{/administrator-add-interactions}" method="post">
+                <div>
+                    <label for="drugNameId">Drug Name:</label>
+                    <select id="drugNameId" name="drugNameId" class="input-field">
+                        <option th:each="ingredient : ${ingredients}"
+                                th:value="${ingredient.id}"
+                                th:text="${ingredient.ingredientName}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label for="interactionDrugId">Interaction Drug:</label>
+                    <select id="interactionDrugId" name="interactionDrugId" class="input-field">
+                        <option th:each="ingredient : ${ingredients}"
+                                th:value="${ingredient.id}"
+                                th:text="${ingredient.ingredientName}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label for="interactionType">Interaction Type:</label>
+                    <select id="interactionType" name="interactionType" class="input-field">
+                        <option th:each="type : ${interactionTypes}"
+                                th:value="${type}"
+                                th:text="${type}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="button">Save</button>
+            </form>
+
+
         </div>
     </div>
     <footer th:replace="fragments/commons::footer"></footer>

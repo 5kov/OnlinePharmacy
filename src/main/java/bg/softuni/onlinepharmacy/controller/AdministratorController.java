@@ -2,10 +2,9 @@ package bg.softuni.onlinepharmacy.controller;
 
 import bg.softuni.onlinepharmacy.model.dto.ActiveIngredientDTO;
 import bg.softuni.onlinepharmacy.model.dto.MedicineDTO;
-import bg.softuni.onlinepharmacy.model.entity.ActiveIngredient;
-import bg.softuni.onlinepharmacy.model.entity.Medicine;
-import bg.softuni.onlinepharmacy.model.entity.User;
+import bg.softuni.onlinepharmacy.model.entity.*;
 import bg.softuni.onlinepharmacy.repository.ActiveIngredientRepository;
+import bg.softuni.onlinepharmacy.repository.InteractionRepository;
 import bg.softuni.onlinepharmacy.repository.MedicineRepository;
 import bg.softuni.onlinepharmacy.service.UserService;
 import jakarta.transaction.Transactional;
@@ -29,6 +28,10 @@ public class AdministratorController {
     private ActiveIngredientRepository ingredientRepository;
     @Autowired
     private MedicineRepository medicineRepository;
+    @Autowired
+    private ActiveIngredientRepository activeIngredientRepository;
+    @Autowired
+    private InteractionRepository interactionRepository;
 
 
     public AdministratorController(UserService userService) {
@@ -36,10 +39,7 @@ public class AdministratorController {
     }
 
 
-    @GetMapping("/administrator-add-interactions")
-    public String viewAddInteraction(){
-        return "administrator-add-interactions";
-    }
+
     @GetMapping("/administrator-manage-users")
     public String viewManageUsers(){
         return "administrator-manage-users";
@@ -231,7 +231,31 @@ public class AdministratorController {
 
 
 
+    @GetMapping("/administrator-add-interactions")
+    public String showAddInteractionForm(Model model) {
+        model.addAttribute("ingredients", activeIngredientRepository.findAll());
+        model.addAttribute("interactionTypes", InteractionTypeEnum.values());
+        return "administrator-add-interactions";
+    }
 
+    @PostMapping("/administrator-add-interactions")
+    public String saveInteraction(
+            @RequestParam Long drugNameId,
+            @RequestParam Long interactionDrugId,
+            @RequestParam InteractionTypeEnum interactionType) {
+        ActiveIngredient drugName = activeIngredientRepository.findById(drugNameId).orElse(null);
+        ActiveIngredient interactionDrug = activeIngredientRepository.findById(interactionDrugId).orElse(null);
+
+        if (drugName != null && interactionDrug != null) {
+            Interaction interaction = new Interaction();
+            interaction.setDrugName(drugName);
+            interaction.setInteractionDrug(interactionDrug);
+            interaction.setInteractionType(interactionType);
+            interactionRepository.save(interaction);
+        }
+
+        return "redirect:/administrator-add-interactions";
+    }
 
 
 
