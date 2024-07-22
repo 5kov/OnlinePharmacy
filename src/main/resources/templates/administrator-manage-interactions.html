@@ -4,18 +4,35 @@
 <body>
 <div class="container">
     <header th:replace="fragments/commons::header"></header>
-
+    <h1>Interactions List</h1>
     <div class="form">
         <h1>Administrator Page</h1>
-        <h3>Manage interactions</h3>
+        <h3>Delete interaction</h3>
         <div class="input-container">
-            <input type="text" class="input-field" placeholder="Medicine Name" />
-            <input type="text" class="input-field" placeholder="Interacts With" />
-            <button class="button">Delete</button>
+            <table>
+                <thead>
+                <tr>
+                    <th>Drug Name</th>
+                    <th>Interaction Drug</th>
+                    <th>Interaction Type</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="interaction : ${interactions}">
+                    <td th:text="${interaction.drugName.ingredientName}">Drug Name</td>
+                    <td th:text="${interaction.interactionDrug.ingredientName}">Interaction Drug</td>
+                    <td th:text="${interaction.interactionType}">Interaction Type</td>
+                    <td>
+                        <form th:action="@{/delete-interaction/{id}(id=${interaction.id})}" method="post">
+                            <button type="submit" class="button buttonSmall">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-
-
 
     <footer th:replace="fragments/commons::footer"></footer>
 </div>

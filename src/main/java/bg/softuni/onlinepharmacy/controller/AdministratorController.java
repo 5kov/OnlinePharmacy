@@ -44,10 +44,6 @@ public class AdministratorController {
     public String viewManageUsers(){
         return "administrator-manage-users";
     }
-    @GetMapping("/administrator-manage-interactions")
-    public String viewManageInteractions(){
-        return "administrator-manage-interactions";
-    }
 
     @PostMapping("/administrator-manage-users")
     public String searchUsers(@RequestParam("username") String username, Model model) {
@@ -231,6 +227,32 @@ public class AdministratorController {
 
 
 
+//    @GetMapping("/administrator-add-interactions")
+//    public String showAddInteractionForm(Model model) {
+//        model.addAttribute("ingredients", activeIngredientRepository.findAll());
+//        model.addAttribute("interactionTypes", InteractionTypeEnum.values());
+//        return "administrator-add-interactions";
+//    }
+//
+//    @PostMapping("/administrator-add-interactions")
+//    public String saveInteraction(
+//            @RequestParam Long drugNameId,
+//            @RequestParam Long interactionDrugId,
+//            @RequestParam InteractionTypeEnum interactionType) {
+//        ActiveIngredient drugName = activeIngredientRepository.findById(drugNameId).orElse(null);
+//        ActiveIngredient interactionDrug = activeIngredientRepository.findById(interactionDrugId).orElse(null);
+//
+//        if (drugName != null && interactionDrug != null) {
+//            Interaction interaction = new Interaction();
+//            interaction.setDrugName(drugName);
+//            interaction.setInteractionDrug(interactionDrug);
+//            interaction.setInteractionType(interactionType);
+//            interactionRepository.save(interaction);
+//        }
+//
+//        return "redirect:/administrator-add-interactions";
+//    }
+
     @GetMapping("/administrator-add-interactions")
     public String showAddInteractionForm(Model model) {
         model.addAttribute("ingredients", activeIngredientRepository.findAll());
@@ -242,22 +264,47 @@ public class AdministratorController {
     public String saveInteraction(
             @RequestParam Long drugNameId,
             @RequestParam Long interactionDrugId,
-            @RequestParam InteractionTypeEnum interactionType) {
+            @RequestParam InteractionTypeEnum interactionType,
+            Model model) {
         ActiveIngredient drugName = activeIngredientRepository.findById(drugNameId).orElse(null);
         ActiveIngredient interactionDrug = activeIngredientRepository.findById(interactionDrugId).orElse(null);
 
-        if (drugName != null && interactionDrug != null) {
-            Interaction interaction = new Interaction();
-            interaction.setDrugName(drugName);
-            interaction.setInteractionDrug(interactionDrug);
-            interaction.setInteractionType(interactionType);
-            interactionRepository.save(interaction);
+        if (drugName == null || interactionDrug == null) {
+            model.addAttribute("errorMessage", "Invalid active ingredient selection.");
+        } else {
+            if (interactionRepository.findByDrugNameAndInteractionDrugAndInteractionType(drugName, interactionDrug, interactionType).isPresent()) {
+                model.addAttribute("errorMessage", "This interaction combination already exists.");
+            } else {
+                Interaction interaction = new Interaction();
+                interaction.setDrugName(drugName);
+                interaction.setInteractionDrug(interactionDrug);
+                interaction.setInteractionType(interactionType);
+                interactionRepository.save(interaction);
+                return "redirect:/administrator-add-interactions";
+            }
         }
 
-        return "redirect:/administrator-add-interactions";
+        // Reload form data
+        model.addAttribute("ingredients", activeIngredientRepository.findAll());
+        model.addAttribute("interactionTypes", InteractionTypeEnum.values());
+        return "administrator-add-interactions";
     }
 
 
+
+
+
+    @GetMapping("/administrator-manage-interactions")
+    public String listInteractions(Model model) {
+        model.addAttribute("interactions", interactionRepository.findAll());
+        return "administrator-manage-interactions";
+    }
+
+    @PostMapping("/delete-interaction/{id}")
+    public String deleteInteraction(@PathVariable Long id) {
+        interactionRepository.deleteById(id);
+        return "redirect:/administrator-manage-interactions"; // Redirect back to the list view to see the updated list after deletion
+    }
 
 
 }

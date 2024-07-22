@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/commons::head"></head>
+<head th:replace="fragments/commons::head">
+</head>
 <body>
 <div class="container">
     <header th:replace="fragments/commons::header"></header>
@@ -10,10 +11,13 @@
         <h3>Add interaction</h3>
         <div class="input-container">
 
-            <form th:action="@{/administrator-add-interactions}" method="post">
+
+            <form id="interactionForm" th:action="@{/administrator-add-interactions}" method="post">
+                <div th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></div>
                 <div>
                     <label for="drugNameId">Drug Name:</label>
                     <select id="drugNameId" name="drugNameId" class="input-field">
+                        <option value="" disabled selected>Select Drug Name</option>
                         <option th:each="ingredient : ${ingredients}"
                                 th:value="${ingredient.id}"
                                 th:text="${ingredient.ingredientName}"></option>
@@ -22,6 +26,7 @@
                 <div>
                     <label for="interactionDrugId">Interaction Drug:</label>
                     <select id="interactionDrugId" name="interactionDrugId" class="input-field">
+                        <option value="" disabled selected>Select Interaction Drug</option>
                         <option th:each="ingredient : ${ingredients}"
                                 th:value="${ingredient.id}"
                                 th:text="${ingredient.ingredientName}"></option>
@@ -30,6 +35,7 @@
                 <div>
                     <label for="interactionType">Interaction Type:</label>
                     <select id="interactionType" name="interactionType" class="input-field">
+                        <option value="" disabled selected>Select Interaction Type</option>
                         <option th:each="type : ${interactionTypes}"
                                 th:value="${type}"
                                 th:text="${type}"></option>
@@ -38,7 +44,21 @@
                 <button type="submit" class="button">Save</button>
             </form>
 
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const form = document.getElementById('interactionForm');
+                    form.addEventListener('submit', function(event) {
+                        const drugName = document.getElementById('drugNameId');
+                        const interactionDrug = document.getElementById('interactionDrugId');
+                        const interactionType = document.getElementById('interactionType');
 
+                        if (drugName.value === "" || interactionDrug.value === "" || interactionType.value === "") {
+                            alert('Please make selections for all fields before submitting.');
+                            event.preventDefault(); // Prevent form submission
+                        }
+                    });
+                });
+            </script>
         </div>
     </div>
     <footer th:replace="fragments/commons::footer"></footer>
