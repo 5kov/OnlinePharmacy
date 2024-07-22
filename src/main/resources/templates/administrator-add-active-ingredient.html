@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<div class="container">
+    <header th:replace="fragments/commons::header"></header>
+
+    <div class="form">
+        <h1>Administrator Page</h1>
+        <h3>Add new active ingredient</h3>
+<!--        <div class="input-container">-->
+<!--            <input type="text" class="input-field" placeholder="Active ingredient name" />-->
+<!--            <input type="text" class="input-field" placeholder="Active ingredient code" />-->
+<!--            <button class="button">Save</button>-->
+<!--        </div>-->
+
+        <form th:action="@{/administrator-add-active-ingredient}" th:object="${ingredient}" method="post">
+            <div class="input-container">
+                <input type="text" class="input-field" placeholder="Active ingredient name" id="ingredientName" th:field="*{ingredientName}" />
+                <span class="centered-text error-message" th:if="${#fields.hasErrors('ingredientName')}" th:errors="*{ingredientName}"></span>
+            </div>
+            <div>
+                <input type="text" class="input-field" placeholder="Active ingredient code" id="ingredientCode" th:field="*{ingredientCode}" />
+                <span class="centered-text error-message" th:if="${#fields.hasErrors('ingredientCode')}" th:errors="*{ingredientCode}"></span>
+            </div>
+            <button class="button" type="submit">Add Ingredient</button>
+        </form>
+    </div>
+
+
+
+
+
+
+    <footer th:replace="fragments/commons::footer"></footer>
+</div>
+</body>
+</html>

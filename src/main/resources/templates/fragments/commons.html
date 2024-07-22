@@ -25,6 +25,8 @@
             <li><a href="/contacts" th:unless="${@userSession.isAdmin()}">Contacts</a></li>
 
             <li><a href="/administrator-manage-users" th:if="${@userSession.isAdmin()}">Manage users</a></li>
+            <li><a href="/administrator-add-active-ingredient" th:if="${@userSession.isAdmin()}">Add active ingredient</a></li>
+            <li><a href="/administrator-manage-active-ingredients" th:if="${@userSession.isAdmin()}">Manage active ingredient</a></li>
             <li><a href="/administrator-add-medicines" th:if="${@userSession.isAdmin()}">Add medicine</a></li>
             <li><a href="/administrator-manage-medicines" th:if="${@userSession.isAdmin()}">Manage medicines</a></li>
             <li><a href="/administrator-add-interactions" th:if="${@userSession.isAdmin()}">Add interaction</a></li>

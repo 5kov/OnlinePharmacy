@@ -4,21 +4,16 @@ package bg.softuni.onlinepharmacy.model.entity;
 import jakarta.persistence.*;
 import org.hibernate.validator.constraints.URL;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Entity
-@Table(name = "drugs")
-public class Drug {
+@Table(name = "medicines")
+public class Medicine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(nullable = false)
-    private String drugNameEn;
+    private String medicineNameEn;
     @Column(nullable = false)
-    private String drugNameBg;
-    @Column(nullable = false)
-    private String activeIngredient;
+    private String medicineNameBg;
     @Column(nullable = false)
     private double price;
     @Column(nullable = false)
@@ -26,17 +21,16 @@ public class Drug {
     @Column(nullable = false)
     private String descriptionBg;
     @Column(nullable = false)
-    @URL
     private String imageUrl;
     @Column(nullable = false)
     private boolean isFavourite;
     @Column(nullable = false)
     private int votes;
-    @ManyToMany
-    private Set<ActiveIngredient> activeIngredients;
+    @ManyToOne
+    @JoinColumn(name = "active_ingredient_id", nullable = false)
+    private ActiveIngredient activeIngredient;
 
-    public Drug() {
-        this.activeIngredients = new HashSet<>();
+    public Medicine() {
     }
 
     public long getId() {
@@ -47,28 +41,20 @@ public class Drug {
         this.id = id;
     }
 
-    public String getDrugNameEn() {
-        return drugNameEn;
+    public String getMedicineNameEn() {
+        return medicineNameEn;
     }
 
-    public void setDrugNameEn(String drugNameEn) {
-        this.drugNameEn = drugNameEn;
+    public void setMedicineNameEn(String medicineNameEn) {
+        this.medicineNameEn = medicineNameEn;
     }
 
-    public String getDrugNameBg() {
-        return drugNameBg;
+    public String getMedicineNameBg() {
+        return medicineNameBg;
     }
 
-    public void setDrugNameBg(String drugNameBg) {
-        this.drugNameBg = drugNameBg;
-    }
-
-    public String getActiveIngredient() {
-        return activeIngredient;
-    }
-
-    public void setActiveIngredient(String activeIngredient) {
-        this.activeIngredient = activeIngredient;
+    public void setMedicineNameBg(String medicineNameBg) {
+        this.medicineNameBg = medicineNameBg;
     }
 
     public double getPrice() {
@@ -95,11 +81,11 @@ public class Drug {
         this.descriptionBg = descriptionBg;
     }
 
-    public @URL String getImageUrl() {
+    public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(@URL String imageUrl) {
+    public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 
@@ -119,11 +105,11 @@ public class Drug {
         this.votes = votes;
     }
 
-    public Set<ActiveIngredient> getActiveIngredients() {
-        return activeIngredients;
+    public ActiveIngredient getActiveIngredient() {
+        return activeIngredient;
     }
 
-    public void setActiveIngredients(Set<ActiveIngredient> activeIngredients) {
-        this.activeIngredients = activeIngredients;
+    public void setActiveIngredient(ActiveIngredient activeIngredient) {
+        this.activeIngredient = activeIngredient;
     }
 }

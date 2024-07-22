@@ -1,6 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head th:replace="fragments/commons::head"></head>
+<script>
+    function redirectToUserManagement() {
+        var username = document.getElementById("username").value;
+        var url = "/administrator-manage-users/" + encodeURIComponent(username);
+        window.location.href = url;
+    }
+
+    function getQueryStringValue(key) {
+        return new URLSearchParams(window.location.search).get(key);
+    }
+
+    // Function to perform actions after the page has loaded
+    window.onload = function() {
+        // Retrieve the username from the URL parameters
+        var username2 = getQueryStringValue('username');
+
+        // Check if the username parameter is present and not null
+        if (username2) {
+            // Set the value of the username input field
+            var usernameInput2 = document.getElementById('username');
+            if (usernameInput2) {
+                usernameInput2.value = username2;
+
+                // Trigger the search form submission
+                var searchForm = document.getElementById('searchForm');
+                if (searchForm) {
+                    searchForm.submit();
+                }
+            }
+        }
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const errorMessage = thymeleafContext.get('error');
+        if (errorMessage) {
+            alert(errorMessage);
+        }
+    });
+
+
+
+</script>
 <body>
 <div class="container">
     <header th:replace="fragments/commons::header"></header>
@@ -9,11 +51,29 @@
         <h1>Administrator Page</h1>
         <h3>Manage users</h3>
         <div class="input-container">
-            <input type="text" class="input-field" placeholder="Search Username" />
-            <button class="button">Search</button>
-            <input type="text" class="input-field" placeholder="Username" disabled />
-            <button class="button">Delete</button>
-            <button class="button">Make Administrator</button>
+            <form action="#" th:action="@{/administrator-manage-users}" method="post" id="searchForm">
+                <input type="text" id="username" name="username" class="input-field" placeholder="Search Username" th:value="${username}" required/>
+                <button type="submit" class="button">Search</button>
+            </form>
+
+            <div th:if="${users}">
+                <ul>
+                    <li th:each="user : ${users}">
+                        <h3><span class="centered-text" th:text="${user.username}"></span></h3>
+                        <form th:action="@{/deleteUser/{id}(id=${user.id}, username=${username})}" method="post">
+                            <button type="submit" class="button">Delete</button>
+                        </form>
+                        <form th:action="@{/toggleAdminStatus/{id}(id=${user.id}, username=${username})}" method="post">
+                            <input type="hidden" name="adminStatus" th:value="${!user.administrator}" />
+                            <button type="submit" class="button" th:text="${user.administrator} ? 'Make Regular User' : 'Make Administrator'" ></button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+            <h3 class="centered-text error-message" th:if="${error}" th:text="${error}"></h3>
+
+
         </div>
     </div>
 

@@ -2,8 +2,6 @@ package bg.softuni.onlinepharmacy.model.entity;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,17 +30,17 @@ public class User {
     private String password;
     @Column(nullable = false)
     private boolean administrator;
-    @ManyToMany
-    private Set<Drug> favouriteDrugs;
-    @ManyToMany
-    private Set<Drug> ratedDrugs;
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private Set<Medicine> favouriteMedicines;
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private Set<Medicine> ratedMedicines;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orders;
 
     public User() {
-        this.favouriteDrugs = new HashSet<>();
-        this.ratedDrugs = new HashSet<>();
+        this.favouriteMedicines = new HashSet<>();
+        this.ratedMedicines = new HashSet<>();
         this.orders = new HashSet<>();
     }
 
@@ -126,20 +124,20 @@ public class User {
         this.administrator = administrator;
     }
 
-    public Set<Drug> getFavouriteDrugs() {
-        return favouriteDrugs;
+    public Set<Medicine> getFavouriteDrugs() {
+        return favouriteMedicines;
     }
 
-    public void setFavouriteDrugs(Set<Drug> favouriteDrugs) {
-        this.favouriteDrugs = favouriteDrugs;
+    public void setFavouriteDrugs(Set<Medicine> favouriteMedicines) {
+        this.favouriteMedicines = favouriteMedicines;
     }
 
-    public Set<Drug> getRatedDrugs() {
-        return ratedDrugs;
+    public Set<Medicine> getRatedDrugs() {
+        return ratedMedicines;
     }
 
-    public void setRatedDrugs(Set<Drug> ratedDrugs) {
-        this.ratedDrugs = ratedDrugs;
+    public void setRatedDrugs(Set<Medicine> ratedMedicines) {
+        this.ratedMedicines = ratedMedicines;
     }
 
     public Set<Order> getOrders() {

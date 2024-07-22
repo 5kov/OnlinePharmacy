@@ -5,11 +5,15 @@ import bg.softuni.onlinepharmacy.model.dto.LoginDTO;
 import bg.softuni.onlinepharmacy.model.dto.RegisterDTO;
 import bg.softuni.onlinepharmacy.model.entity.User;
 import bg.softuni.onlinepharmacy.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -59,4 +63,49 @@ public class UserService {
     public void logout() {
         userSession.logOut();
     }
+//    public List<User> findUsersByUsername(String username) {
+//        return userRepository.findByUsernameContaining(username);
+//    }
+//
+//    public void deleteUser(Long id) {
+//        userRepository.deleteUserById(id);
+//    }
+//
+//    public void toggleAdminStatus(Long id, boolean adminStatus) {
+//        userRepository.updateUserAdminStatus(id, adminStatus);
+//    }
+
+    public List<User> findUsersByUsername(String username) {
+        return userRepository.findByUsernameContaining(username);
+    }
+
+    public boolean canDeleteUser(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null && user.isAdministrator()) {
+            // Count administrators
+            long count = userRepository.countByAdministrator(true);
+            // Check if this is the last administrator
+            return count > 1;
+        }
+        return true; // User is not an administrator or not the only one
+    }
+
+    public void deleteUser(Long id) {
+        if (canDeleteUser(id)) {
+            userRepository.deleteById(id);
+        } else {
+            throw new IllegalStateException("At least one administrator is required.");
+        }
+    }
+
+    public void toggleAdminStatus(Long id, boolean adminStatus) {
+        if (canDeleteUser(id)) {
+            userRepository.updateUserAdminStatus(id, adminStatus);
+        } else {
+            throw new IllegalStateException("At least one administrator is required.");
+        }
+
+    }
+
+
 }

@@ -11,7 +11,7 @@ public class OrderItem {
     @ManyToOne
     private Order order;
     @ManyToOne
-    private Drug drug;
+    private Medicine medicine;
     private int quantity;
     private double itemPrice;
 
@@ -34,12 +34,12 @@ public class OrderItem {
         this.order = order;
     }
 
-    public Drug getDrug() {
-        return drug;
+    public Medicine getDrug() {
+        return medicine;
     }
 
-    public void setDrug(Drug drug) {
-        this.drug = drug;
+    public void setDrug(Medicine medicine) {
+        this.medicine = medicine;
     }
 
     public int getQuantity() {

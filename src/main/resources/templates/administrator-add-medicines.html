@@ -9,18 +9,42 @@
         <h1>Administrator Page</h1>
         <h3>Add new medicine</h3>
         <div class="input-container">
-            <input type="text" class="input-field" placeholder="Medicine Name (English)" />
-            <input type="text" class="input-field" placeholder="Medicine Name (Bulgarian)" />
-            <input type="text" class="input-field" placeholder="Active Ingredient" />
-            <input type="number" step="0.01" class="input-field" placeholder="Price" />
-            <input type="text" class="input-field" placeholder="Description (English)" />
-            <input type="text" class="input-field" placeholder="Description (Bulgarian)" />
-            <input type="text" class="input-field" placeholder="Image URL" />
-            <button class="button">Save</button>
+            <form th:action="@{/administrator-add-medicines}" th:object="${medicine}" method="post">
+                <div>
+                    <input type="text" class="input-field" th:field="*{medicineNameEn}" placeholder="Medicine Name (English)" />
+                    <span class="centered-text error-message" th:if="${#fields.hasErrors('medicineNameEn')}" th:errors="*{medicineNameEn}"></span>
+                </div>
+                <div>
+                    <input type="text" class="input-field" th:field="*{medicineNameBg}" placeholder="Medicine Name (Bulgarian)" />
+                    <span class="centered-text error-message" th:if="${#fields.hasErrors('medicineNameBg')}" th:errors="*{medicineNameBg}"></span>
+                </div>
+                <div>
+                    <input type="number" class="input-field" step="0.01" th:field="*{price}" placeholder="Price" />
+                    <span class="centered-text error-message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+                </div>
+                <div>
+                    <input type="text" class="input-field" th:field="*{descriptionEn}" placeholder="Description (English)" />
+                    <span class="centered-text error-message" th:if="${#fields.hasErrors('descriptionEn')}" th:errors="*{descriptionEn}"></span>
+                </div>
+                <div>
+                    <input type="text" class="input-field" th:field="*{descriptionBg}" placeholder="Description (Bulgarian)" />
+                    <span class="centered-text error-message" th:if="${#fields.hasErrors('descriptionBg')}" th:errors="*{descriptionBg}"></span>
+                </div>
+                <div>
+                    <input type="text" class="input-field" th:field="*{imageUrl}" placeholder="Image URL" />
+                    <span class="centered-text error-message" th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"></span>
+                </div>
+                <div>
+                    <select class="input-field" th:field="*{activeIngredientId}">
+                        <option value="">-- Select Active Ingredient --</option>
+                        <option th:each="ingredient : ${ingredients}" th:value="${ingredient.id}" th:text="${ingredient.ingredientName}"></option>
+                    </select>
+                    <span class="centered-text error-message" th:if="${#fields.hasErrors('activeIngredientId')}" th:errors="*{activeIngredientId}"></span>
+                </div>
+                <button class="button" type="submit">Submit</button>
+            </form>
         </div>
     </div>
-
-
 
     <footer th:replace="fragments/commons::footer"></footer>
 </div>
