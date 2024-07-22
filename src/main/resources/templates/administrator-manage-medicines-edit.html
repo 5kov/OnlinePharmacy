@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<div class="container">
+    <header th:replace="fragments/commons::header"></header>
+
+    <div class="form">
+        <h1>Administrator Page</h1>
+        <h3>Manage medicines</h3>
+<!--        <div class="input-container">-->
+<!--            <input type="text" class="input-field" placeholder="Search Medicine" />-->
+<!--            <button class="button">Search</button>-->
+<!--            <input type="text" class="input-field" placeholder="Medicine Name in English" />-->
+<!--            <input type="text" class="input-field" placeholder="Medicine Name in Bulgarian" />-->
+<!--            <input type="number" step="0.01" class="input-field" placeholder="Price" />-->
+<!--            <input type="text" class="input-field" placeholder="Active Ingredient" />-->
+<!--            <input type="text" class="input-field" placeholder="Description in English" />-->
+<!--            <input type="text" class="input-field" placeholder="Description in Bulgarian" />-->
+<!--            <input type="text" class="input-field" placeholder="Image URL" />-->
+<!--            <button class="button">Save</button>-->
+<!--            <button class="button">Delete</button>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+
+        <h1>Manage Medicines</h1>
+        <form th:action="@{/administrator-manage-medicines}" method="get">
+            <input type="text" name="search" placeholder="Search by Name"/>
+            <button type="submit">Search</button>
+        </form>
+
+        <div th:each="medicine : ${medicines}">
+            <p th:text="${medicine.medicineNameEn}"></p>
+            <button th:onclick="'javascript:editMedicine(' + ${medicine.id} + ');'">Edit</button>
+            <form th:action="@{/medicines/delete/{id}(id=${medicine.id})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+
+        <!-- Edit Form -->
+        <form id="editForm" th:action="@{/save}" method="post" style="display:none;">
+            <!-- Form fields for editing a medicine -->
+            <input type="hidden" id="id" name="id"/>
+            <input type="text" id="medicineNameEn" name="medicineNameEn" placeholder="Medicine Name (English)"/>
+            <!-- Additional fields like the above -->
+            <button type="submit">Save</button>
+        </form>
+
+        <script>
+            function editMedicine(id) {
+                const form = document.getElementById('editForm');
+                form.style.display = 'block';
+                fetch(`/data/${id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('id').value = data.id;
+                        document.getElementById('medicineNameEn').value = data.medicineNameEn;
+                        // Populate other fields similarly
+                        form.action = '/medicines/save';
+                    })
+                    .catch(error => console.error('Error loading medicine:', error));
+            }
+        </script>
+
+
+    <footer th:replace="fragments/commons::footer"></footer>
+</div>
+</body>
+</html>

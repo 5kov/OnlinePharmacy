@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.URL;
 
 public class MedicineDTO {
+
+    private long id;
     @NotBlank(message = "The name in English must not be blank.")
     @Size(min = 3, max = 20, message = "The name in English must be between 3 and 20 characters.")
     private String medicineNameEn;
@@ -90,5 +92,13 @@ public class MedicineDTO {
 
     public void setActiveIngredientId(@NotNull Long activeIngredientId) {
         this.activeIngredientId = activeIngredientId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

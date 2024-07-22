@@ -11,12 +11,14 @@ import bg.softuni.onlinepharmacy.service.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,10 +43,6 @@ public class AdministratorController {
     @GetMapping("/administrator-manage-users")
     public String viewManageUsers(){
         return "administrator-manage-users";
-    }
-    @GetMapping("/administrator-manage-medicines")
-    public String viewManageMedicines(){
-        return "administrator-manage-medicines";
     }
     @GetMapping("/administrator-manage-interactions")
     public String viewManageInteractions(){
@@ -161,7 +159,8 @@ public class AdministratorController {
     }
 
     private Medicine convertToEntity(MedicineDTO medicineDTO) {
-        Medicine medicine = new Medicine();
+        Medicine medicine = medicineRepository.findById(medicineDTO.getId())
+                .orElse(new Medicine()); // Only create a new instance if the ID does not exist
         medicine.setMedicineNameEn(medicineDTO.getMedicineNameEn());
         medicine.setMedicineNameBg(medicineDTO.getMedicineNameBg());
         medicine.setPrice(medicineDTO.getPrice());
@@ -169,11 +168,71 @@ public class AdministratorController {
         medicine.setDescriptionBg(medicineDTO.getDescriptionBg());
         medicine.setImageUrl(medicineDTO.getImageUrl());
         if (medicineDTO.getActiveIngredientId() != null) {
-            Optional<ActiveIngredient> ingredient = ingredientRepository.findById(medicineDTO.getActiveIngredientId());
-            ingredient.ifPresent(medicine::setActiveIngredient);
+            ActiveIngredient ingredient = ingredientRepository.findById(medicineDTO.getActiveIngredientId())
+                    .orElse(null);
+            medicine.setActiveIngredient(ingredient);
         }
         return medicine;
     }
+
+
+
+    @GetMapping("/administrator-manage-medicines")
+    public String listMedicines(@RequestParam(required = false) String search, Model model) {
+        if (search != null && !search.isEmpty()) {
+            model.addAttribute("medicines", medicineRepository.findByMedicineNameEnContainingIgnoreCase(search));
+        } else {
+            model.addAttribute("medicines", medicineRepository.findAll());
+        }
+        model.addAttribute("ingredients", ingredientRepository.findAll());
+        return "administrator-manage-medicines";
+    }
+
+    @PostMapping("/save")
+    public String saveMedicine(@ModelAttribute("medicineDTO") @Valid MedicineDTO medicineDTO, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("medicines", medicineRepository.findAll());
+            model.addAttribute("ingredients", ingredientRepository.findAll());
+            return "administrator-manage-medicines";
+        }
+        Medicine medicine = convertToEntity(medicineDTO);
+        medicineRepository.save(medicine);
+        return "redirect:/administrator-manage-medicines";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteMedicine(@PathVariable Long id) {
+        medicineRepository.deleteById(id);
+        return "redirect:/administrator-manage-medicines";
+    }
+
+    @GetMapping("/data/{id}")
+    public ResponseEntity<MedicineDTO> getMedicineData(@PathVariable Long id) {
+        Optional<Medicine> medicine = medicineRepository.findById(id);
+        if (medicine.isPresent()) {
+            MedicineDTO dto = convertToDto(medicine.get());
+            return ResponseEntity.ok(dto);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    private MedicineDTO convertToDto(Medicine medicine) {
+        MedicineDTO dto = new MedicineDTO();
+        dto.setId(medicine.getId());
+        dto.setMedicineNameEn(medicine.getMedicineNameEn());
+        dto.setMedicineNameBg(medicine.getMedicineNameBg());
+        dto.setPrice(medicine.getPrice());
+        dto.setDescriptionEn(medicine.getDescriptionEn());
+        dto.setDescriptionBg(medicine.getDescriptionBg());
+        dto.setImageUrl(medicine.getImageUrl());
+        dto.setActiveIngredientId(medicine.getActiveIngredient().getId());
+        return dto;
+    }
+
+
+
+
+
 
 
 
