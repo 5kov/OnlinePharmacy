@@ -7,11 +7,10 @@ import jakarta.persistence.PreRemove;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +30,9 @@ public class CartService {
     private UserRepository userRepository;
     @Autowired
     private UserSession userSession;
+    @Autowired
+    private InteractionRepository interactionRepository;
+
     @Transactional
     public void addToCart(User user, Long medicineId, int quantity) {
 
@@ -75,7 +77,7 @@ public class CartService {
 
     @Transactional
     public void createOrderFromCart() {
-        User user = userRepository.findById(userSession.getId()).get();  // Assume method to fetch current user
+        User user = userRepository.findById(userSession.getId()).get();
         Cart cart = user.getCart();
         if (cart == null || cart.getCartItems().isEmpty()) {
             throw new IllegalStateException("Cart is empty");
@@ -85,27 +87,69 @@ public class CartService {
         order.setUser(user);
         order.setOrderDate(LocalDateTime.now());
 
-        // Convert each CartItem to an OrderItem and save
         for (CartItem cartItem : cart.getCartItems()) {
             OrderItem orderItem = new OrderItem();
             orderItem.setOrder(order);
             orderItem.setDrug(cartItem.getMedicine());
             orderItem.setQuantity(cartItem.getQuantity());
-            orderItem.setItemPrice(cartItem.getItemPrice());  // Assuming itemPrice is the total for that item
+            orderItem.setItemPrice(cartItem.getItemPrice());
             order.getOrderItems().add(orderItem);
-            orderItemRepository.save(orderItem);  // Save each OrderItem
+            orderItemRepository.save(orderItem);
         }
 
-        orderRepository.save(order);  // Save the order
-        cart.getCartItems().clear();  // Clear the cart items
-        cartRepository.save(cart);  // Save the empty cart
+        orderRepository.save(order);
+        cart.getCartItems().clear();
+        cartRepository.save(cart);
     }
 
+    @Transactional
+    public boolean placeOrder() {
+        User user = userRepository.findById(userSession.getId()).get();
+        Cart cart = user.getCart();
+        if (cart.getCartItems().isEmpty()) {
+            // If the cart is empty, throw an exception or simply return false
+            throw new IllegalStateException("Cannot place an order because the cart is empty");
+        }
+        if (checkForInteractions(cart)) {
+            throw new IllegalStateException("Cannot place order due to incompatible ingredients");
+        }
 
+        Order order = new Order();
+        order.setUser(user);
+        order.setOrderDate(LocalDateTime.now());
 
+        for (CartItem cartItem : cart.getCartItems()) {
+            OrderItem orderItem = new OrderItem();
+            orderItem.setOrder(order);
+            orderItem.setDrug(cartItem.getMedicine());
+            orderItem.setQuantity(cartItem.getQuantity());
+            orderItem.setItemPrice(cartItem.getItemPrice());
+            order.getOrderItems().add(orderItem);
+            orderItemRepository.save(orderItem);
+        }
 
+        orderRepository.save(order);
+        cart.getCartItems().clear();
+        cartRepository.save(cart);
 
+        return true;
+    }
 
+    private boolean checkForInteractions(Cart cart) {
+        Set<ActiveIngredient> ingredients = new HashSet<>();
+        for (CartItem item : cart.getCartItems()) {
+            ingredients.add(item.getMedicine().getActiveIngredient());
+        }
+
+        for (ActiveIngredient ingredientOne : ingredients) {
+            for (ActiveIngredient ingredientTwo : ingredients) {
+                if (!ingredientOne.equals(ingredientTwo) && interactionRepository.existsByActiveIngredients(ingredientOne, ingredientTwo)) {
+                    return true; // Interaction found
+                }
+            }
+        }
+        return false; // No interactions found
+    }
 
     public Cart getCurrentCart() {
         User user = userRepository.findById(userSession.getId()).get();

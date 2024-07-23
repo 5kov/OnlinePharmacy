@@ -109,10 +109,6 @@ public class UserService {
 
     }
 
-
-
-
-
     public UpdateUserDTO findById(Long id) {
         User user = userRepository.findById(id).orElse(null);
         return convertToDto(user);
@@ -167,8 +163,6 @@ public class UserService {
                 user.setPassword(passwordEncoder.encode(dto.getPassword()));
             }
         }
-
-
 
     }
     public String updatePassword(UpdateUserDTO updateUserDTO) {

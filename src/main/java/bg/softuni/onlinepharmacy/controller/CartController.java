@@ -72,11 +72,30 @@ public class CartController {
         return "redirect:/cart";
     }
 
+//    @PostMapping("/order")
+//    public String placeOrder(RedirectAttributes redirectAttributes) {
+//        cartService.createOrderFromCart();
+//        redirectAttributes.addFlashAttribute("successMessage", "Order placed successfully!");
+//        return "redirect:/cart";
+//    }
+
+
+
+
     @PostMapping("/order")
     public String placeOrder(RedirectAttributes redirectAttributes) {
-        cartService.createOrderFromCart();
-        redirectAttributes.addFlashAttribute("successMessage", "Order placed successfully!");
+        try {
+            if (cartService.placeOrder()) {
+                redirectAttributes.addFlashAttribute("successMessage", "Order placed successfully!");
+            }
+        } catch (IllegalStateException e) {
+            redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
+            return "redirect:/cart"; // Redirect back to cart if there is an interaction
+        }
         return "redirect:/cart";
     }
+
+
+
 
 }
