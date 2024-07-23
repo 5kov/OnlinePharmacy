@@ -36,16 +36,22 @@ public class CartService {
 
         Cart cart = user.getCart();
         Medicine medicine = medicineRepository.findById(medicineId).orElseThrow();
-        CartItem cartItem = new CartItem();
-        cartItem.setCart(cart);
-        cartItem.setMedicine(medicine);
-        cartItem.setQuantity(quantity);
-        cartItem.setItemPrice(medicine.getPrice() * quantity);
-        cart.getCartItems().add(cartItem);
-        cartRepository.save(cart);
 
-
-
+        Optional<CartItem> result = cartItemRepository.findCartItemByCartIdAndMedicineId(cart.getId(), medicineId);
+        if (!result.isPresent()) {
+            CartItem cartItem = new CartItem();
+            cartItem.setCart(cart);
+            cartItem.setMedicine(medicine);
+            cartItem.setQuantity(quantity);
+            cartItem.setItemPrice(medicine.getPrice() * quantity);
+            cart.getCartItems().add(cartItem);
+            cartRepository.save(cart);
+        } else {
+            //            // Medicine already in the cart, update the quantity
+            CartItem cartItem = result.get();
+            cartItem.setQuantity(cartItem.getQuantity() + quantity);
+            cartItemRepository.save(cartItem);
+        }
     }
 
     // Method to get current cart, update items, delete items, calculate total price, etc.

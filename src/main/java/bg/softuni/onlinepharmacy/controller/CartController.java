@@ -3,6 +3,7 @@ package bg.softuni.onlinepharmacy.controller;
 import bg.softuni.onlinepharmacy.config.UserSession;
 import bg.softuni.onlinepharmacy.model.entity.Cart;
 import bg.softuni.onlinepharmacy.model.entity.User;
+import bg.softuni.onlinepharmacy.repository.CartRepository;
 import bg.softuni.onlinepharmacy.repository.UserRepository;
 import bg.softuni.onlinepharmacy.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class CartController {
     private UserRepository userRepository;
     @Autowired
     private UserSession userSession;
+    @Autowired
+    private CartRepository cartRepository;
 
 
     @GetMapping("/order-finished")
@@ -38,7 +41,7 @@ public class CartController {
 
     @PostMapping("/add")
     public ModelAndView addToCart(@RequestParam Long medicineId, @RequestParam int quantity) {
-        User user = userRepository.findById(userSession.getId()).get(); // Assume you have a method to get the currently logged-in user
+        User user = userRepository.findById(userSession.getId()).get();
         cartService.addToCart(user, medicineId, quantity);
         return new ModelAndView("redirect:/medicines");
     }
