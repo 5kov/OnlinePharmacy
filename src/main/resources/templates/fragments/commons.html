@@ -34,6 +34,7 @@
 
             <li><a href="/login" th:unless="${@userSession.isLoggedIn()}">Sign in</a></li>
             <li><a href="/logout" th:if="${@userSession.isLoggedIn()}">Sign out</a></li>
+            <li><a href="/user-settings" th:if="${@userSession.isLoggedIn()}">User settings</a></li>
         </ul>
     </nav>
 </header>

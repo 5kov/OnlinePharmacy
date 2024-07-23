@@ -9,7 +9,7 @@ public class ActiveIngredientDTO {
     private String ingredientName;
 
     @NotBlank(message = "The code cannot be empty.")
-    @Size(min = 1, max = 6, message = "The code must be between 1 and 6 characters.")
+    @Size(min = 1, max = 7, message = "The code must be between 1 and 7 characters.")
     private String ingredientCode;
 
     // Getters and Setters

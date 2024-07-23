@@ -8,14 +8,28 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cart_id")
     private Cart cart;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "medicine_id")
     private Medicine medicine;
 
     private int quantity;
     private double itemPrice;
+
+
+//    @ManyToOne
+//    private Cart cart;
+//
+//    @ManyToOne
+//    private Medicine medicine;
+//
+//    private int quantity;
+//    private double itemPrice;
 
     public CartItem() {
     }
@@ -36,11 +50,11 @@ public class CartItem {
         this.cart = cart;
     }
 
-    public Medicine getDrug() {
+    public Medicine getMedicine() {
         return medicine;
     }
 
-    public void setDrug(Medicine medicine) {
+    public void setMedicine(Medicine medicine) {
         this.medicine = medicine;
     }
 

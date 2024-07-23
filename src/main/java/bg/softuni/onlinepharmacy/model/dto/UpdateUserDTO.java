@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-public class RegisterDTO {
+public class UpdateUserDTO {
     private long id;
     @NotBlank
     @Size(min = 3, max = 20)
@@ -28,14 +28,20 @@ public class RegisterDTO {
     @NotBlank
     @Size(min = 3, max = 20)
     private String phoneNumber;
-    @NotBlank
     @Size(min = 3, max = 20)
     private String password;
-    @NotBlank
     @Size(min = 3, max = 20)
     private String confirmPassword;
 
-    public RegisterDTO() {
+    public UpdateUserDTO() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public @NotBlank @Size(min = 3, max = 20) String getUsername() {
@@ -94,27 +100,19 @@ public class RegisterDTO {
         this.phoneNumber = phoneNumber;
     }
 
-    public @NotBlank @Size(min = 3, max = 20) String getPassword() {
+    public @Size(min = 3, max = 20) String getPassword() {
         return password;
     }
 
-    public void setPassword(@NotBlank @Size(min = 3, max = 20) String password) {
+    public void setPassword(@Size(min = 3, max = 20) String password) {
         this.password = password;
     }
 
-    public @NotBlank @Size(min = 3, max = 20) String getConfirmPassword() {
+    public @Size(min = 3, max = 20) String getConfirmPassword() {
         return confirmPassword;
     }
 
-    public void setConfirmPassword(@NotBlank @Size(min = 3, max = 20) String confirmPassword) {
+    public void setConfirmPassword(@Size(min = 3, max = 20) String confirmPassword) {
         this.confirmPassword = confirmPassword;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 }

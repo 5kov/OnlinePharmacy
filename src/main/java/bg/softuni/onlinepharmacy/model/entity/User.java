@@ -30,6 +30,15 @@ public class User {
     private String password;
     @Column(nullable = false)
     private boolean administrator;
+
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cart_id", referencedColumnName = "id")
+    private Cart cart;  // Each user has one cart
+
+
+
+
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private Set<Medicine> favouriteMedicines;
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
@@ -42,6 +51,9 @@ public class User {
         this.favouriteMedicines = new HashSet<>();
         this.ratedMedicines = new HashSet<>();
         this.orders = new HashSet<>();
+        this.cart = new Cart(); // Initialize a new Cart when creating a new User
+        this.cart.setUser(this); // Set the bi-directional relationship
+
     }
 
     public long getId() {
@@ -124,19 +136,27 @@ public class User {
         this.administrator = administrator;
     }
 
-    public Set<Medicine> getFavouriteDrugs() {
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    public Set<Medicine> getFavouriteMedicines() {
         return favouriteMedicines;
     }
 
-    public void setFavouriteDrugs(Set<Medicine> favouriteMedicines) {
+    public void setFavouriteMedicines(Set<Medicine> favouriteMedicines) {
         this.favouriteMedicines = favouriteMedicines;
     }
 
-    public Set<Medicine> getRatedDrugs() {
+    public Set<Medicine> getRatedMedicines() {
         return ratedMedicines;
     }
 
-    public void setRatedDrugs(Set<Medicine> ratedMedicines) {
+    public void setRatedMedicines(Set<Medicine> ratedMedicines) {
         this.ratedMedicines = ratedMedicines;
     }
 

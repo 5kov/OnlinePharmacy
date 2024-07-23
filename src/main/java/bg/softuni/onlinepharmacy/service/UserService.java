@@ -3,6 +3,8 @@ package bg.softuni.onlinepharmacy.service;
 import bg.softuni.onlinepharmacy.config.UserSession;
 import bg.softuni.onlinepharmacy.model.dto.LoginDTO;
 import bg.softuni.onlinepharmacy.model.dto.RegisterDTO;
+import bg.softuni.onlinepharmacy.model.dto.UpdateUserDTO;
+import bg.softuni.onlinepharmacy.model.entity.Medicine;
 import bg.softuni.onlinepharmacy.model.entity.User;
 import bg.softuni.onlinepharmacy.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -108,4 +110,78 @@ public class UserService {
     }
 
 
+
+
+
+    public UpdateUserDTO findById(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        return convertToDto(user);
+    }
+
+    public String updateUser(UpdateUserDTO updateUserDTO) {
+        User user = userRepository.findById(userSession.getId()).orElse(null);
+
+        Optional<User> user2 = userRepository.findByUsername(updateUserDTO.getUsername());
+
+        if (user2.isPresent() && user2.get().getId() != userSession.getId()) {
+            return "usernameExists";
+        }
+        user2 = userRepository.findByEmail(updateUserDTO.getEmail());
+        if (user2.isPresent() && user2.get().getId() != userSession.getId()) {
+            return "emailExists";
+        }
+
+        convertToUser(updateUserDTO, user);
+        userRepository.save(user);
+        return "success";
+    }
+
+    private UpdateUserDTO convertToDto(User user) {
+        UpdateUserDTO dto = new UpdateUserDTO();
+        if (user != null) {
+            dto.setId(user.getId());
+            dto.setUsername(user.getUsername());
+            dto.setEmail(user.getEmail());
+            dto.setCountry(user.getCountry());
+            dto.setCity(user.getCity());
+            dto.setStreet(user.getStreet());
+            dto.setPostalCode(user.getPostalCode());
+            dto.setPhoneNumber(user.getPhoneNumber());
+            dto.setPassword(user.getPassword());  // Consider security implications of handling passwords
+        }
+        return dto;
+    }
+
+    private void convertToUser(UpdateUserDTO dto, User user) {
+
+        if (dto != null && user != null) {
+            user.setId(dto.getId());
+            user.setUsername(dto.getUsername());
+            user.setEmail(dto.getEmail());
+            user.setCountry(dto.getCountry());
+            user.setCity(dto.getCity());
+            user.setStreet(dto.getStreet());
+            user.setPostalCode(dto.getPostalCode());
+            user.setPhoneNumber(dto.getPhoneNumber());
+            if(dto.getPassword() != null) {
+                user.setPassword(passwordEncoder.encode(dto.getPassword()));
+            }
+        }
+
+
+
+    }
+    public String updatePassword(UpdateUserDTO updateUserDTO) {
+        if (!updateUserDTO.getPassword().equals(updateUserDTO.getConfirmPassword())) {
+            return "passwordsDoNotMatch";
+        }
+        if(updateUserDTO.getPassword().length() >= 3 && updateUserDTO.getPassword().length() <= 20) {
+            User user = userRepository.findById(userSession.getId()).orElse(null);
+            user.setPassword(passwordEncoder.encode(updateUserDTO.getPassword()));
+            userRepository.save(user);
+            return "success";
+        }
+        return "passwordsLength";
+
+    }
 }

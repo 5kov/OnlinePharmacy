@@ -3,6 +3,7 @@ package bg.softuni.onlinepharmacy.controller;
 import bg.softuni.onlinepharmacy.config.UserSession;
 import bg.softuni.onlinepharmacy.model.dto.LoginDTO;
 import bg.softuni.onlinepharmacy.model.dto.RegisterDTO;
+import bg.softuni.onlinepharmacy.model.dto.UpdateUserDTO;
 import bg.softuni.onlinepharmacy.model.entity.User;
 import bg.softuni.onlinepharmacy.service.UserService;
 import jakarta.validation.Valid;
@@ -53,7 +54,6 @@ public class UserRegistrationLoginController {
 
     @PostMapping("/register")
     public String doRegister(@Valid RegisterDTO data, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        System.out.println();
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("registerData", data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
@@ -106,6 +106,79 @@ public class UserRegistrationLoginController {
     public String doLogout() {
         userService.logout();
         return "redirect:/index";
+    }
+
+    @GetMapping("/user-settings")
+    public String showSettingsForm(Model model) {
+        Long userId = userSession.getId(); // Assuming UserSession is appropriately implemented
+        UpdateUserDTO updateUserDTO = userService.findById(userId);
+        model.addAttribute("updateUserDTO", updateUserDTO);
+        return "user-settings";
+    }
+
+    @PostMapping("/user-settings")
+    public String updateSettings(@ModelAttribute("updateUserDTO") @Valid UpdateUserDTO updateUserDTO,
+                                 BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("updateUserDTO", updateUserDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
+            return "user-settings";
+        }
+        String success = userService.updateUser(updateUserDTO);
+        if (success.equals("usernameExists")) {
+            redirectAttributes.addFlashAttribute("updateUserDTO", updateUserDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
+            redirectAttributes.addFlashAttribute("usernameExists", true);
+            return "redirect:/user-settings";
+        } else if (success.equals("emailExists")) {
+            redirectAttributes.addFlashAttribute("updateUserDTO", updateUserDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
+            redirectAttributes.addFlashAttribute("emailExists", true);
+            return "redirect:/user-settings";
+        } else if (success.equals("passwordsDoNotMatch")) {
+            redirectAttributes.addFlashAttribute("updateUserDTO", updateUserDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
+            redirectAttributes.addFlashAttribute("passwordsDoNotMatch", true);
+            return "redirect:/user-settings";
+        }
+        return "redirect:/success";
+    }
+
+    @GetMapping("/success")
+    public String showSuccessForm() {
+        return "success";
+    }
+
+    @GetMapping("/change-password")
+    public String showChangePasswordForm(Model model) {
+        Long userId = userSession.getId(); // Assuming UserSession is appropriately implemented
+        UpdateUserDTO updateUserDTO = userService.findById(userId);
+        model.addAttribute("updateUserDTO", updateUserDTO);
+        return "change-password";
+    }
+
+    @PostMapping("/change-password")
+    public String updateChangePassword(@ModelAttribute("updateUserDTO") @Valid UpdateUserDTO updateUserDTO,
+                                 BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+//        if (bindingResult.hasErrors()) {
+//            redirectAttributes.addFlashAttribute("updateUserDTO", updateUserDTO);
+//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
+//            return "change-password";
+//        }
+        String success = userService.updatePassword(updateUserDTO);
+        if (success.equals("passwordsDoNotMatch")) {
+            redirectAttributes.addFlashAttribute("updateUserDTO", updateUserDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
+            redirectAttributes.addFlashAttribute("passwordsDoNotMatch", true);
+            return "redirect:/change-password";
+        }
+        if (success.equals("passwordsLength")) {
+            redirectAttributes.addFlashAttribute("updateUserDTO", updateUserDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
+            redirectAttributes.addFlashAttribute("passwordLength", true);
+            return "redirect:/change-password";
+        }
+        return "redirect:/user-settings";
     }
 
 }
