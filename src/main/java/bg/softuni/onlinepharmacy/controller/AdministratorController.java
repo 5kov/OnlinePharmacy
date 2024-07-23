@@ -6,6 +6,7 @@ import bg.softuni.onlinepharmacy.model.entity.*;
 import bg.softuni.onlinepharmacy.repository.ActiveIngredientRepository;
 import bg.softuni.onlinepharmacy.repository.InteractionRepository;
 import bg.softuni.onlinepharmacy.repository.MedicineRepository;
+import bg.softuni.onlinepharmacy.service.ManageUserService;
 import bg.softuni.onlinepharmacy.service.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -24,6 +25,7 @@ import java.util.Optional;
 @Controller
 public class AdministratorController {
     private final UserService userService;
+    private final ManageUserService manageUserService;
     @Autowired
     private ActiveIngredientRepository ingredientRepository;
     @Autowired
@@ -33,12 +35,10 @@ public class AdministratorController {
     @Autowired
     private InteractionRepository interactionRepository;
 
-
-    public AdministratorController(UserService userService) {
+    public AdministratorController(UserService userService, ManageUserService manageUserService) {
         this.userService = userService;
+        this.manageUserService = manageUserService;
     }
-
-
 
     @GetMapping("/administrator-manage-users")
     public String viewManageUsers(){
@@ -47,7 +47,7 @@ public class AdministratorController {
 
     @PostMapping("/administrator-manage-users")
     public String searchUsers(@RequestParam("username") String username, Model model) {
-        List<User> users = userService.findUsersByUsername(username);
+        List<User> users = manageUserService.findUsersByUsername(username);
         model.addAttribute("users", users);
         model.addAttribute("username", username);
         return "administrator-manage-users";
@@ -55,7 +55,7 @@ public class AdministratorController {
     @PostMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable Long id, @RequestParam("username") String username, Model model) {
         try {
-            userService.deleteUser(id);
+            manageUserService.deleteUser(id);
         } catch (IllegalStateException e) {
             model.addAttribute("error", e.getMessage());
             model.addAttribute("username", username);
@@ -67,7 +67,7 @@ public class AdministratorController {
     @PostMapping("/toggleAdminStatus/{id}")
     public String toggleAdminStatus(@PathVariable Long id, @RequestParam("username") String username, @RequestParam boolean adminStatus, Model model) {
         try {
-            userService.toggleAdminStatus(id, adminStatus);
+            manageUserService.toggleAdminStatus(id, adminStatus);
         } catch (IllegalStateException e) {
             model.addAttribute("error", e.getMessage());
             model.addAttribute("username", username);
@@ -76,11 +76,6 @@ public class AdministratorController {
 
         return "redirect:/administrator-manage-users?username=" + username;
     }
-
-
-
-
-
 
     @GetMapping("/administrator-add-active-ingredient")
     public String showAddIngredientForm(Model model) {
@@ -171,8 +166,6 @@ public class AdministratorController {
         return medicine;
     }
 
-
-
     @GetMapping("/administrator-manage-medicines")
     public String listMedicines(@RequestParam(required = false) String search, Model model) {
         if (search != null && !search.isEmpty()) {
@@ -225,34 +218,6 @@ public class AdministratorController {
         return dto;
     }
 
-
-
-//    @GetMapping("/administrator-add-interactions")
-//    public String showAddInteractionForm(Model model) {
-//        model.addAttribute("ingredients", activeIngredientRepository.findAll());
-//        model.addAttribute("interactionTypes", InteractionTypeEnum.values());
-//        return "administrator-add-interactions";
-//    }
-//
-//    @PostMapping("/administrator-add-interactions")
-//    public String saveInteraction(
-//            @RequestParam Long drugNameId,
-//            @RequestParam Long interactionDrugId,
-//            @RequestParam InteractionTypeEnum interactionType) {
-//        ActiveIngredient drugName = activeIngredientRepository.findById(drugNameId).orElse(null);
-//        ActiveIngredient interactionDrug = activeIngredientRepository.findById(interactionDrugId).orElse(null);
-//
-//        if (drugName != null && interactionDrug != null) {
-//            Interaction interaction = new Interaction();
-//            interaction.setDrugName(drugName);
-//            interaction.setInteractionDrug(interactionDrug);
-//            interaction.setInteractionType(interactionType);
-//            interactionRepository.save(interaction);
-//        }
-//
-//        return "redirect:/administrator-add-interactions";
-//    }
-
     @GetMapping("/administrator-add-interactions")
     public String showAddInteractionForm(Model model) {
         model.addAttribute("ingredients", activeIngredientRepository.findAll());
@@ -284,15 +249,10 @@ public class AdministratorController {
             }
         }
 
-        // Reload form data
         model.addAttribute("ingredients", activeIngredientRepository.findAll());
         model.addAttribute("interactionTypes", InteractionTypeEnum.values());
         return "administrator-add-interactions";
     }
-
-
-
-
 
     @GetMapping("/administrator-manage-interactions")
     public String listInteractions(Model model) {
@@ -303,7 +263,7 @@ public class AdministratorController {
     @PostMapping("/delete-interaction/{id}")
     public String deleteInteraction(@PathVariable Long id) {
         interactionRepository.deleteById(id);
-        return "redirect:/administrator-manage-interactions"; // Redirect back to the list view to see the updated list after deletion
+        return "redirect:/administrator-manage-interactions";
     }
 
 

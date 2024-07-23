@@ -36,9 +36,6 @@ public class User {
     @JoinColumn(name = "cart_id", referencedColumnName = "id")
     private Cart cart;  // Each user has one cart
 
-
-
-
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private Set<Medicine> favouriteMedicines;
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
@@ -51,8 +48,8 @@ public class User {
         this.favouriteMedicines = new HashSet<>();
         this.ratedMedicines = new HashSet<>();
         this.orders = new HashSet<>();
-        this.cart = new Cart(); // Initialize a new Cart when creating a new User
-        this.cart.setUser(this); // Set the bi-directional relationship
+        this.cart = new Cart();
+        this.cart.setUser(this);
 
     }
 

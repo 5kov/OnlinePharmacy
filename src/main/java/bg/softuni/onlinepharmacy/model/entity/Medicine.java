@@ -4,6 +4,8 @@ package bg.softuni.onlinepharmacy.model.entity;
 import jakarta.persistence.*;
 import org.hibernate.validator.constraints.URL;
 
+import java.util.List;
+
 @Entity
 @Table(name = "medicines")
 public class Medicine {
@@ -29,6 +31,8 @@ public class Medicine {
     @ManyToOne
     @JoinColumn(name = "active_ingredient_id", nullable = false)
     private ActiveIngredient activeIngredient;
+    @OneToMany(mappedBy = "medicine", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> orderItems;
 
     public Medicine() {
     }

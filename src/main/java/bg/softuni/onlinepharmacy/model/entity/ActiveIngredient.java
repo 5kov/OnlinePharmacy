@@ -2,6 +2,8 @@ package bg.softuni.onlinepharmacy.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "active_ingredients")
 public class ActiveIngredient {
@@ -13,6 +15,9 @@ public class ActiveIngredient {
 
     @Column(unique = true, nullable = false)
     private String ingredientCode;
+
+    @OneToMany(mappedBy = "activeIngredient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Medicine> medicines;
 
     public ActiveIngredient() {
     }

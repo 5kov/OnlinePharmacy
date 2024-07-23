@@ -6,6 +6,7 @@ import bg.softuni.onlinepharmacy.model.entity.User;
 import bg.softuni.onlinepharmacy.repository.CartRepository;
 import bg.softuni.onlinepharmacy.repository.UserRepository;
 import bg.softuni.onlinepharmacy.service.CartService;
+import bg.softuni.onlinepharmacy.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,10 @@ public class CartController {
     private UserSession userSession;
     @Autowired
     private CartRepository cartRepository;
+    @Autowired
+    private CartService cartService;
+    @Autowired
+    private OrderService orderService;
 
 
     @GetMapping("/order-finished")
@@ -36,8 +41,7 @@ public class CartController {
 
 
 
-    @Autowired
-    private CartService cartService;
+
 
     @PostMapping("/add")
     public ModelAndView addToCart(@RequestParam Long medicineId, @RequestParam int quantity) {
@@ -85,7 +89,7 @@ public class CartController {
     @PostMapping("/order")
     public String placeOrder(RedirectAttributes redirectAttributes) {
         try {
-            if (cartService.placeOrder()) {
+            if (orderService.placeOrder()) {
                 redirectAttributes.addFlashAttribute("successMessage", "Order placed successfully!");
             }
         } catch (IllegalStateException e) {

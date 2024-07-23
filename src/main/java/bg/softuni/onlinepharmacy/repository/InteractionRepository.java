@@ -17,6 +17,4 @@ public interface InteractionRepository extends JpaRepository<Interaction, Long> 
     @Query("SELECT COUNT(i) > 0 FROM Interaction i WHERE (i.drugName = :ingredientOne AND i.interactionDrug = :ingredientTwo) OR (i.drugName = :ingredientTwo AND i.interactionDrug = :ingredientOne)")
     boolean existsByActiveIngredients(ActiveIngredient ingredientOne, ActiveIngredient ingredientTwo);
 
-
-
 }

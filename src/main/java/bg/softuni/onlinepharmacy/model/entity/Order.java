@@ -20,7 +20,7 @@ public class Order {
     private User user;
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime orderDate;
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems;
 
     public double getTotalPrice() {
