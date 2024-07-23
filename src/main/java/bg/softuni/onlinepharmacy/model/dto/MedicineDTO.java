@@ -21,11 +21,11 @@ public class MedicineDTO {
     private double price;
 
     @NotBlank(message = "The description in English must not be blank.")
-    @Size(min = 3, max = 20, message = "The description in English must be between 3 and 20 characters.")
+    @Size(min = 3, max = 5000, message = "The description in English must be between 3 and 5000 characters.")
     private String descriptionEn;
 
     @NotBlank(message = "The description in Bulgarian must not be blank.")
-    @Size(min = 3, max = 20, message = "The description in Bulgarian must be between 3 and 20 characters.")
+    @Size(min = 3, max = 5000, message = "The description in Bulgarian must be between 3 and 5000 characters.")
     private String descriptionBg;
 
     @NotBlank(message = "The image url must not be blank.")
@@ -35,6 +35,14 @@ public class MedicineDTO {
     private Long activeIngredientId;
 
     public MedicineDTO() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public @NotBlank(message = "The name in English must not be blank.") @Size(min = 3, max = 20, message = "The name in English must be between 3 and 20 characters.") String getMedicineNameEn() {
@@ -62,19 +70,19 @@ public class MedicineDTO {
         this.price = price;
     }
 
-    public @NotBlank(message = "The description in English must not be blank.") @Size(min = 3, max = 20, message = "The description in English must be between 3 and 20 characters.") String getDescriptionEn() {
+    public @NotBlank(message = "The description in English must not be blank.") @Size(min = 3, max = 5000, message = "The description in English must be between 3 and 5000 characters.") String getDescriptionEn() {
         return descriptionEn;
     }
 
-    public void setDescriptionEn(@NotBlank(message = "The description in English must not be blank.") @Size(min = 3, max = 20, message = "The description in English must be between 3 and 20 characters.") String descriptionEn) {
+    public void setDescriptionEn(@NotBlank(message = "The description in English must not be blank.") @Size(min = 3, max = 5000, message = "The description in English must be between 3 and 5000 characters.") String descriptionEn) {
         this.descriptionEn = descriptionEn;
     }
 
-    public @NotBlank(message = "The description in Bulgarian must not be blank.") @Size(min = 3, max = 20, message = "The description in Bulgarian must be between 3 and 20 characters.") String getDescriptionBg() {
+    public @NotBlank(message = "The description in Bulgarian must not be blank.") @Size(min = 3, max = 5000, message = "The description in Bulgarian must be between 3 and 5000 characters.") String getDescriptionBg() {
         return descriptionBg;
     }
 
-    public void setDescriptionBg(@NotBlank(message = "The description in Bulgarian must not be blank.") @Size(min = 3, max = 20, message = "The description in Bulgarian must be between 3 and 20 characters.") String descriptionBg) {
+    public void setDescriptionBg(@NotBlank(message = "The description in Bulgarian must not be blank.") @Size(min = 3, max = 5000, message = "The description in Bulgarian must be between 3 and 5000 characters.") String descriptionBg) {
         this.descriptionBg = descriptionBg;
     }
 
@@ -92,13 +100,5 @@ public class MedicineDTO {
 
     public void setActiveIngredientId(@NotNull Long activeIngredientId) {
         this.activeIngredientId = activeIngredientId;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 }

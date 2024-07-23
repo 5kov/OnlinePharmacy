@@ -560,6 +560,20 @@ li::marker {
     text-align: center;
     border-radius: 0; /* Remove rounded corners */
 }
+
+.description-field {
+    width:100%;
+    max-width:51em;/* Full width of the container */
+    height: 200px;
+    padding: 0.5em;
+    margin: 0.5em 0;
+    border: 0.15em solid #B0825C;
+    box-sizing: border-box;
+    font-size: 0.77em;
+    text-align: center;
+    border-radius: 0; /* Remove rounded corners */
+}
+
 .button {
     width: 100%; /* Full width of the container */
     height: 3.2em;
@@ -668,4 +682,69 @@ ul.my-list li {
         top: 0;
         width: 100%;
     }
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Spacing between form elements */
+    margin-bottom: 1em;
+}
+
+.button-dropdown {
+    width: 3.2em; /* Full width of the container */
+    height: 3.2em;
+    margin-top: 1em;
+    background-color: white; /* White background */
+    color: #B0825C;
+    border: 0.15em solid #B0825C;
+    border-radius: 0; /* Remove rounded corners */
+    font-size: 0.77em;
+    cursor: default;
+    text-align: center;
+}
+
+.button-search-input {
+    width: 51.6em; /* Full width of the container */
+    height: 3.2em;
+    margin-top: 1em;
+    background-color: white; /* White background */
+    color: #B0825C;
+    border: 0.15em solid #B0825C;
+    border-radius: 0; /* Remove rounded corners */
+    font-size: 0.77em;
+    cursor: default;
+    text-align: center;
+}
+
+.button-search {
+    width: 9.6em; /* Full width of the container */
+    height: 3.2em;
+    margin-top: 1em;
+    background-color: white; /* White background */
+    color: #B0825C;
+    border: 0.15em solid #B0825C;
+    border-radius: 0; /* Remove rounded corners */
+    font-size: 0.77em;
+    cursor: default;
+    text-align: center;
+}
+
+.pagination {
+    color: #B0825C;
+    font-family: "PT Sans", sans-serif;
+    font-size: 1em;
+    text-decoration: none;
+    width: 15.5em;
+    height: 3.2em;
+    background-color: white;
+    margin-top: 4em;
+}
+
+.pagination-form {
+    list-style-type: none;
+    margin-top: 4em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
 }

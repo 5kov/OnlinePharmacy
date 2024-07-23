@@ -28,12 +28,53 @@
 <!--            </div>-->
 
             <div class ="flex-container2">
+<!--                <div th:if="${message != null}">-->
+<!--                    <p th:text="${message}"></p>-->
+<!--                </div>-->
+<!--                <div class="medicine-container">-->
+<!--                    <div th:each="medicine : ${medicines}" class="medicine-card">-->
+<!--                        <img th:src="@{'/img/' + ${medicine.imageUrl}}" alt="Medicine Image" style="width:100px; height:100px;"/>-->
+<!--                        <p th:text="${medicine.medicineNameEn}">Medicine Name</p>-->
+<!--                        <p th:text="${'$' + medicine.price}">Price</p>-->
+<!--                        <form th:action="@{/add-to-cart}" method="post">-->
+<!--                            <input type="hidden" th:value="${medicine.id}" name="medicineId" />-->
+<!--                            <input type="number" name="quantity" class="input-field" value="1" min="1" />-->
+<!--                            <button type="submit" class="button">Add to Cart</button>-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div>-->
+<!--                    <ul class="my-list" >-->
+<!--                        <li th:if="${currentPage != 0}">-->
+<!--                            <a th:href="@{/pharmacy(page=${currentPage - 1})}">Previous</a>-->
+<!--                        </li>-->
+<!--                        <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}">-->
+<!--                            <a th:href="@{/pharmacy(page=${i})}" th:text="${i}">Page number</a>-->
+<!--                        </li>-->
+<!--                        <li th:if="${currentPage + 1 < totalPages}">-->
+<!--                            <a th:href="@{/pharmacy(page=${currentPage + 1})}">Next</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </div>-->
                 <div th:if="${message != null}">
                     <p th:text="${message}"></p>
                 </div>
+                <div class="search-container">
+                    <form action="#" th:action="@{/pharmacy}" method="get" class="search-container">
+                        <input type="text" name="search" th:value="${search}" placeholder="Search medicines..." class="button-search-input" />
+                        <button type="submit" class="button-search">Search</button>
+                        <select name="size" onchange="this.form.submit()" class="button-dropdown">
+                            <option th:selected="${currentSize == 9}" value="9">9</option>
+                            <option th:selected="${currentSize == 36}" value="36">36</option>
+                            <option th:selected="${currentSize == 144}" value="144">144</option>
+                        </select>
+                    </form>
+                </div>
+
                 <div class="medicine-container">
                     <div th:each="medicine : ${medicines}" class="medicine-card">
-                        <img th:src="@{'/img/' + ${medicine.imageUrl}}" alt="Medicine Image" style="width:100px; height:100px;"/>
+                        <a th:href="@{/item(medicineId=${medicine.id})}"><img th:src="@{'/img/' + ${medicine.imageUrl}}" alt="Medicine Image" style="width:100px; height:100px;"/></a>
                         <p th:text="${medicine.medicineNameEn}">Medicine Name</p>
                         <p th:text="${'$' + medicine.price}">Price</p>
                         <form th:action="@{/add-to-cart}" method="post">
@@ -45,18 +86,20 @@
                 </div>
 
                 <div>
-                    <ul class="my-list" >
-                        <li th:if="${currentPage != 0}">
-                            <a th:href="@{/pharmacy(page=${currentPage - 1})}">Previous</a>
+                    <ul class="pagination-form">
+                        <li th:if="${currentPage > 0}">
+                            <a th:href="@{/pharmacy(page=${currentPage - 1}, search=${search})}" class="pagination">Previous</a>
                         </li>
                         <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
-                            <a th:href="@{/pharmacy(page=${i})}" th:text="${i}">Page number</a>
+                            <a th:href="@{/pharmacy(page=${i}, search=${search})}" th:text="${i}" class="pagination"></a>
                         </li>
                         <li th:if="${currentPage + 1 < totalPages}">
-                            <a th:href="@{/pharmacy(page=${currentPage + 1})}">Next</a>
+                            <a th:href="@{/pharmacy(page=${currentPage + 1}, search=${search})}" class="pagination">Next</a>
                         </li>
                     </ul>
                 </div>
+
+
             </div>
 
 

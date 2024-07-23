@@ -18,9 +18,9 @@ public class Medicine {
     private String medicineNameBg;
     @Column(nullable = false)
     private double price;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition="TEXT")
     private String descriptionEn;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition="TEXT")
     private String descriptionBg;
     @Column(nullable = false)
     private String imageUrl;

@@ -72,32 +72,32 @@ public class CartService {
     }
 
 
-    @Transactional
-    public void createOrderFromCart() {
-        User user = userRepository.findById(userSession.getId()).get();
-        Cart cart = user.getCart();
-        if (cart == null || cart.getCartItems().isEmpty()) {
-            throw new IllegalStateException("Cart is empty");
-        }
-
-        Order order = new Order();
-        order.setUser(user);
-        order.setOrderDate(LocalDateTime.now());
-
-        for (CartItem cartItem : cart.getCartItems()) {
-            OrderItem orderItem = new OrderItem();
-            orderItem.setOrder(order);
-            orderItem.setDrug(cartItem.getMedicine());
-            orderItem.setQuantity(cartItem.getQuantity());
-            orderItem.setItemPrice(cartItem.getItemPrice());
-            order.getOrderItems().add(orderItem);
-            orderItemRepository.save(orderItem);
-        }
-
-        orderRepository.save(order);
-        cart.getCartItems().clear();
-        cartRepository.save(cart);
-    }
+//    @Transactional
+//    public void createOrderFromCart() {
+//        User user = userRepository.findById(userSession.getId()).get();
+//        Cart cart = user.getCart();
+//        if (cart == null || cart.getCartItems().isEmpty()) {
+//            throw new IllegalStateException("Cart is empty");
+//        }
+//
+//        Order order = new Order();
+//        order.setUser(user);
+//        order.setOrderDate(LocalDateTime.now());
+//
+//        for (CartItem cartItem : cart.getCartItems()) {
+//            OrderItem orderItem = new OrderItem();
+//            orderItem.setOrder(order);
+//            orderItem.setDrug(cartItem.getMedicine());
+//            orderItem.setQuantity(cartItem.getQuantity());
+//            orderItem.setItemPrice(cartItem.getItemPrice());
+//            order.getOrderItems().add(orderItem);
+//            orderItemRepository.save(orderItem);
+//        }
+//
+//        orderRepository.save(order);
+//        cart.getCartItems().clear();
+//        cartRepository.save(cart);
+//    }
 
     public Cart getCurrentCart() {
         User user = userRepository.findById(userSession.getId()).get();

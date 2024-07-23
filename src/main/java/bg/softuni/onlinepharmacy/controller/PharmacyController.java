@@ -20,6 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 
 @Controller
 public class PharmacyController {
@@ -30,11 +32,6 @@ public class PharmacyController {
     private CartRepository cartRepository;
     @Autowired
     private UserSession userSession;
-
-    @GetMapping("/item")
-    public String viewItem(){
-        return "item";
-    }
 
     @Autowired
     private MedicineRepository medicineRepository;
@@ -48,18 +45,59 @@ public class PharmacyController {
 //        return "pharmacy";
 //    }
 
+//    @GetMapping("/pharmacy")
+//    public String listMedicines(Model model, @RequestParam(defaultValue = "0") int page) {
+//        int pageSize = 9;
+//        Pageable pageable = PageRequest.of(page, pageSize);
+//        Page<Medicine> medicinePage = medicineRepository.findAll(pageable);
+//
+//        model.addAttribute("medicines", medicinePage.getContent());
+//        model.addAttribute("currentPage", page);
+//        model.addAttribute("totalPages", medicinePage.getTotalPages());
+//        return "pharmacy";
+//    }
+
+//    @GetMapping("/pharmacy")
+//    public String listMedicines(Model model,
+//                                @RequestParam(defaultValue = "") String search,
+//                                @RequestParam(defaultValue = "0") int page,
+//                                @RequestParam(defaultValue = "9") int size) {
+//        Pageable pageable = PageRequest.of(page, size);
+//        Page<Medicine> medicinePage;
+//        if (search.isEmpty()) {
+//            medicinePage = medicineRepository.findAll(pageable);
+//        } else {
+//            medicinePage = medicineRepository.findBySearchTerm(search, pageable);
+//        }
+//        model.addAttribute("medicines", medicinePage.getContent());
+//        model.addAttribute("currentPage", page);
+//        model.addAttribute("totalPages", medicinePage.getTotalPages());
+//        model.addAttribute("search", search);
+//        return "pharmacy";
+//    }
+
+
+
     @GetMapping("/pharmacy")
     public String listMedicines(Model model,
-                                @RequestParam(defaultValue = "0") int page) {
-        int pageSize = 9;  // We want 9 items per page
-        Pageable pageable = PageRequest.of(page, pageSize);
-        Page<Medicine> medicinePage = medicineRepository.findAll(pageable);
+                                @RequestParam(defaultValue = "") String search,
+                                @RequestParam(defaultValue = "0") int page,
+                                @RequestParam(defaultValue = "9") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Medicine> medicinePage = medicineRepository.findBySearchTerm(search, pageable);
 
         model.addAttribute("medicines", medicinePage.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", medicinePage.getTotalPages());
+        model.addAttribute("currentSize", size);
+        model.addAttribute("search", search);
         return "pharmacy";
     }
+
+
+
+
+
 
 
 //    @PostMapping("/add-to-cart")
