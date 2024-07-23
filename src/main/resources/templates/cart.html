@@ -7,31 +7,40 @@
 
     <div class="form">
         <div class="flex-container-cart">
-            <div class="flex-container-cart-2">
-                <div class="medicine-picture-small">
-                    <img class="medicine-picture-small" src="https://sopharmacy.bg/media/sys_master/haf/h37/9093013340190.jpg" alt="Helicid">
-                </div>
-                <div>
-                    <p>
-                        &nbsp; <span>Хелицид 20 мг х28 капсули Zentiva</span>&nbsp;
-                        <span>8,12 лв.</span>
-                    </p>
-                    <div class="flex-container-cart-3">
-                        <input class="button-show-more" min="1" name="form-0-quantity" value="1" type="number">
-                        <button type="button" class="button-show-more">Update cart</button>
-                        <button type="button" class="button-show-more">Remove</button>
-                    </div>
+<!--            <div th:each="item : ${cartItems}">-->
+<!--                <div class="flex-container-cart-2" >-->
+<!--                    <div class="medicine-picture-small">-->
+<!--                        <img class="medicine-picture-small" th:src="@{'/img/' + ${item.medicine.getImageUrl()}}" alt="Product Image">-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <p>-->
+<!--                            &nbsp; <span th:text="${item.medicine.medicineNameEn}">Хелицид 20 мг х28 капсули Zentiva</span>&nbsp;-->
+<!--                            <span th:text="${'$' + item.medicine.price}">8,12 лв.</span>-->
+<!--                        </p>-->
+<!--                        <div class="flex-container-cart-3">-->
+<!--                            <form th:action="@{'/update-order/' + ${item.id}}" method="post">-->
+<!--                                <input class="button-show-more" min="1" name="form-0-quantity" value="1" type="number">-->
+<!--                                <button type="submit" class="button-show-more">Update cart</button>-->
+<!--                            </form>-->
+<!--                            <form th:action="@{'/delete-order/' + ${item.id}}" method="post">-->
+<!--                                <button type="submit" class="button-show-more">Remove</button>-->
+<!--                            </form>-->
+<!--                        </div>-->
 
-                </div>
-            </div>
+<!--                    </div>-->
+<!--                </div>-->
 
-        </div>
-        <div class="total">
-            <span>Total: 100 лв.</span>
-        </div>
-        <div>
-            <button type="button" class="button-show-more">Order</button>
-        </div>
+<!--            </div>-->
+<!--            <div class="total">-->
+<!--                <span th:text="${totalPrice}">Total: 100 лв.</span>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <form th:action="@{/order}" method="post">-->
+<!--                    <button type="submit" class="button-show-more">Order</button>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--            </div>-->
+
 
 
 
@@ -46,16 +55,16 @@
                     <p th:text="${'$' + item.medicine.price}">Price</p>
                     <form th:action="@{'/update-order/' + ${item.id}}" method="post">
                         <input type="number" name="quantity" th:value="${item.quantity}" class="input-field" min="1"/>
-                        <button type="submit">Update</button>
+                        <button type="submit" class="button" >Update</button>
                     </form>
                     <form th:action="@{'/delete-order/' + ${item.id}}" method="post">
-                        <button type="submit">Delete</button>
+                        <button type="submit" class="button">Delete</button>
                     </form>
                 </div>
             </div>
             <p>Total Price: <span th:text="${totalPrice}"></span></p>
             <form th:action="@{/order}" method="post">
-                <button type="submit">Place Order</button>
+                <button type="submit" class="button">Place Order</button>
             </form>
         </div>
 

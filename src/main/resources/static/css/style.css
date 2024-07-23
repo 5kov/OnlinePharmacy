@@ -376,6 +376,15 @@ li::marker {
 
 
 }
+
+.flex-container2 {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column; /* This is the magic step! */
+    align-items: center; /* To keep them centered vertically */
+    width: 100%;
+}
+
 .flex-item {
     display: flex;
     flex-direction: column;
@@ -613,4 +622,50 @@ li::marker {
 .buttonSmall {
     margin-top: 0em;
     height: 100%;
+}
+
+.medicine-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+.medicine-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+ul.my-list {
+    list-style: none;
+}
+ul.my-list li {
+    font-family: 'PT Serif', serif;
+    color: #B0825C;
+    float: left;
+    margin-right: 10px;
+}
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.table th, .table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .printable, .printable * {
+        visibility: visible;
+    }
+    .printable {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
 }

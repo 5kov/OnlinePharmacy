@@ -20,8 +20,14 @@ public class Order {
     private User user;
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime orderDate;
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<OrderItem> orderItems;
+
+    public double getTotalPrice() {
+        return orderItems.stream()
+                .mapToDouble(item -> item.getItemPrice() * item.getQuantity())
+                .sum();
+    }
 
     public Order() {
         orderItems = new ArrayList<>();
