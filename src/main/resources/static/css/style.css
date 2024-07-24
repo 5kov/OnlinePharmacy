@@ -570,6 +570,7 @@ li::marker {
     border: 0.15em solid #B0825C;
     box-sizing: border-box;
     font-size: 0.77em;
+    font-family: "PT Sans", sans-serif;
     text-align: center;
     border-radius: 0; /* Remove rounded corners */
 }
