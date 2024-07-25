@@ -31,7 +31,7 @@ public class SecurityConfig {
         .formLogin(formLogin ->
             formLogin
                 // Where is our custom login form?
-                .loginPage("/login")
+                .loginPage("/user/login")
                 // what is the name of the username parameter in the Login POST request?
                 .usernameParameter("username")
                 // what is the name of the password parameter in the Login POST request?
@@ -39,7 +39,7 @@ public class SecurityConfig {
                 // What will happen if the login is successful
                 .defaultSuccessUrl("/index", true)
                 // What will happen if the login fails
-                .failureForwardUrl("/login-error")
+                .failureForwardUrl("/user/login-error")
         )
         .logout(
             logout ->
