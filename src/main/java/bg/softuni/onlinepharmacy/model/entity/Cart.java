@@ -2,10 +2,7 @@ package bg.softuni.onlinepharmacy.model.entity;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "carts")
@@ -14,13 +11,13 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @OneToOne(mappedBy = "cart")
-    private User user;
+    private UserEntity userEntity;
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<CartItem> cartItems;
 
 
 //    @ManyToOne
-//    private User user;
+//    private UserEntity userEntity;
 //    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
 //    private List<CartItem> cartItems = new ArrayList<>();
 
@@ -36,12 +33,12 @@ public class Cart {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public UserEntity getUser() {
+        return userEntity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
     public List<CartItem> getCartItems() {

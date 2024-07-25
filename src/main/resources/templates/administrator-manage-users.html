@@ -4,7 +4,7 @@
 <script>
     function redirectToUserManagement() {
         var username = document.getElementById("username").value;
-        var url = "/administrator-manage-users/" + encodeURIComponent(username);
+        var url = "/administrator-manage-userEntities/" + encodeURIComponent(username);
         window.location.href = url;
     }
 
@@ -49,23 +49,23 @@
 
     <div class="form">
         <h1>Administrator Page</h1>
-        <h3>Manage users</h3>
+        <h3>Manage userEntities</h3>
         <div class="input-container">
-            <form action="#" th:action="@{/administrator-manage-users}" method="post" id="searchForm">
+            <form action="#" th:action="@{/administrator-manage-userEntities}" method="post" id="searchForm">
                 <input type="text" id="username" name="username" class="input-field" placeholder="Search Username" th:value="${username}" required/>
                 <button type="submit" class="button">Search</button>
             </form>
 
-            <div th:if="${users}">
+            <div th:if="${userEntities}">
                 <ul>
-                    <li th:each="user : ${users}">
-                        <h3><span class="centered-text" th:text="${user.username}"></span></h3>
-                        <form th:action="@{/deleteUser/{id}(id=${user.id}, username=${username})}" method="post">
+                    <li th:each="userEntity : ${userEntities}">
+                        <h3><span class="centered-text" th:text="${userEntity.username}"></span></h3>
+                        <form th:action="@{/deleteUser/{id}(id=${userEntity.id}, username=${username})}" method="post">
                             <button type="submit" class="button">Delete</button>
                         </form>
-                        <form th:action="@{/toggleAdminStatus/{id}(id=${user.id}, username=${username})}" method="post">
-                            <input type="hidden" name="adminStatus" th:value="${!user.administrator}" />
-                            <button type="submit" class="button" th:text="${user.administrator} ? 'Make Regular User' : 'Make Administrator'" ></button>
+                        <form th:action="@{/toggleAdminStatus/{id}(id=${userEntity.id}, username=${username})}" method="post">
+                            <input type="hidden" name="adminStatus" th:value="${!userEntity.administrator}" />
+                            <button type="submit" class="button" th:text="${userEntity.administrator} ? 'Make Regular User' : 'Make Administrator'" ></button>
                         </form>
                     </li>
                 </ul>

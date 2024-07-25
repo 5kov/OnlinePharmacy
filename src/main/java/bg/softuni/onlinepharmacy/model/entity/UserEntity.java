@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -45,10 +45,10 @@ public class User {
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private Set<Medicine> ratedMedicines;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orders;
 
-    public User() {
+    public UserEntity() {
         this.favouriteMedicines = new HashSet<>();
         this.ratedMedicines = new HashSet<>();
         this.orders = new HashSet<>();

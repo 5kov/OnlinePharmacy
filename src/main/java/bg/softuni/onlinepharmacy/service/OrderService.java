@@ -29,8 +29,8 @@ public class OrderService {
 
     @Transactional
     public boolean placeOrder() {
-        User user = userRepository.findById(userSession.getId()).get();
-        Cart cart = user.getCart();
+        UserEntity userEntity = userRepository.findById(userSession.getId()).get();
+        Cart cart = userEntity.getCart();
         if (cart.getCartItems().isEmpty()) {
             throw new IllegalStateException("Cannot place an order because the cart is empty");
         }
@@ -39,7 +39,7 @@ public class OrderService {
         }
 
         Order order = new Order();
-        order.setUser(user);
+        order.setUser(userEntity);
         order.setOrderDate(LocalDateTime.now());
 
         for (CartItem cartItem : cart.getCartItems()) {

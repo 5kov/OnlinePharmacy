@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.time.LocalDateTime;
 import java.util.*;
 
 
@@ -33,9 +32,9 @@ public class CartService {
 
 
     @Transactional
-    public void addToCart(User user, Long medicineId, int quantity) {
+    public void addToCart(UserEntity userEntity, Long medicineId, int quantity) {
 
-        Cart cart = user.getCart();
+        Cart cart = userEntity.getCart();
         Medicine medicine = medicineRepository.findById(medicineId).orElseThrow();
 
         Optional<CartItem> result = cartItemRepository.findCartItemByCartIdAndMedicineId(cart.getId(), medicineId);
@@ -74,7 +73,7 @@ public class CartService {
 
 //    @Transactional
 //    public void createOrderFromCart() {
-//        User user = userRepository.findById(userSession.getId()).get();
+//        UserEntity user = userRepository.findById(userSession.getId()).get();
 //        Cart cart = user.getCart();
 //        if (cart == null || cart.getCartItems().isEmpty()) {
 //            throw new IllegalStateException("Cart is empty");
@@ -100,8 +99,8 @@ public class CartService {
 //    }
 
     public Cart getCurrentCart() {
-        User user = userRepository.findById(userSession.getId()).get();
-        return cartRepository.findById(user.getCart().getId()).orElseThrow();
+        UserEntity userEntity = userRepository.findById(userSession.getId()).get();
+        return cartRepository.findById(userEntity.getCart().getId()).orElseThrow();
     }
 
     public double calculateTotalPrice(Cart cart) {

@@ -10,7 +10,7 @@
         <h3>User settings</h3>
         <div class="input-container">
 
-            <form th:action="@{/user-settings}" th:object="${updateUserDTO}" method="post">
+            <form th:action="@{/userEntity-settings}" th:object="${updateUserDTO}" method="post">
                 <div>
                      <input type="hidden" id="id" name="id" th:field="*{id}" class="input-field"/>
                 </div>

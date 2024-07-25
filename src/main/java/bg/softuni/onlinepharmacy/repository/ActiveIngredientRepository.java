@@ -1,7 +1,6 @@
 package bg.softuni.onlinepharmacy.repository;
 
 import bg.softuni.onlinepharmacy.model.entity.ActiveIngredient;
-import bg.softuni.onlinepharmacy.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ActiveIngredientRepository extends JpaRepository<ActiveIngredient, Long> {

@@ -82,33 +82,33 @@ public class UserRegistrationLoginController {
         return "redirect:/login";
     }
 
-    @PostMapping("/login")
-    public String doLogin(@Valid LoginDTO data, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if(userSession.isLoggedIn()) {
-            return "redirect:/home";
-        }
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("loginData", data);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginData", bindingResult);
-            return "redirect:/login";
-        }
+//    @PostMapping("/login")
+//    public String doLogin(@Valid LoginDTO data, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+//        if(userSession.isLoggedIn()) {
+//            return "redirect:/home";
+//        }
+//        if (bindingResult.hasErrors()) {
+//            redirectAttributes.addFlashAttribute("loginData", data);
+//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginData", bindingResult);
+//            return "redirect:/login";
+//        }
+//
+//        boolean success = userService.login(data);
+//        if (!success) {
+//            redirectAttributes.addFlashAttribute("loginData", data);
+//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginData", bindingResult);
+//            redirectAttributes.addFlashAttribute("wrongUsernameOrPassword", true);
+//            return "redirect:/login";
+//        }
+//
+//        return "redirect:/index";
+//    }
 
-        boolean success = userService.login(data);
-        if (!success) {
-            redirectAttributes.addFlashAttribute("loginData", data);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginData", bindingResult);
-            redirectAttributes.addFlashAttribute("wrongUsernameOrPassword", true);
-            return "redirect:/login";
-        }
-
-        return "redirect:/index";
-    }
-
-    @GetMapping("/logout")
-    public String doLogout() {
-        userService.logout();
-        return "redirect:/index";
-    }
+//    @GetMapping("/logout")
+//    public String doLogout() {
+//        userService.logout();
+//        return "redirect:/index";
+//    }
 
     @GetMapping("/user-settings")
     public String showSettingsForm(Model model) {

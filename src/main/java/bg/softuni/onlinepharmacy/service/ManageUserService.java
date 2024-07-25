@@ -2,7 +2,7 @@ package bg.softuni.onlinepharmacy.service;
 
 import bg.softuni.onlinepharmacy.config.UserSession;
 import bg.softuni.onlinepharmacy.model.dto.UpdateUserDTO;
-import bg.softuni.onlinepharmacy.model.entity.User;
+import bg.softuni.onlinepharmacy.model.entity.UserEntity;
 import bg.softuni.onlinepharmacy.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,13 +23,13 @@ public class ManageUserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public List<User> findUsersByUsername(String username) {
+    public List<UserEntity> findUsersByUsername(String username) {
         return userRepository.findByUsernameContaining(username);
     }
 
     public boolean canDeleteUser(Long id) {
-        User user = userRepository.findById(id).orElse(null);
-        if (user != null && user.isAdministrator()) {
+        UserEntity userEntity = userRepository.findById(id).orElse(null);
+        if (userEntity != null && userEntity.isAdministrator()) {
             long count = userRepository.countByAdministrator(true);
             return count > 1;
         }
@@ -54,14 +54,14 @@ public class ManageUserService {
     }
 
     public UpdateUserDTO findById(Long id) {
-        User user = userRepository.findById(id).orElse(null);
-        return convertToDto(user);
+        UserEntity userEntity = userRepository.findById(id).orElse(null);
+        return convertToDto(userEntity);
     }
 
     public String updateUser(UpdateUserDTO updateUserDTO) {
-        User user = userRepository.findById(userSession.getId()).orElse(null);
+        UserEntity userEntity = userRepository.findById(userSession.getId()).orElse(null);
 
-        Optional<User> user2 = userRepository.findByUsername(updateUserDTO.getUsername());
+        Optional<UserEntity> user2 = userRepository.findByUsername(updateUserDTO.getUsername());
 
         if (user2.isPresent() && user2.get().getId() != userSession.getId()) {
             return "usernameExists";
@@ -71,44 +71,44 @@ public class ManageUserService {
             return "emailExists";
         }
 
-        convertToUser(updateUserDTO, user);
-        userRepository.save(user);
+        convertToUser(updateUserDTO, userEntity);
+        userRepository.save(userEntity);
         return "success";
     }
 
-    private UpdateUserDTO convertToDto(User user) {
+    private UpdateUserDTO convertToDto(UserEntity userEntity) {
         UpdateUserDTO dto = new UpdateUserDTO();
-        if (user != null) {
-            dto.setId(user.getId());
-            dto.setUsername(user.getUsername());
-            dto.setFirstName(user.getFirstName());
-            dto.setLastName(user.getLastName());
-            dto.setEmail(user.getEmail());
-            dto.setCountry(user.getCountry());
-            dto.setCity(user.getCity());
-            dto.setStreet(user.getStreet());
-            dto.setPostalCode(user.getPostalCode());
-            dto.setPhoneNumber(user.getPhoneNumber());
-            dto.setPassword(user.getPassword());
+        if (userEntity != null) {
+            dto.setId(userEntity.getId());
+            dto.setUsername(userEntity.getUsername());
+            dto.setFirstName(userEntity.getFirstName());
+            dto.setLastName(userEntity.getLastName());
+            dto.setEmail(userEntity.getEmail());
+            dto.setCountry(userEntity.getCountry());
+            dto.setCity(userEntity.getCity());
+            dto.setStreet(userEntity.getStreet());
+            dto.setPostalCode(userEntity.getPostalCode());
+            dto.setPhoneNumber(userEntity.getPhoneNumber());
+            dto.setPassword(userEntity.getPassword());
         }
         return dto;
     }
 
-    private void convertToUser(UpdateUserDTO dto, User user) {
+    private void convertToUser(UpdateUserDTO dto, UserEntity userEntity) {
 
-        if (dto != null && user != null) {
-            user.setId(dto.getId());
-            user.setUsername(dto.getUsername());
-            user.setFirstName(dto.getFirstName());
-            user.setLastName(dto.getLastName());
-            user.setEmail(dto.getEmail());
-            user.setCountry(dto.getCountry());
-            user.setCity(dto.getCity());
-            user.setStreet(dto.getStreet());
-            user.setPostalCode(dto.getPostalCode());
-            user.setPhoneNumber(dto.getPhoneNumber());
+        if (dto != null && userEntity != null) {
+            userEntity.setId(dto.getId());
+            userEntity.setUsername(dto.getUsername());
+            userEntity.setFirstName(dto.getFirstName());
+            userEntity.setLastName(dto.getLastName());
+            userEntity.setEmail(dto.getEmail());
+            userEntity.setCountry(dto.getCountry());
+            userEntity.setCity(dto.getCity());
+            userEntity.setStreet(dto.getStreet());
+            userEntity.setPostalCode(dto.getPostalCode());
+            userEntity.setPhoneNumber(dto.getPhoneNumber());
             if(dto.getPassword() != null) {
-                user.setPassword(passwordEncoder.encode(dto.getPassword()));
+                userEntity.setPassword(passwordEncoder.encode(dto.getPassword()));
             }
         }
 
@@ -119,9 +119,9 @@ public class ManageUserService {
             return "passwordsDoNotMatch";
         }
         if(updateUserDTO.getPassword().length() >= 3 && updateUserDTO.getPassword().length() <= 20) {
-            User user = userRepository.findById(userSession.getId()).orElse(null);
-            user.setPassword(passwordEncoder.encode(updateUserDTO.getPassword()));
-            userRepository.save(user);
+            UserEntity userEntity = userRepository.findById(userSession.getId()).orElse(null);
+            userEntity.setPassword(passwordEncoder.encode(updateUserDTO.getPassword()));
+            userRepository.save(userEntity);
             return "success";
         }
         return "passwordsLength";

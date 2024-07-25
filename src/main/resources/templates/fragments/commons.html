@@ -24,7 +24,7 @@
             <li><a href="/about" th:unless="${@userSession.isAdmin()}">About</a></li>
             <li><a href="/contacts" th:unless="${@userSession.isAdmin()}">Contacts</a></li>
 
-            <li><a href="/administrator-manage-users" th:if="${@userSession.isAdmin()}">Manage users</a></li>
+            <li><a href="/administrator-manage-userEntities" th:if="${@userSession.isAdmin()}">Manage userEntities</a></li>
             <li><a href="/administrator-add-active-ingredient" th:if="${@userSession.isAdmin()}">Add active ingredient</a></li>
             <li><a href="/administrator-manage-active-ingredients" th:if="${@userSession.isAdmin()}">Manage active ingredient</a></li>
             <li><a href="/administrator-add-medicines" th:if="${@userSession.isAdmin()}">Add medicine</a></li>
@@ -36,7 +36,7 @@
             <li><a href="/cart" th:if="${@userSession.isLoggedIn()}">View Cart</a></li>
             <li><a href="/login" th:unless="${@userSession.isLoggedIn()}">Sign in</a></li>
             <li><a href="/logout" th:if="${@userSession.isLoggedIn()}">Sign out</a></li>
-            <li><a href="/user-settings" th:if="${@userSession.isLoggedIn()}">User settings</a></li>
+            <li><a href="/userEntity-settings" th:if="${@userSession.isLoggedIn()}">User settings</a></li>
         </ul>
     </nav>
 </header>

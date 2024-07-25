@@ -1,21 +1,14 @@
 package bg.softuni.onlinepharmacy.service;
 
 import bg.softuni.onlinepharmacy.config.UserSession;
-import bg.softuni.onlinepharmacy.model.dto.LoginDTO;
 import bg.softuni.onlinepharmacy.model.dto.RegisterDTO;
-import bg.softuni.onlinepharmacy.model.dto.UpdateUserDTO;
-import bg.softuni.onlinepharmacy.model.entity.Medicine;
-import bg.softuni.onlinepharmacy.model.entity.User;
+import bg.softuni.onlinepharmacy.model.entity.UserEntity;
 import bg.softuni.onlinepharmacy.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -32,7 +25,7 @@ public class UserService {
     }
 
     public String register(RegisterDTO data) {
-        Optional<User> user = userRepository.findByUsername(data.getUsername());
+        Optional<UserEntity> user = userRepository.findByUsername(data.getUsername());
         if (user.isPresent()) {
             return "usernameExists";
         }
@@ -44,25 +37,25 @@ public class UserService {
             return "passwordsDoNotMatch";
         }
 
-        User mapped = modelMapper.map(data, User.class);
+        UserEntity mapped = modelMapper.map(data, UserEntity.class);
         mapped.setPassword(passwordEncoder.encode(data.getPassword()));
         mapped.setAdministrator(userRepository.countUsers() == 0);
         userRepository.save(mapped);
         return "success";
     }
 
-    public boolean login(LoginDTO data) {
-        Optional<User> user = userRepository.findByUsername(data.getUsername());
-        if (user.isPresent()) {
-            if(passwordEncoder.matches(data.getPassword(), user.get().getPassword())) {
-                userSession.logIn(user.get());
-                return true;
-            }
-        }
-        return false;
-    }
+//    public boolean login(LoginDTO data) {
+//        Optional<UserEntity> user = userRepository.findByUsername(data.getUsername());
+//        if (user.isPresent()) {
+//            if(passwordEncoder.matches(data.getPassword(), user.get().getPassword())) {
+//                userSession.logIn(user.get());
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
-    public void logout() {
-        userSession.logOut();
-    }
+//    public void logout() {
+//        userSession.logOut();
+//    }
 }

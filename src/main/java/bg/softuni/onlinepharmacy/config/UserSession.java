@@ -1,7 +1,7 @@
 package bg.softuni.onlinepharmacy.config;
 
 
-import bg.softuni.onlinepharmacy.model.entity.User;
+import bg.softuni.onlinepharmacy.model.entity.UserEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -16,10 +16,10 @@ public class UserSession {
         return id != 0;
     }
 
-    public void logIn(User user) {
-        this.id = user.getId();
-        this.username = user.getUsername();
-        this.isAdmin = user.isAdministrator();
+    public void logIn(UserEntity userEntity) {
+        this.id = userEntity.getId();
+        this.username = userEntity.getUsername();
+        this.isAdmin = userEntity.isAdministrator();
     }
 
     public void logOut() {

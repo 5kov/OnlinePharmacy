@@ -8,17 +8,14 @@ import bg.softuni.onlinepharmacy.repository.InteractionRepository;
 import bg.softuni.onlinepharmacy.repository.MedicineRepository;
 import bg.softuni.onlinepharmacy.service.ManageUserService;
 import bg.softuni.onlinepharmacy.service.UserService;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,8 +44,8 @@ public class AdministratorController {
 
     @PostMapping("/administrator-manage-users")
     public String searchUsers(@RequestParam("username") String username, Model model) {
-        List<User> users = manageUserService.findUsersByUsername(username);
-        model.addAttribute("users", users);
+        List<UserEntity> userEntities = manageUserService.findUsersByUsername(username);
+        model.addAttribute("users", userEntities);
         model.addAttribute("username", username);
         return "administrator-manage-users";
     }
