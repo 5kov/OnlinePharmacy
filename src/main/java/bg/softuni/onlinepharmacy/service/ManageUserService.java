@@ -81,6 +81,8 @@ public class ManageUserService {
         if (user != null) {
             dto.setId(user.getId());
             dto.setUsername(user.getUsername());
+            dto.setFirstName(user.getFirstName());
+            dto.setLastName(user.getLastName());
             dto.setEmail(user.getEmail());
             dto.setCountry(user.getCountry());
             dto.setCity(user.getCity());
@@ -97,6 +99,8 @@ public class ManageUserService {
         if (dto != null && user != null) {
             user.setId(dto.getId());
             user.setUsername(dto.getUsername());
+            user.setFirstName(dto.getFirstName());
+            user.setLastName(dto.getLastName());
             user.setEmail(dto.getEmail());
             user.setCountry(dto.getCountry());
             user.setCity(dto.getCity());

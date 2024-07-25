@@ -10,6 +10,11 @@ public class RegisterDTO {
     @NotBlank
     @Size(min = 3, max = 20)
     private String username;
+    @Size(min = 3, max = 20)
+    private String firstName;
+    @NotBlank
+    @Size(min = 3, max = 20)
+    private String lastName;
     @NotBlank
     @Email
     private String email;
@@ -116,5 +121,21 @@ public class RegisterDTO {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public @Size(min = 3, max = 20) String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(@Size(min = 3, max = 20) String firstName) {
+        this.firstName = firstName;
+    }
+
+    public @NotBlank @Size(min = 3, max = 20) String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(@NotBlank @Size(min = 3, max = 20) String lastName) {
+        this.lastName = lastName;
     }
 }

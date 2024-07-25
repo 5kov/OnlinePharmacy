@@ -19,7 +19,7 @@ footer {
 .container {
     max-width: 75em;
     margin: auto;
-    background-image: url(../img/background.jpg);
+    background-image: url(../images/background.jpg);
     background-repeat: no-repeat;
     background-size: 75em;
     background-position: top;
