@@ -749,3 +749,14 @@ ul.my-list li {
     align-items: center;
     gap: 1em;
 }
+
+.logout {
+    background: none;
+    border: none;
+    color: white;
+    text-decoration: none;
+    font-size: 0.65em;
+    font-family: "PT Sans", sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+}

@@ -1,5 +1,6 @@
 package bg.softuni.onlinepharmacy.controller;
 
+
 import bg.softuni.onlinepharmacy.model.dto.ActiveIngredientDTO;
 import bg.softuni.onlinepharmacy.model.dto.MedicineDTO;
 import bg.softuni.onlinepharmacy.model.entity.*;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,41 +40,30 @@ public class AdministratorController {
     }
 
     @GetMapping("/administrator-manage-users")
-    public String viewManageUsers(){
+    public String showUserManagement(Model model, @RequestParam(required = false) String search) {
+        List<UserEntity> users = manageUserService.searchUsers(search == null ? "" : search);
+        model.addAttribute("users", users);
         return "administrator-manage-users";
     }
 
-    @PostMapping("/administrator-manage-users")
-    public String searchUsers(@RequestParam("username") String username, Model model) {
-        List<UserEntity> userEntities = manageUserService.findUsersByUsername(username);
-        model.addAttribute("users", userEntities);
-        model.addAttribute("username", username);
-        return "administrator-manage-users";
-    }
-    @PostMapping("/deleteUser/{id}")
-    public String deleteUser(@PathVariable Long id, @RequestParam("username") String username, Model model) {
-        try {
-            manageUserService.deleteUser(id);
-        } catch (IllegalStateException e) {
-            model.addAttribute("error", e.getMessage());
-            model.addAttribute("username", username);
-            return searchUsers(username, model); // Re-populate the search page with the current results
+    @PostMapping("/delete-user")
+    public String deleteUser(@RequestParam Long userId, RedirectAttributes redirectAttributes) {
+        boolean success = manageUserService.deleteUser(userId);
+        if (!success) {
+            redirectAttributes.addFlashAttribute("error", "Cannot remove the last admin.");
         }
-        return "redirect:/administrator-manage-users?username=" + username;
+        return "redirect:/administrator-manage-users";
     }
 
-    @PostMapping("/toggleAdminStatus/{id}")
-    public String toggleAdminStatus(@PathVariable Long id, @RequestParam("username") String username, @RequestParam boolean adminStatus, Model model) {
-        try {
-            manageUserService.toggleAdminStatus(id, adminStatus);
-        } catch (IllegalStateException e) {
-            model.addAttribute("error", e.getMessage());
-            model.addAttribute("username", username);
-            return searchUsers(username, model); // Re-populate the search page with the current results
+    @PostMapping("/toggle-role")
+    public String toggleRole(@RequestParam Long userId, RedirectAttributes redirectAttributes) {
+        boolean success = manageUserService.toggleUserRole(userId);
+        if (!success) {
+            redirectAttributes.addFlashAttribute("error", "Cannot remove the last admin.");
         }
-
-        return "redirect:/administrator-manage-users?username=" + username;
+        return "redirect:/administrator-manage-users";
     }
+
 
     @GetMapping("/administrator-add-active-ingredient")
     public String showAddIngredientForm(Model model) {

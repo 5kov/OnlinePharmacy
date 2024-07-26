@@ -1,16 +1,19 @@
 package bg.softuni.onlinepharmacy.service;
 
+
 import bg.softuni.onlinepharmacy.config.UserSession;
-import bg.softuni.onlinepharmacy.model.entity.*;
+import bg.softuni.onlinepharmacy.model.entity.Cart;
+import bg.softuni.onlinepharmacy.model.entity.CartItem;
+import bg.softuni.onlinepharmacy.model.entity.Medicine;
+import bg.softuni.onlinepharmacy.model.entity.UserEntity;
 import bg.softuni.onlinepharmacy.repository.*;
 import jakarta.persistence.PreRemove;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import java.util.*;
-
+import java.awt.desktop.UserSessionEvent;
+import java.util.Optional;
 
 @Service
 public class CartService {

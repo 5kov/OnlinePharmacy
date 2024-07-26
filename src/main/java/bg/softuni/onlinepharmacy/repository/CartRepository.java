@@ -1,5 +1,6 @@
 package bg.softuni.onlinepharmacy.repository;
 
+
 import bg.softuni.onlinepharmacy.model.entity.Cart;
 import bg.softuni.onlinepharmacy.model.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

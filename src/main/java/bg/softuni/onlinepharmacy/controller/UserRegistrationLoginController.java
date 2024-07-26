@@ -7,6 +7,8 @@ import bg.softuni.onlinepharmacy.model.dto.UpdateUserDTO;
 import bg.softuni.onlinepharmacy.service.ManageUserService;
 import bg.softuni.onlinepharmacy.service.UserService;
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 
 @Controller
@@ -103,17 +104,20 @@ public class UserRegistrationLoginController {
 //
 //        return "redirect:/index";
 //    }
-
+//
 //    @GetMapping("/logout")
 //    public String doLogout() {
-//        userService.logout();
-//        return "redirect:/index";
+//        return "login";
 //    }
+
 
     @GetMapping("/user-settings")
     public String showSettingsForm(Model model) {
-        Long userId = userSession.getId(); // Assuming UserSession is appropriately implemented
-        UpdateUserDTO updateUserDTO = manageUserService.findById(userId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        UpdateUserDTO updateUserDTO = manageUserService.findByUsername(currentPrincipalName);
+
+//        UpdateUserDTO updateUserDTO = manageUserService.findById(userId);
         model.addAttribute("updateUserDTO", updateUserDTO);
         return "user-settings";
     }

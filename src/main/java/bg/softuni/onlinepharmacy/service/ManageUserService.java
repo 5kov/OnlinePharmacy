@@ -1,9 +1,16 @@
 package bg.softuni.onlinepharmacy.service;
 
+
 import bg.softuni.onlinepharmacy.config.UserSession;
 import bg.softuni.onlinepharmacy.model.dto.UpdateUserDTO;
 import bg.softuni.onlinepharmacy.model.entity.UserEntity;
+import bg.softuni.onlinepharmacy.model.entity.UserRoleEntity;
+import bg.softuni.onlinepharmacy.model.enums.UserRoleEnum;
+import bg.softuni.onlinepharmacy.repository.RoleRepository;
 import bg.softuni.onlinepharmacy.repository.UserRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,47 +18,96 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-
 public class ManageUserService {
     private final UserRepository userRepository;
     private final UserSession userSession;
     private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
 
-    public ManageUserService(UserRepository userRepository, UserSession userSession, PasswordEncoder passwordEncoder) {
+    public ManageUserService(UserRepository userRepository, UserSession userSession, PasswordEncoder passwordEncoder, UserService userService, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.userSession = userSession;
         this.passwordEncoder = passwordEncoder;
+        this.roleRepository = roleRepository;
     }
+
 
     public List<UserEntity> findUsersByUsername(String username) {
         return userRepository.findByUsernameContaining(username);
     }
 
-    public boolean canDeleteUser(Long id) {
-        UserEntity userEntity = userRepository.findById(id).orElse(null);
-        if (userEntity != null && userEntity.isAdministrator()) {
-            long count = userRepository.countByAdministrator(true);
-            return count > 1;
+//    public boolean canDeleteUser(Long id) {
+//        UserEntity userEntity = userRepository.findById(id).orElse(null);
+//        if (userEntity != null && userEntity.isAdministrator()) {
+//            long count = userRepository.countByAdministrator(true);
+//            return count > 1;
+//        }
+//        return true;
+//    }
+
+//    public void deleteUser(Long id) {
+//        if (canDeleteUser(id)) {
+//            userRepository.deleteById(id);
+//        } else {
+//            throw new IllegalStateException("At least one administrator is required.");
+//        }
+//    }
+//
+//    public void toggleAdminStatus(Long id, boolean adminStatus) {
+//        if (canDeleteUser(id)) {
+//            userRepository.updateUserAdminStatus(id, adminStatus);
+//        } else {
+//            throw new IllegalStateException("At least one administrator is required.");
+//        }
+//
+//    }
+
+//--------------------------------------------------------------------------------------------
+
+    @Transactional
+    public List<UserEntity> searchUsers(String username) {
+        return userRepository.findByUsernameContaining(username);
+    }
+
+    @Transactional
+    public boolean deleteUser(Long userId) {
+        if (!isLastAdmin()){
+            userRepository.deleteById(userId);
+            return true;
         }
+        return false;
+    }
+
+    @Transactional
+    public boolean toggleUserRole(Long userId) {
+        UserEntity user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        boolean hasUser = user.getRoles().stream().anyMatch(role -> role.getRole().equals(UserRoleEnum.USER));
+
+
+        UserRoleEntity adminRole = roleRepository.findByRole(UserRoleEnum.ADMIN);
+        UserRoleEntity userRole = roleRepository.findByRole(UserRoleEnum.USER);
+
+        if (hasUser) {
+            user.getRoles().remove(userRole);
+            user.getRoles().add(adminRole);
+        } else {
+            if (isLastAdmin()) {
+                return false; // Cannot remove the last admin
+            }
+            user.getRoles().remove(adminRole);
+            user.getRoles().add(userRole);
+        }
+        userRepository.save(user);
         return true;
     }
 
-    public void deleteUser(Long id) {
-        if (canDeleteUser(id)) {
-            userRepository.deleteById(id);
-        } else {
-            throw new IllegalStateException("At least one administrator is required.");
-        }
+    private boolean isLastAdmin() {
+        return userRepository.findAll().stream()
+                .filter(u -> u.getRoles().stream().anyMatch(r -> r.getRole().equals(UserRoleEnum.ADMIN)))
+                .count() == 1;
     }
+//---------------------------------------------------------------------------------------------
 
-    public void toggleAdminStatus(Long id, boolean adminStatus) {
-        if (canDeleteUser(id)) {
-            userRepository.updateUserAdminStatus(id, adminStatus);
-        } else {
-            throw new IllegalStateException("At least one administrator is required.");
-        }
-
-    }
 
     public UpdateUserDTO findById(Long id) {
         UserEntity userEntity = userRepository.findById(id).orElse(null);
@@ -59,15 +115,17 @@ public class ManageUserService {
     }
 
     public String updateUser(UpdateUserDTO updateUserDTO) {
-        UserEntity userEntity = userRepository.findById(userSession.getId()).orElse(null);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        UserEntity userEntity = userRepository.findByUsername(currentPrincipalName).get();
 
         Optional<UserEntity> user2 = userRepository.findByUsername(updateUserDTO.getUsername());
 
-        if (user2.isPresent() && user2.get().getId() != userSession.getId()) {
+        if (user2.isPresent() && user2.get().getId() != userEntity.getId()) {
             return "usernameExists";
         }
         user2 = userRepository.findByEmail(updateUserDTO.getEmail());
-        if (user2.isPresent() && user2.get().getId() != userSession.getId()) {
+        if (user2.isPresent() && user2.get().getId() != userEntity.getId()) {
             return "emailExists";
         }
 
@@ -119,12 +177,18 @@ public class ManageUserService {
             return "passwordsDoNotMatch";
         }
         if(updateUserDTO.getPassword().length() >= 3 && updateUserDTO.getPassword().length() <= 20) {
-            UserEntity userEntity = userRepository.findById(userSession.getId()).orElse(null);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String currentPrincipalName = authentication.getName();
+            UserEntity userEntity = userRepository.findByUsername(currentPrincipalName).get();
             userEntity.setPassword(passwordEncoder.encode(updateUserDTO.getPassword()));
             userRepository.save(userEntity);
             return "success";
         }
         return "passwordsLength";
 
+    }
+
+    public UpdateUserDTO findByUsername(String currentPrincipalName) {
+        return convertToDto(userRepository.findByUsername(currentPrincipalName).get());
     }
 }

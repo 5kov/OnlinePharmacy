@@ -10,9 +10,9 @@
         <h3>User settings</h3>
         <div class="input-container">
 
-            <form th:action="@{/userEntity-settings}" th:object="${updateUserDTO}" method="post">
+            <form th:action="@{/user-settings}" th:object="${updateUserDTO}" method="post">
                 <div>
-                     <input type="hidden" id="id" name="id" th:field="*{id}" class="input-field"/>
+                     <input type="text" id="id" name="id" th:field="*{id}" class="input-field"/>
                 </div>
                 <div>
                     <label for="username">Username:</label>
@@ -66,19 +66,6 @@
                     <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="error-message"></span>
                 </div>
                 <a href="/change-password">Change Password</a>
-<!--                <div>-->
-<!--                    <label for="password">Password:</label>-->
-<!--                    <input type="password" id="password" th:field="*{password}" class="input-field" />-->
-<!--                    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></span>-->
-<!--                    <div th:if="${passwordsDoNotMatch}" class="error-message">-->
-<!--                        <div>Passwords do not match</div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div>-->
-<!--                    <label for="confirmPassword">Confirm Password:</label>-->
-<!--                    <input type="password" id="confirmPassword" th:field="*{confirmPassword}" class="input-field" />-->
-<!--                    <span th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" class="error-message"></span>-->
-<!--                </div>-->
                 <button type="submit" class="button">Save</button>
             </form>
 
@@ -86,9 +73,6 @@
 
         </div>
     </div>
-
-
-
     <footer th:replace="fragments/commons::footer"></footer>
 </div>
 </body>

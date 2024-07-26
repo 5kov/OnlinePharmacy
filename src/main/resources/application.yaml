@@ -1,32 +1,42 @@
 spring:
+  application:
+    name: mobilele
+#  thymeleaf:
+#    check-template-location: true
+#    cache: false
+#    prefix: file:./src/main/resources/templates/
+#server:
+#  port: 8081
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/pharmacy?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: root
+    password: qwerty
   jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    defer-datasource-initialization: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-        format_sql: 'TRUE'
+        format_sql: true
     hibernate:
       ddl-auto: update
-    open-in-view: 'false'
+  sql:
+    init:
+      mode: never
   mvc:
     hiddenmethod:
       filter:
-        enabled: 'true'
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    username: root
-    password: qwerty
-    url: jdbc:mysql://localhost:3306/online_pharmacy?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
-  messages:
-    basename: messages
-logging:
-  level:
-    org:
-      hibernate:
-        type:
-          descriptor: TRACE
-        SQL: DEBUG
-      nodeValue: WARN
-    blog: WARN
-server:
-  port: 8080
+        enabled: true
+
+forex:
+  api:
+    key: ${FOREX_API_KEY:}
+    url: "https://openexchangerates.org/api/latest.json?app_id={app_id}"
+    base: "USD"
+  init-ex-rates: ${INIT_EX_RATES:false}
+
+offers:
+  api:
+    baseUrl: "${OFFERS_BASE_URL:http://localhost:8081}"
+
+jwt:
 

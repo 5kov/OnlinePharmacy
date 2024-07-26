@@ -2,9 +2,12 @@ package bg.softuni.onlinepharmacy.model.entity;
 
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UuidGenerator;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+
+import static org.hibernate.type.SqlTypes.VARCHAR;
 
 @Entity
 @Table(name = "users")
@@ -14,6 +17,10 @@ public class UserEntity {
     private long id;
     @Column(unique = true, nullable = false)
     private String username;
+    @UuidGenerator
+    //@UUIDSequence <-- applicable for all kind of identifiers
+    @JdbcTypeCode(VARCHAR)
+    private UUID uuid;
     @Column(nullable = false)
     private String firstName;
     @Column(nullable = false)
@@ -47,6 +54,17 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orders;
+
+    @ManyToMany(
+            fetch = FetchType.EAGER
+    )
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private List<UserRoleEntity> roles = new ArrayList<>();
+
 
     public UserEntity() {
         this.favouriteMedicines = new HashSet<>();
@@ -183,5 +201,21 @@ public class UserEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public List<UserRoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<UserRoleEntity> roles) {
+        this.roles = roles;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 }

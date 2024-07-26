@@ -1,48 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/commons::head"></head>
-<script>
-    function redirectToUserManagement() {
-        var username = document.getElementById("username").value;
-        var url = "/administrator-manage-userEntities/" + encodeURIComponent(username);
-        window.location.href = url;
-    }
-
-    function getQueryStringValue(key) {
-        return new URLSearchParams(window.location.search).get(key);
-    }
-
-    // Function to perform actions after the page has loaded
-    window.onload = function() {
-        // Retrieve the username from the URL parameters
-        var username2 = getQueryStringValue('username');
-
-        // Check if the username parameter is present and not null
-        if (username2) {
-            // Set the value of the username input field
-            var usernameInput2 = document.getElementById('username');
-            if (usernameInput2) {
-                usernameInput2.value = username2;
-
-                // Trigger the search form submission
-                var searchForm = document.getElementById('searchForm');
-                if (searchForm) {
-                    searchForm.submit();
-                }
-            }
-        }
-    };
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const errorMessage = thymeleafContext.get('error');
-        if (errorMessage) {
-            alert(errorMessage);
-        }
-    });
-
-
-
-</script>
 <body>
 <div class="container">
     <header th:replace="fragments/commons::header"></header>
@@ -51,27 +9,25 @@
         <h1>Administrator Page</h1>
         <h3>Manage userEntities</h3>
         <div class="input-container">
-            <form action="#" th:action="@{/administrator-manage-userEntities}" method="post" id="searchForm">
-                <input type="text" id="username" name="username" class="input-field" placeholder="Search Username" th:value="${username}" required/>
+            <form th:action="@{/administrator-manage-users}" method="get">
+                <input type="text" name="search" placeholder="Search users..." class="input-field">
                 <button type="submit" class="button">Search</button>
             </form>
 
-            <div th:if="${userEntities}">
-                <ul>
-                    <li th:each="userEntity : ${userEntities}">
-                        <h3><span class="centered-text" th:text="${userEntity.username}"></span></h3>
-                        <form th:action="@{/deleteUser/{id}(id=${userEntity.id}, username=${username})}" method="post">
-                            <button type="submit" class="button">Delete</button>
-                        </form>
-                        <form th:action="@{/toggleAdminStatus/{id}(id=${userEntity.id}, username=${username})}" method="post">
-                            <input type="hidden" name="adminStatus" th:value="${!userEntity.administrator}" />
-                            <button type="submit" class="button" th:text="${userEntity.administrator} ? 'Make Regular User' : 'Make Administrator'" ></button>
-                        </form>
-                    </li>
-                </ul>
+            <div th:each="user : ${users}">
+                <p th:text="'User: ' + ${user.username} + ' Role: ' + ${user.getRoles().getFirst().getRole()}">Username</p>
+                <form th:action="@{/delete-user}" method="post">
+                    <input type="hidden" th:value="${user.id}" name="userId"/>
+                    <button type="submit">Delete</button>
+                </form>
+                <form th:action="@{/toggle-role}" method="post">
+                    <input type="hidden" th:value="${user.id}" name="userId"/>
+                    <button type="submit">Toggle Role</button>
+                </form>
             </div>
 
-            <h3 class="centered-text error-message" th:if="${error}" th:text="${error}"></h3>
+            <div th:if="${error}" th:text="${error}">Error Message</div>
+
 
 
         </div>

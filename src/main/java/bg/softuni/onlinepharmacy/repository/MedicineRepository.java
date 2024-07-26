@@ -1,5 +1,6 @@
 package bg.softuni.onlinepharmacy.repository;
 
+
 import bg.softuni.onlinepharmacy.model.entity.Medicine;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

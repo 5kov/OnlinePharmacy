@@ -1,7 +1,7 @@
 package bg.softuni.onlinepharmacy.repository;
 
+
 import bg.softuni.onlinepharmacy.model.entity.CartItem;
-import bg.softuni.onlinepharmacy.model.entity.Medicine;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

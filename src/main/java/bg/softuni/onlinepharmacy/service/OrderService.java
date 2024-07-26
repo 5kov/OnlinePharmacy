@@ -27,6 +27,7 @@ public class OrderService {
     @Autowired
     private InteractionRepository interactionRepository;
 
+
     @Transactional
     public boolean placeOrder() {
         UserEntity userEntity = userRepository.findById(userSession.getId()).get();

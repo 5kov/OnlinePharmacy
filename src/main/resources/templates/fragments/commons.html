@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,33 +10,31 @@
 <body>
 <header>
     <div class="logo-container">
-        <a href="/"><img src="img/pharmacy_logo.gif" alt="logo"></a>
+        <a href="/"><img src="/images/pharmacy_logo.gif" alt="logo"></a>
     </div>
     <nav>
         <ul>
-            <li><a href="/pharmacy" th:unless="${@userSession.isAdmin()}">OnlinePharmacy</a></li>
-            <li><a href="#" th:unless="${@userSession.isAdmin()}">Promotions</a></li>
-            <li><a href="#" th:unless="${@userSession.isAdmin()}">Health Library</a></li>
-            <li><a href="#" th:unless="${@userSession.isAdmin()}">Diagnosis</a></li>
-            <li><a href="#" th:unless="${@userSession.isAdmin()}">Health Help</a></li>
-            <li><a href="#" th:unless="${@userSession.isAdmin()}">Health Media</a></li>
-            <li><a href="#" th:unless="${@userSession.isAdmin()}">Health & Lifestyle</a></li>
-            <li><a href="/about" th:unless="${@userSession.isAdmin()}">About</a></li>
-            <li><a href="/contacts" th:unless="${@userSession.isAdmin()}">Contacts</a></li>
+            <li><a href="/pharmacy" sec:authorize="isAuthenticated()">OnlinePharmacy</a></li>
+            <li><a href="/about" sec:authorize="isAuthenticated()">About</a></li>
+            <li><a href="/contacts" sec:authorize="isAuthenticated()">Contacts</a></li>
 
-            <li><a href="/administrator-manage-userEntities" th:if="${@userSession.isAdmin()}">Manage userEntities</a></li>
-            <li><a href="/administrator-add-active-ingredient" th:if="${@userSession.isAdmin()}">Add active ingredient</a></li>
-            <li><a href="/administrator-manage-active-ingredients" th:if="${@userSession.isAdmin()}">Manage active ingredient</a></li>
-            <li><a href="/administrator-add-medicines" th:if="${@userSession.isAdmin()}">Add medicine</a></li>
-            <li><a href="/administrator-manage-medicines" th:if="${@userSession.isAdmin()}">Manage medicines</a></li>
-            <li><a href="/administrator-add-interactions" th:if="${@userSession.isAdmin()}">Add interaction</a></li>
-            <li><a href="/administrator-manage-interactions" th:if="${@userSession.isAdmin()}">Manage interactions</a></li>
-            <li><a href="/orders" th:if="${@userSession.isAdmin()}">View orders</a></li>
+            <li><a href="/administrator-manage-users" sec:authorize="hasRole('ADMIN')">Manage users</a></li>
+            <li><a href="/administrator-add-active-ingredient" sec:authorize="hasRole('ADMIN')">Add active ingredient</a></li>
+            <li><a href="/administrator-manage-active-ingredients" sec:authorize="hasRole('ADMIN')">Manage active ingredient</a></li>
+            <li><a href="/administrator-add-medicines" sec:authorize="hasRole('ADMIN')">Add medicine</a></li>
+            <li><a href="/administrator-manage-medicines" sec:authorize="hasRole('ADMIN')">Manage medicines</a></li>
+            <li><a href="/administrator-add-interactions" sec:authorize="hasRole('ADMIN')">Add interaction</a></li>
+            <li><a href="/administrator-manage-interactions" sec:authorize="hasRole('ADMIN')">Manage interactions</a></li>
+            <li><a href="/orders" sec:authorize="hasRole('ADMIN')">View orders</a></li>
 
-            <li><a href="/cart" th:if="${@userSession.isLoggedIn()}">View Cart</a></li>
-            <li><a href="/login" th:unless="${@userSession.isLoggedIn()}">Sign in</a></li>
-            <li><a href="/logout" th:if="${@userSession.isLoggedIn()}">Sign out</a></li>
-            <li><a href="/userEntity-settings" th:if="${@userSession.isLoggedIn()}">User settings</a></li>
+            <li><a href="/cart" sec:authorize="hasRole('USER')">View Cart</a></li>
+            <li><a href="/login" sec:authorize="!isAuthenticated()">Sign in</a></li>
+<!--            <li><a href="/logout" sec:authorize="isAuthenticated()">Sign out</a></li>-->
+            <li><form th:method="post"
+                  th:action="@{/logout}" sec:authorize="isAuthenticated()">
+                <input type="submit" value="Sign out" class="logout"/>
+            </form></li>
+            <li><a href="/user-settings" sec:authorize="isAuthenticated()">User settings</a></li>
         </ul>
     </nav>
 </header>

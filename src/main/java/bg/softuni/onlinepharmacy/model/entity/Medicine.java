@@ -2,7 +2,6 @@ package bg.softuni.onlinepharmacy.model.entity;
 
 
 import jakarta.persistence.*;
-import org.hibernate.validator.constraints.URL;
 
 import java.util.List;
 

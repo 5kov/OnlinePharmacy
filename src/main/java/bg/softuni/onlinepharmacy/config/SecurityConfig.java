@@ -1,5 +1,6 @@
 package bg.softuni.onlinepharmacy.config;
 
+
 import bg.softuni.onlinepharmacy.repository.UserRepository;
 import bg.softuni.onlinepharmacy.service.impl.PharmacyUserDetailsService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -23,7 +24,7 @@ public class SecurityConfig {
                     // all static resources to "common locations" (css, images, js) are available to anyone
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     // some more resources for all users
-                    .requestMatchers("/", "/index","/login", "/register", "/pharmacy").permitAll()
+                    .requestMatchers("/", "/login", "/register", "/error", "/offers/all", "/offers/{id}", "/api/convert").permitAll()
                     // all other URL-s should be authenticated.
                     .anyRequest()
                     .authenticated()
@@ -31,7 +32,7 @@ public class SecurityConfig {
         .formLogin(formLogin ->
             formLogin
                 // Where is our custom login form?
-                .loginPage("/user/login")
+                .loginPage("/login")
                 // what is the name of the username parameter in the Login POST request?
                 .usernameParameter("username")
                 // what is the name of the password parameter in the Login POST request?
@@ -39,7 +40,7 @@ public class SecurityConfig {
                 // What will happen if the login is successful
                 .defaultSuccessUrl("/index", true)
                 // What will happen if the login fails
-                .failureForwardUrl("/user/login-error")
+                .failureForwardUrl("/users/login-error")
         )
         .logout(
             logout ->
@@ -54,10 +55,10 @@ public class SecurityConfig {
         .build();
   }
 
-//  @Bean
-//  public PharmacyUserDetailsService userDetailsService(UserRepository userRepository) {
-//    return new PharmacyUserDetailsService(userRepository);
-//  }
+  @Bean
+  public PharmacyUserDetailsService userDetailsService(UserRepository userRepository) {
+    return new PharmacyUserDetailsService(userRepository);
+  }
 
   @Bean
   public PasswordEncoder passwordEncoder() {

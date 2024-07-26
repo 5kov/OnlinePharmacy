@@ -1,7 +1,6 @@
 package bg.softuni.onlinepharmacy.repository;
 
 
-
 import bg.softuni.onlinepharmacy.model.entity.UserEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,9 +17,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query("SELECT COUNT(u) FROM UserEntity u")
     long countUsers();
 
-    @Query("SELECT u FROM UserEntity u WHERE u.username LIKE %:username%")
-    List<UserEntity> findByUsernameContaining(@Param("username") String username);
-
+    List<UserEntity> findByUsernameContaining(String username);
 
     @Transactional
     @Modifying
