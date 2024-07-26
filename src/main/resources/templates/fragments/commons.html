@@ -14,9 +14,8 @@
     </div>
     <nav>
         <ul>
-            <li><a href="/pharmacy" sec:authorize="isAuthenticated()">OnlinePharmacy</a></li>
-            <li><a href="/about" sec:authorize="isAuthenticated()">About</a></li>
-            <li><a href="/contacts" sec:authorize="isAuthenticated()">Contacts</a></li>
+            <li><a href="/pharmacy" sec:authorize="hasRole('USER')">OnlinePharmacy</a></li>
+
 
             <li><a href="/administrator-manage-users" sec:authorize="hasRole('ADMIN')">Manage users</a></li>
             <li><a href="/administrator-add-active-ingredient" sec:authorize="hasRole('ADMIN')">Add active ingredient</a></li>
@@ -27,14 +26,16 @@
             <li><a href="/administrator-manage-interactions" sec:authorize="hasRole('ADMIN')">Manage interactions</a></li>
             <li><a href="/orders" sec:authorize="hasRole('ADMIN')">View orders</a></li>
 
+            <li><a href="/about" sec:authorize="hasRole('USER')">About</a></li>
+            <li><a href="/contacts" sec:authorize="hasRole('USER')">Contacts</a></li>
+
             <li><a href="/cart" sec:authorize="hasRole('USER')">View Cart</a></li>
             <li><a href="/login" sec:authorize="!isAuthenticated()">Sign in</a></li>
-<!--            <li><a href="/logout" sec:authorize="isAuthenticated()">Sign out</a></li>-->
             <li><form th:method="post"
                   th:action="@{/logout}" sec:authorize="isAuthenticated()">
                 <input type="submit" value="Sign out" class="logout"/>
             </form></li>
-            <li><a href="/user-settings" sec:authorize="isAuthenticated()">User settings</a></li>
+            <li><a href="/user-settings" sec:authorize="hasRole('USER')">User settings</a></li>
         </ul>
     </nav>
 </header>

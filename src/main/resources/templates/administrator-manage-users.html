@@ -15,7 +15,7 @@
             </form>
 
             <div th:each="user : ${users}">
-                <p th:text="'User: ' + ${user.username} + ' Role: ' + ${user.getRoles().getFirst().getRole()}">Username</p>
+                <p th:text="'User: ' + ${user.username} + ' Role: ' + ${user.getRoles().get(0).getRole()}">Username</p>
                 <form th:action="@{/delete-user}" method="post">
                     <input type="hidden" th:value="${user.id}" name="userId"/>
                     <button type="submit">Delete</button>
