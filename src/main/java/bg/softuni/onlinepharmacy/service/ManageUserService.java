@@ -68,7 +68,12 @@ public class ManageUserService {
 
     @Transactional
     public boolean deleteUser(Long userId) {
-        if (!isLastAdmin()){
+        UserEntity user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
+        UserRoleEntity userRole = user.getRoles().stream().findFirst().get();
+        if (userRole.getRole().equals(UserRoleEnum.USER)){
+            userRepository.deleteById(userId);
+            return true;
+        } else if (!isLastAdmin()) {
             userRepository.deleteById(userId);
             return true;
         }
