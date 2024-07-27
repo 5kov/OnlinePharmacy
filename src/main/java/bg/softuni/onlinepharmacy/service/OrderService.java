@@ -1,10 +1,11 @@
 package bg.softuni.onlinepharmacy.service;
 
-import bg.softuni.onlinepharmacy.config.UserSession;
 import bg.softuni.onlinepharmacy.model.entity.*;
 import bg.softuni.onlinepharmacy.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,8 +18,6 @@ public class OrderService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private UserSession userSession;
-    @Autowired
     private CartRepository cartRepository;
     @Autowired
     private OrderRepository orderRepository;
@@ -30,7 +29,9 @@ public class OrderService {
 
     @Transactional
     public boolean placeOrder() {
-        UserEntity userEntity = userRepository.findById(userSession.getId()).get();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        UserEntity userEntity = userRepository.findByUsername(currentPrincipalName).get();
         Cart cart = userEntity.getCart();
         if (cart.getCartItems().isEmpty()) {
             throw new IllegalStateException("Cannot place an order because the cart is empty");

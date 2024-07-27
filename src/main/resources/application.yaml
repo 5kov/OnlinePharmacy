@@ -1,6 +1,8 @@
 spring:
   application:
-    name: mobilele
+    name: onlinepharmacy
+  messages:
+    basename: i18n/messages
 #  thymeleaf:
 #    check-template-location: true
 #    cache: false

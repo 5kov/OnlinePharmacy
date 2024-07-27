@@ -13,7 +13,7 @@
             </div>
             <div>
                 <p th:text="${medicine.medicineNameEn}"></p>
-                <p th:text="${'$' + medicine.price}"></p>
+                <p th:text="${#numbers.formatDecimal(medicine.price, 1, 2)}"></p>
                 <form th:action="@{/add-to-cart}" method="post">
                     <input type="hidden" th:value="${medicine.id}" name="medicineId" />
                     <input type="number" name="quantity" class="button-show-more" value="1" min="1" />

@@ -36,12 +36,12 @@
         <div th:each="order : ${orders}">
             <p><strong>Order ID:</strong> <span th:text="${order.id}"></span></p>
             <p><strong>Order Date:</strong> <span th:text="${order.orderDate}"></span></p>
-            <p><strong>Username:</strong> <span th:text="${order.userEntity.username}"></span></p>
-            <p><strong>First Name:</strong> <span th:text="${order.userEntity.firstName}"></span></p>
-            <p><strong>Last Name:</strong> <span th:text="${order.userEntity.lastName}"></span></p>
-            <p><strong>Phone Number:</strong> <span th:text="${order.userEntity.phoneNumber}"></span></p>
-            <p><strong>Address:</strong> <span th:text="${order.userEntity.street}"></span>, <span th:text="${order.userEntity.city}"></span>, <span th:text="${order.userEntity.postalCode}"></span></p>
-            <p><strong>Email:</strong> <span th:text="${order.userEntity.email}"></span></p>
+            <p><strong>Username:</strong> <span th:text="${order.user.username}"></span></p>
+            <p><strong>First Name:</strong> <span th:text="${order.user.firstName}"></span></p>
+            <p><strong>Last Name:</strong> <span th:text="${order.user.lastName}"></span></p>
+            <p><strong>Phone Number:</strong> <span th:text="${order.user.phoneNumber}"></span></p>
+            <p><strong>Address:</strong> <span th:text="${order.user.street}"></span>, <span th:text="${order.user.city}"></span>, <span th:text="${order.user.postalCode}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${order.user.email}"></span></p>
 
             <h3>Items:</h3>
             <table class="table">
@@ -57,14 +57,16 @@
                 <tr th:each="item : ${order.orderItems}">
                     <td th:text="${item.drug.medicineNameEn}">Medicine Name</td>
                     <td th:text="${item.quantity}">Quantity</td>
-                    <td th:text="${'$' + item.itemPrice}">Price</td>
-                    <td th:text="${'$' + (item.itemPrice * item.quantity)}">Total Price</td>
+                    <td th:text="${#numbers.formatDecimal(item.itemPrice, 1, 2)}">Price</td>
+                    <td th:text="${#numbers.formatDecimal(item.itemPrice * item.quantity, 1, 2)}">Total Price</td>
+
                 </tr>
                 </tbody>
                 <tfoot>
                 <tr>
                     <td colspan="3">Total Price of Order:</td>
-                    <td th:text="${'$' + order.getTotalPrice()}"></td>
+                    <td th:text="${#numbers.formatDecimal(order.getTotalPrice(), 1, 2)}"></td>
+
                 </tr>
                 </tfoot>
             </table>

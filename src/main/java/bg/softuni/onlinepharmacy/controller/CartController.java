@@ -1,6 +1,5 @@
 package bg.softuni.onlinepharmacy.controller;
 
-import bg.softuni.onlinepharmacy.config.UserSession;
 import bg.softuni.onlinepharmacy.model.entity.Cart;
 import bg.softuni.onlinepharmacy.model.entity.UserEntity;
 import bg.softuni.onlinepharmacy.repository.CartRepository;
@@ -8,6 +7,8 @@ import bg.softuni.onlinepharmacy.repository.UserRepository;
 import bg.softuni.onlinepharmacy.service.CartService;
 import bg.softuni.onlinepharmacy.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,35 +21,26 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class CartController {
-
-    private UserRepository userRepository;
-    @Autowired
-    private UserSession userSession;
-    @Autowired
-    private CartRepository cartRepository;
     @Autowired
     private CartService cartService;
     @Autowired
     private OrderService orderService;
-
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/order-finished")
     public String viewOrderFinished(){
         return "order-finished";
     }
 
-
-
-
-
     @PostMapping("/add")
     public ModelAndView addToCart(@RequestParam Long medicineId, @RequestParam int quantity) {
-        UserEntity userEntity = userRepository.findById(userSession.getId()).get();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        UserEntity userEntity = userRepository.findByUsername(currentPrincipalName).get();
         cartService.addToCart(userEntity, medicineId, quantity);
         return new ModelAndView("redirect:/medicines");
     }
-
-
 
     @GetMapping("/cart")
     public String showCart(Model model) {
@@ -72,16 +64,6 @@ public class CartController {
         return "redirect:/cart";
     }
 
-//    @PostMapping("/order")
-//    public String placeOrder(RedirectAttributes redirectAttributes) {
-//        cartService.createOrderFromCart();
-//        redirectAttributes.addFlashAttribute("successMessage", "Order placed successfully!");
-//        return "redirect:/cart";
-//    }
-
-
-
-
     @PostMapping("/order")
     public String placeOrder(RedirectAttributes redirectAttributes) {
         try {
@@ -94,8 +76,4 @@ public class CartController {
         }
         return "redirect:/cart";
     }
-
-
-
-
 }

@@ -76,7 +76,7 @@
                     <div th:each="medicine : ${medicines}" class="medicine-card">
                         <a th:href="@{/item(medicineId=${medicine.id})}"><img th:src="@{'/img/' + ${medicine.imageUrl}}" alt="Medicine Image" style="width:100px; height:100px;"/></a>
                         <p th:text="${medicine.medicineNameEn}">Medicine Name</p>
-                        <p th:text="${'$' + medicine.price}">Price</p>
+                        <p th:text="${#numbers.formatDecimal(medicine.price, 1, 2)}">Price</p>
                         <form th:action="@{/add-to-cart}" method="post">
                             <input type="hidden" th:value="${medicine.id}" name="medicineId" />
                             <input type="number" name="quantity" class="input-field" value="1" min="1" />
@@ -91,7 +91,7 @@
                             <a th:href="@{/pharmacy(page=${currentPage - 1}, search=${search})}" class="pagination">Previous</a>
                         </li>
                         <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
-                            <a th:href="@{/pharmacy(page=${i}, search=${search})}" th:text="${i}" class="pagination"></a>
+                            <a th:href="@{/pharmacy(page=${i}, search=${search})}" th:text="${i + 1}" class="pagination"></a>
                         </li>
                         <li th:if="${currentPage + 1 < totalPages}">
                             <a th:href="@{/pharmacy(page=${currentPage + 1}, search=${search})}" class="pagination">Next</a>

@@ -1,7 +1,6 @@
 package bg.softuni.onlinepharmacy.service;
 
 
-import bg.softuni.onlinepharmacy.config.UserSession;
 import bg.softuni.onlinepharmacy.model.entity.Cart;
 import bg.softuni.onlinepharmacy.model.entity.CartItem;
 import bg.softuni.onlinepharmacy.model.entity.Medicine;
@@ -10,9 +9,10 @@ import bg.softuni.onlinepharmacy.repository.*;
 import jakarta.persistence.PreRemove;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.awt.desktop.UserSessionEvent;
 import java.util.Optional;
 
 @Service
@@ -30,9 +30,6 @@ public class CartService {
     private MedicineRepository medicineRepository;
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private UserSession userSession;
-
 
     @Transactional
     public void addToCart(UserEntity userEntity, Long medicineId, int quantity) {
@@ -73,36 +70,10 @@ public class CartService {
         cartItemRepository.delete(item);
     }
 
-
-//    @Transactional
-//    public void createOrderFromCart() {
-//        UserEntity user = userRepository.findById(userSession.getId()).get();
-//        Cart cart = user.getCart();
-//        if (cart == null || cart.getCartItems().isEmpty()) {
-//            throw new IllegalStateException("Cart is empty");
-//        }
-//
-//        Order order = new Order();
-//        order.setUser(user);
-//        order.setOrderDate(LocalDateTime.now());
-//
-//        for (CartItem cartItem : cart.getCartItems()) {
-//            OrderItem orderItem = new OrderItem();
-//            orderItem.setOrder(order);
-//            orderItem.setDrug(cartItem.getMedicine());
-//            orderItem.setQuantity(cartItem.getQuantity());
-//            orderItem.setItemPrice(cartItem.getItemPrice());
-//            order.getOrderItems().add(orderItem);
-//            orderItemRepository.save(orderItem);
-//        }
-//
-//        orderRepository.save(order);
-//        cart.getCartItems().clear();
-//        cartRepository.save(cart);
-//    }
-
     public Cart getCurrentCart() {
-        UserEntity userEntity = userRepository.findById(userSession.getId()).get();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        UserEntity userEntity = userRepository.findByUsername(currentPrincipalName).get();
         return cartRepository.findById(userEntity.getCart().getId()).orElseThrow();
     }
 

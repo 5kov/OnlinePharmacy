@@ -54,7 +54,7 @@
                         <div>
                             <img th:src="@{'/img/' + ${item.medicine.getImageUrl()}}" alt="Product Image" style="width:100px; height:100px;"/>
                             <p th:text="${item.medicine.medicineNameEn}">Medicine Name</p>
-                            <p th:text="${'$' + item.medicine.price}">Price</p>
+                            <p th:text="${#numbers.formatDecimal(item.medicine.price, 1, 2)}">Price</p>
                             <form th:action="@{'/update-order/' + ${item.id}}" method="post">
                                 <input type="number" name="quantity" th:value="${item.quantity}" class="input-field" min="1"/>
                                 <button type="submit" class="button" >Update</button>
@@ -64,7 +64,8 @@
                             </form>
                         </div>
                     </div>
-                    <p>Total Price: <span th:text="${totalPrice}"></span></p>
+                    <p>Total Price: <span th:text="${#numbers.formatDecimal(totalPrice, 1, 2)}"></span></p>
+
                     <form th:action="@{/order}" method="post">
                         <button type="submit" class="button">Place Order</button>
                     </form>

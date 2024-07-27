@@ -1,9 +1,10 @@
 package bg.softuni.onlinepharmacy.controller;
 
-import bg.softuni.onlinepharmacy.config.UserSession;
 import bg.softuni.onlinepharmacy.model.dto.LoginDTO;
 import bg.softuni.onlinepharmacy.model.dto.RegisterDTO;
 import bg.softuni.onlinepharmacy.model.dto.UpdateUserDTO;
+import bg.softuni.onlinepharmacy.model.entity.UserEntity;
+import bg.softuni.onlinepharmacy.repository.UserRepository;
 import bg.softuni.onlinepharmacy.service.ManageUserService;
 import bg.softuni.onlinepharmacy.service.UserService;
 import jakarta.validation.Valid;
@@ -22,13 +23,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserRegistrationLoginController {
 
     private final UserService userService;
-    private final UserSession userSession;
     private final ManageUserService manageUserService;
+    private final UserRepository userRepository;
 
-    public UserRegistrationLoginController(UserService userService, UserSession userSession, ManageUserService manageUserService) {
+    public UserRegistrationLoginController(UserService userService, ManageUserService manageUserService, UserRepository userRepository) {
         this.userService = userService;
-        this.userSession = userSession;
         this.manageUserService = manageUserService;
+        this.userRepository = userRepository;
     }
 
     @ModelAttribute("registerData")
@@ -157,8 +158,10 @@ public class UserRegistrationLoginController {
 
     @GetMapping("/change-password")
     public String showChangePasswordForm(Model model) {
-        Long userId = userSession.getId(); // Assuming UserSession is appropriately implemented
-        UpdateUserDTO updateUserDTO = manageUserService.findById(userId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        UserEntity userEntity = userRepository.findByUsername(currentPrincipalName).get();
+        UpdateUserDTO updateUserDTO = manageUserService.findById(userEntity.getId());
         model.addAttribute("updateUserDTO", updateUserDTO);
         return "change-password";
     }

@@ -30,12 +30,20 @@
             <li><a href="/contacts" sec:authorize="hasRole('USER')">Contacts</a></li>
 
             <li><a href="/cart" sec:authorize="hasRole('USER')">View Cart</a></li>
-            <li><a href="/login" sec:authorize="!isAuthenticated()">Sign in</a></li>
+            <li><a href="/login" sec:authorize="!isAuthenticated()" th:text="#{sign_in.message}">Sign in</a></li>
             <li><form th:method="post"
                   th:action="@{/logout}" sec:authorize="isAuthenticated()">
                 <input type="submit" value="Sign out" class="logout"/>
             </form></li>
             <li><a href="/user-settings" sec:authorize="hasRole('USER')">User settings</a></li>
+            <li>
+                <form action="#" th:action="@{/}" method="get">
+                <select name="lang" onchange="this.form.submit()">
+                    <option value="en" th:selected="${#locale == 'en'}">English</option>
+                    <option value="bg" th:selected="${#locale == 'bg'}">Bulgarian</option>
+                </select>
+            </form>
+            </li>
         </ul>
     </nav>
 </header>

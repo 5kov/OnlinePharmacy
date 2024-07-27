@@ -1,7 +1,6 @@
 package bg.softuni.onlinepharmacy.service;
 
 
-import bg.softuni.onlinepharmacy.config.UserSession;
 import bg.softuni.onlinepharmacy.model.dto.UpdateUserDTO;
 import bg.softuni.onlinepharmacy.model.entity.UserEntity;
 import bg.softuni.onlinepharmacy.model.entity.UserRoleEntity;
@@ -20,13 +19,11 @@ import java.util.Optional;
 @Service
 public class ManageUserService {
     private final UserRepository userRepository;
-    private final UserSession userSession;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
 
-    public ManageUserService(UserRepository userRepository, UserSession userSession, PasswordEncoder passwordEncoder, UserService userService, RoleRepository roleRepository) {
+    public ManageUserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserService userService, RoleRepository roleRepository) {
         this.userRepository = userRepository;
-        this.userSession = userSession;
         this.passwordEncoder = passwordEncoder;
         this.roleRepository = roleRepository;
     }
