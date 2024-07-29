@@ -12,17 +12,17 @@
                 <img th:src="@{'/img/' + ${medicine.imageUrl}}" alt="Mock">
             </div>
             <div>
-                <p th:text="${medicine.medicineNameEn}"></p>
+                <p th:text="__${#locale}__=='bg_BG' ? ${medicine.medicineNameBg} : ${medicine.medicineNameEn}"></p>
                 <p th:text="${#numbers.formatDecimal(medicine.price, 1, 2)}"></p>
                 <form th:action="@{/add-to-cart}" method="post">
                     <input type="hidden" th:value="${medicine.id}" name="medicineId" />
                     <input type="number" name="quantity" class="button-show-more" value="1" min="1" />
-                    <button type="submit" class="button-show-more">Add to Cart</button>
+                    <button type="submit" class="button-show-more" th:text="#{add_to_cart}">Add to Cart</button>
                 </form>
             </div>
         </div>
         <div id="description">
-            <p th:text="${medicine.descriptionEn}">
+            <p th:text="__${#locale}__=='bg_BG' ? ${medicine.descriptionBg} : ${medicine.descriptionEn}">
 
             </p>
         </div>
