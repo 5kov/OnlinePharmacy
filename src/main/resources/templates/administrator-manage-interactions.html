@@ -5,16 +5,16 @@
 <div class="container">
     <header th:replace="fragments/commons::header"></header>
     <div class="form">
-        <h1>Administrator Page</h1>
-        <h3>Delete interaction</h3>
+        <h1 th:text="#{administrator_page}">Administrator Page</h1>
+        <h3 th:text="#{delete_interaction}">Delete interaction</h3>
         <div class="input-container">
             <table>
                 <thead>
                 <tr>
-                    <th>Drug Name</th>
-                    <th>Interaction Drug</th>
-                    <th>Interaction Type</th>
-                    <th>Actions</th>
+                    <th th:text="#{medicine_name}">Drug Name</th>
+                    <th th:text="#{interaction_medicine}">Interaction Drug</th>
+                    <th th:text="#{interaction_type}">Interaction Type</th>
+                    <th th:text="#{action}">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -24,7 +24,7 @@
                     <td th:text="${interaction.interactionType}">Interaction Type</td>
                     <td>
                         <form th:action="@{/delete-interaction/{id}(id=${interaction.id})}" method="post">
-                            <button type="submit" class="button buttonSmall">Delete</button>
+                            <button type="submit" class="button buttonSmall" th:text="#{delete}">Delete</button>
                         </form>
                     </td>
                 </tr>

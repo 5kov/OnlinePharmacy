@@ -6,21 +6,24 @@
     <header th:replace="fragments/commons::header"></header>
     <div class="section-1">
         <article>
-            <h1>About the
-                PharmEase
-                Online Pharmacy
-            </h1>
-            <p>PharmEase, a pioneering online pharmacy, revolutionizes medication access by combining healthcare and technology. With a vast catalog of prescription drugs, over-the-counter medications, and health supplements, customers can easily upload prescriptions for verification by licensed pharmacists. The platform provides detailed product information and an AI-powered chatbot for 24/7 assistance, ensuring informed decisions.</p>
-            <p>PharmEase offers swift, discreet delivery, subscription options, automatic refills, and reminders, making chronic condition management easier. With stringent data protection and a userEntity-friendly interface, PharmEase simplifies medication management and fosters trust in digital healthcare, setting a new standard for online pharmacies.</p>
+            <h1 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">About the PharmEase Online Pharmacy</h1>
+            <h1 th:class="__${#locale}__=='en_US' ? 'display' : ''">За Онлайн Аптека PharmEase</h1>
+            <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">PharmEase, a pioneering online pharmacy, revolutionizes medication access by combining healthcare and technology. With a vast catalog of prescription drugs, over-the-counter medications, and health supplements, customers can easily upload prescriptions for verification by licensed pharmacists. The platform provides detailed product information and an AI-powered chatbot for 24/7 assistance, ensuring informed decisions.</p>
+            <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">PharmEase offers swift, discreet delivery, subscription options, automatic refills, and reminders, making chronic condition management easier. With stringent data protection and a userEntity-friendly interface, PharmEase simplifies medication management and fosters trust in digital healthcare, setting a new standard for online pharmacies.</p>
+
+            <p th:class="__${#locale}__=='en_US' ? 'display' : ''">PharmEase, пионер в онлайн аптеките, революционизира достъпа до лекарства, като комбинира здравеопазването и технологиите. С огромен каталог от рецептурни лекарства, лекарства без рецепта и здравни добавки, клиентите могат лесно да качват рецепти за проверка от лицензирани фармацевти. Платформата предоставя подробна информация за продуктите и AI-чатбот за денонощна помощ, осигурявайки информирани решения.</p>
+            <p th:class="__${#locale}__=='en_US' ? 'display' : ''">PharmEase предлага бърза и дискретна доставка, опции за абонамент, автоматични презареждания и напомняния, което улеснява управлението на хронични заболявания. Със строга защита на данните и потребителски интерфейс, PharmEase опростява управлението на медикаменти и насърчава доверието в дигиталното здравеопазване, поставяйки нов стандарт за онлайн аптеките.</p>
+
 
         </article>
     </div>
     <div class="section-2">
         <article>
-            <h2>Business Aims</h2>
+            <h2 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Business Aims</h2>
+            <h2 th:class="__${#locale}__=='en_US' ? 'display' : ''">Цели на бизнеса</h2>
             <div id="aims">
-                <p>PharmEase aims to revolutionize healthcare access by providing a convenient, reliable, and secure online pharmacy platform. Their mission is to simplify medication management through an extensive catalog of prescription and over-the-counter drugs, detailed product information, and 24/7 AI-powered assistance. Committed to enhancing customer experience, PharmEase ensures swift, discreet delivery and offers subscription options, automatic refills, and reminders for seamless chronic condition management. Upholding stringent data protection and fostering trust in digital healthcare, PharmEase strives to set a new standard for online pharmacies, making quality healthcare accessible to all.</p>
-                <p>PharmEase aims to transform the landscape of healthcare access by creating a seamless, reliable, and secure online pharmacy experience. The company is dedicated to addressing the needs of modern consumers who seek convenience and efficiency in managing their health. By offering an extensive catalog of prescription medications, over-the-counter drugs, and health supplements, PharmEase ensures that customers have a comprehensive selection of products at their fingertips.
+                <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">PharmEase aims to revolutionize healthcare access by providing a convenient, reliable, and secure online pharmacy platform. Their mission is to simplify medication management through an extensive catalog of prescription and over-the-counter drugs, detailed product information, and 24/7 AI-powered assistance. Committed to enhancing customer experience, PharmEase ensures swift, discreet delivery and offers subscription options, automatic refills, and reminders for seamless chronic condition management. Upholding stringent data protection and fostering trust in digital healthcare, PharmEase strives to set a new standard for online pharmacies, making quality healthcare accessible to all.</p>
+                <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">PharmEase aims to transform the landscape of healthcare access by creating a seamless, reliable, and secure online pharmacy experience. The company is dedicated to addressing the needs of modern consumers who seek convenience and efficiency in managing their health. By offering an extensive catalog of prescription medications, over-the-counter drugs, and health supplements, PharmEase ensures that customers have a comprehensive selection of products at their fingertips.
 
                     A key aim of PharmEase is to empower userEntities with detailed product information, including dosage guidelines, potential side effects, and transparent pricing. This empowers customers to make informed decisions about their healthcare. To further enhance this experience, PharmEase integrates an AI-powered chatbot available 24/7, providing instant assistance and answering medical queries, thereby ensuring userEntities receive expert guidance whenever needed.
 
@@ -29,9 +32,22 @@
                     Data protection and userEntity privacy are paramount to PharmEase, with stringent measures in place to safeguard customer information. The userEntity-friendly interface is designed to make navigation and purchasing effortless, fostering a sense of trust and reliability. By combining advanced technology with expert healthcare services, PharmEase aims to set a new standard for online pharmacies.
 
                     Ultimately, PharmEase strives to make quality healthcare accessible to all, irrespective of geographic location or mobility constraints. By bridging the gap between traditional pharmacy services and digital innovation, PharmEase is not just an online pharmacy but a comprehensive healthcare partner dedicated to enhancing the overall well-being of its customers.</p>
+
+                <p th:class="__${#locale}__=='en_US' ? 'display' : ''">PharmEase се стреми да революционизира достъпа до здравеопазване, като предоставя удобна, надеждна и сигурна онлайн платформа за аптека. Тяхната мисия е да опростят управлението на медикаменти чрез обширен каталог от рецептурни и лекарства без рецепта, подробна информация за продуктите и денонощна помощ, захранвана от изкуствен интелект. Посветени на подобряване на клиентското изживяване, PharmEase осигурява бърза и дискретна доставка и предлага опции за абонамент, автоматични презареждания и напомняния за безпроблемно управление на хронични състояния. Поддържайки строга защита на данните и насърчавайки доверието в дигиталното здравеопазване, PharmEase се стреми да постави нов стандарт за онлайн аптеките, правейки качественото здравеопазване достъпно за всички.</p>
+
+                <p th:class="__${#locale}__=='en_US' ? 'display' : ''">PharmEase се стреми да трансформира пейзажа на достъпа до здравеопазване, като създава безпроблемно, надеждно и сигурно онлайн аптечно изживяване. Компанията е посветена на задоволяването на нуждите на съвременните потребители, които търсят удобство и ефективност в управлението на здравето си. Като предлага обширен каталог от рецептурни лекарства, лекарства без рецепта и здравни добавки, PharmEase осигурява, че клиентите имат на разположение широк избор от продукти.
+
+                    Една от основните цели на PharmEase е да даде възможност на потребителите с подробна информация за продуктите, включително указания за дозировката, възможни странични ефекти и прозрачни цени. Това позволява на клиентите да вземат информирани решения за здравето си. За да подобри още повече това изживяване, PharmEase интегрира чатбот, захранван от изкуствен интелект, който е на разположение денонощно, предоставяйки незабавна помощ и отговаряйки на медицински въпроси, като по този начин осигурява на потребителите експертни съвети винаги, когато е необходимо.
+
+                    PharmEase е ангажирана с предоставянето на бързи и дискретни услуги за доставка, осигурявайки, че медикаментите достигат до клиентите бързо и сигурно. Компанията признава значението на непрекъснатостта в здравеопазването, особено за тези, които управляват хронични състояния. В тази връзка, PharmEase предлага опции за абонамент, автоматични презареждания и навременни напомняния, опростявайки управлението на дългосрочните здравни нужди.
+
+                    Защита на данните и поверителност на потребителите са от съществено значение за PharmEase, като са въведени строги мерки за защита на информацията на клиентите. Потребителският интерфейс е проектиран да направи навигацията и покупката лесни, насърчавайки усещане за доверие и надеждност. Като комбинира авангардни технологии с експертни здравни услуги, PharmEase се стреми да постави нов стандарт за онлайн аптеките.
+
+                    В крайна сметка, PharmEase се стреми да направи качественото здравеопазване достъпно за всички, независимо от географското местоположение или ограниченията в подвижността. Като преодолява разликата между традиционните аптечни услуги и дигиталните иновации, PharmEase не е просто онлайн аптека, а цялостен здравен партньор, посветен на подобряването на общото благосъстояние на своите клиенти.</p>
+
             </div>
 
-            <li><a onclick="myFunction()" id="show-more" class="button-show-more">More information</a></li>
+            <li><a onclick="myFunction()" id="show-more" class="button-show-more" th:text="#{more_information}">More information</a></li>
             <script>
                 let content = document.getElementById("aims");
                 let button = document.getElementById("show-more");
@@ -49,10 +65,11 @@
             </script>
         </article>
         <article>
-            <h2>Objectives</h2>
+            <h2 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Objectives</h2>
+            <h2 th:class="__${#locale}__=='en_US' ? 'display' : ''">Цели</h2>
             <div id="objectives">
-                <p>PharmEase's objectives are to provide convenient and accessible healthcare solutions through a comprehensive online pharmacy platform. The company aims to offer a wide range of prescription medications, over-the-counter drugs, and health supplements with detailed information to empower informed decisions. By ensuring swift, discreet delivery and incorporating features like 24/7 AI-powered assistance, subscription options, and automatic refills, PharmEase strives to enhance customer experience and simplify medication management. Additionally, PharmEase is committed to stringent data protection and fostering trust, setting a new standard in digital healthcare accessibility.</p>
-                <p>PharmEase's objectives center on transforming healthcare accessibility and convenience through a robust online pharmacy platform. One primary objective is to offer a comprehensive range of prescription medications, over-the-counter drugs, and health supplements, ensuring that customers have a vast selection to meet their diverse healthcare needs. By providing detailed product descriptions, dosage guidelines, and transparent information about potential side effects, PharmEase empowers customers to make well-informed decisions regarding their health.
+                <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">PharmEase's objectives are to provide convenient and accessible healthcare solutions through a comprehensive online pharmacy platform. The company aims to offer a wide range of prescription medications, over-the-counter drugs, and health supplements with detailed information to empower informed decisions. By ensuring swift, discreet delivery and incorporating features like 24/7 AI-powered assistance, subscription options, and automatic refills, PharmEase strives to enhance customer experience and simplify medication management. Additionally, PharmEase is committed to stringent data protection and fostering trust, setting a new standard in digital healthcare accessibility.</p>
+                <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">PharmEase's objectives center on transforming healthcare accessibility and convenience through a robust online pharmacy platform. One primary objective is to offer a comprehensive range of prescription medications, over-the-counter drugs, and health supplements, ensuring that customers have a vast selection to meet their diverse healthcare needs. By providing detailed product descriptions, dosage guidelines, and transparent information about potential side effects, PharmEase empowers customers to make well-informed decisions regarding their health.
 
                     Another crucial objective is to enhance the overall customer experience through innovative technology and services. PharmEase incorporates an AI-powered chatbot available 24/7 to offer instant assistance and answer medical queries, ensuring expert guidance is always within reach. The platform is designed to be userEntity-friendly, making it easy for customers to navigate, upload prescriptions, and complete purchases efficiently.
 
@@ -60,9 +77,21 @@
 
                     Data protection and userEntity privacy are paramount objectives for PharmEase. The company employs stringent security measures to safeguard customer information, fostering a sense of trust and reliability. By maintaining high standards of data protection, PharmEase aims to reassure customers that their personal and medical information is secure.
 
-                    Additionally, PharmEase strives to bridge the gap between traditional pharmacy services and the digital age, making quality healthcare accessible to all, regardless of geographic location or mobility constraints. By continuously innovating and adapting to the evolving needs of its customers, PharmEase aims to set a new standard in the online pharmacy industry, becoming a trusted partner in healthcare management and enhancing the overall well-being of its userEntities.
+                    Additionally, PharmEase strives to bridge the gap between traditional pharmacy services and the digital age, making quality healthcare accessible to all, regardless of geographic location or mobility constraints. By continuously innovating and adapting to the evolving needs of its customers, PharmEase aims to set a new standard in the online pharmacy industry, becoming a trusted partner in healthcare management and enhancing the overall well-being of its users.
 
                 </p>
+                <p th:class="__${#locale}__=='en_US' ? 'display' : ''">Целите на PharmEase са да предоставят удобни и достъпни решения за здравеопазване чрез цялостна онлайн платформа за аптеки. Компанията се стреми да предлага широк асортимент от рецептурни лекарства, лекарства без рецепта и здравни добавки с подробна информация, за да подпомага информираните решения. Като осигурява бърза и дискретна доставка и включва функции като денонощна помощ с изкуствен интелект, опции за абонамент и автоматични презареждания, PharmEase се стреми да подобри клиентското изживяване и да опрости управлението на медикаменти. Допълнително, PharmEase е ангажирана със строга защита на данните и насърчаване на доверието, като поставя нов стандарт в достъпа до дигитално здравеопазване.</p>
+
+                <p th:class="__${#locale}__=='en_US' ? 'display' : ''">Целите на PharmEase се съсредоточават върху трансформирането на достъпа до здравеопазване и удобството чрез надеждна онлайн платформа за аптеки. Една от основните цели е да предложи цялостен асортимент от рецептурни лекарства, лекарства без рецепта и здравни добавки, осигурявайки на клиентите богат избор за удовлетворяване на техните разнообразни здравни нужди. Като предоставя подробни описания на продуктите, указания за дозировката и прозрачна информация за възможните странични ефекти, PharmEase дава възможност на клиентите да вземат информирани решения относно здравето си.
+
+                    Друга ключова цел е да подобри цялостното клиентско изживяване чрез иновативни технологии и услуги. PharmEase интегрира чатбот с изкуствен интелект, достъпен денонощно, за да предложи незабавна помощ и да отговаря на медицински въпроси, осигурявайки експертни съвети винаги, когато е необходимо. Платформата е проектирана да бъде удобна за потребителите, улеснявайки навигацията, качването на рецепти и завършването на покупките ефективно.
+
+                    PharmEase е посветена на осигуряването на бърза и дискретна доставка на медикаменти, признавайки значението на навременния достъп до здравни продукти. За да подкрепи лицата, управляващи хронични състояния, компанията предлага абонаментни услуги, автоматични презареждания и напомняния, опростявайки процеса на поддържане на дългосрочни планове за лечение и намалявайки риска от пропуснати дози.
+
+                    Защитата на данните и поверителността на потребителите са основни цели за PharmEase. Компанията прилага строги мерки за сигурност, за да защити информацията на клиентите, насърчавайки усещане за доверие и надеждност. Като поддържа високи стандарти за защита на данните, PharmEase се стреми да увери клиентите, че личната и медицинската им информация са защитени.
+
+                    Освен това, PharmEase се стреми да преодолее разликата между традиционните аптечни услуги и дигиталната епоха, правейки качественото здравеопазване достъпно за всички, независимо от географското местоположение или ограниченията в подвижността. Чрез непрекъснато иновации и адаптиране към развиващите се нужди на своите клиенти, PharmEase се стреми да постави нов стандарт в индустрията на онлайн аптеките, превръщайки се в надежден партньор в управлението на здравето и подобряване на общото благосъстояние на своите потребители.</p>
+
             </div>
             <div>
                 <li><a onclick="myFunction2()" id="show-more2" class="button-show-more">More information</a></li>
@@ -86,9 +115,12 @@
     </div>
     <div class="section-3">
         <article>
-            <h2>Sponsors</h2>
-            <p>PharmEase is proudly supported by leading companies dedicated to advancing healthcare accessibility. These sponsors include top pharmaceutical firms and health tech innovators who share a commitment to digital healthcare solutions. Their investment and expertise enable PharmEase to continuously innovate and expand its services while maintaining high standards of quality and security.</p>
+            <h2 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Sponsors</h2>
+            <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">PharmEase is proudly supported by leading companies dedicated to advancing healthcare accessibility. These sponsors include top pharmaceutical firms and health tech innovators who share a commitment to digital healthcare solutions. Their investment and expertise enable PharmEase to continuously innovate and expand its services while maintaining high standards of quality and security.</p>
+            <h2 th:class="__${#locale}__=='en_US' ? 'display' : ''">Спонсори</h2>
+            <p th:class="__${#locale}__=='en_US' ? 'display' : ''">PharmEase се гордее, че е подкрепена от водещи компании, посветени на подобряване на достъпа до здравеопазване. Тези спонсори включват водещи фармацевтични фирми и иноватори в здравните технологии, които споделят ангажимента към дигиталните здравни решения. Техните инвестиции и експертни знания позволяват на PharmEase да продължава да иновира и разширява своите услуги, като същевременно поддържа високи стандарти за качество и сигурност.</p>
         </article>
+
         <article>
             <div class="container-all">
                 <div class="image-container">
@@ -116,8 +148,11 @@
             </div>
         </article>
         <article>
-            <h2>Partners</h2>
-            <p>PharmEase collaborates with a diverse network of strategic partners to enhance healthcare accessibility and innovation. These partnerships include leading pharmaceutical manufacturers, technology providers specializing in health solutions, healthcare providers, and regulatory agencies. By leveraging these alliances, PharmEase ensures a robust supply chain, cutting-edge technology integration, and adherence to regulatory standards. Together with its partners, PharmEase strives to expand its service offerings, improve customer experiences, and advance the future of digital healthcare.</p>
+            <h2 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Partners</h2>
+            <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">PharmEase collaborates with a diverse network of strategic partners to enhance healthcare accessibility and innovation. These partnerships include leading pharmaceutical manufacturers, technology providers specializing in health solutions, healthcare providers, and regulatory agencies. By leveraging these alliances, PharmEase ensures a robust supply chain, cutting-edge technology integration, and adherence to regulatory standards. Together with its partners, PharmEase strives to expand its service offerings, improve customer experiences, and advance the future of digital healthcare.</p>
+            <h2 th:class="__${#locale}__=='en_US' ? 'display' : ''">Партньори</h2>
+            <p th:class="__${#locale}__=='en_US' ? 'display' : ''">PharmEase си сътрудничи с разнообразна мрежа от стратегически партньори за подобряване на достъпа до здравеопазване и иновациите. Тези партньорства включват водещи производители на лекарства, доставчици на технологии, специализирани в здравни решения, здравни доставчици и регулаторни агенции. Чрез използване на тези съюзи, PharmEase осигурява надеждна верига на доставки, интеграция на съвременни технологии и съответствие с регулаторните стандарти. Заедно със своите партньори, PharmEase се стреми да разширява своите услуги, да подобрява клиентските изживявания и да напредва бъдещето на дигиталното здравеопазване.</p>
+
         </article>
         <article>
             <div class="container-all">

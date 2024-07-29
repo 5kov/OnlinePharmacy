@@ -6,56 +6,32 @@
     <header th:replace="fragments/commons::header"></header>
 
     <div class="form printable">
-        <h1>Administrator Page</h1>
-        <h3>Order Details</h3>
-
-<!--        <div th:each="order : ${orders}">-->
-<!--            <h2>Order Details</h2>-->
-<!--            <p><strong>Order ID:</strong> <span th:text="${order.id}"></span></p>-->
-<!--            <p><strong>Username:</strong> <span th:text="${order.userEntity.username}"></span></p>-->
-<!--            <p><strong>Phone Number:</strong> <span th:text="${order.userEntity.phoneNumber}"></span></p>-->
-<!--            <p><strong>Address:</strong> <span th:text="${order.userEntity.street}"></span>, <span th:text="${order.userEntity.city}"></span>, <span th:text="${order.userEntity.postalCode}"></span></p>-->
-<!--            <p><strong>Email:</strong> <span th:text="${order.userEntity.email}"></span></p>-->
-
-<!--            <h3>Items:</h3>-->
-<!--            <ul>-->
-<!--                <li th:each="item : ${order.orderItems}">-->
-<!--                    <span th:text="${item.drug.getMedicineNameEn()}">Medicine</span>,-->
-<!--                    <span th:text="${item.quantity}">Quantity</span>,-->
-<!--                    <span th:text="${'$' + item.itemPrice}">Price</span>-->
-<!--            </ul>-->
-
-<!--            <button onclick="window.print()">Print Order</button>-->
-
-<!--            <div>-->
-<!--                <a th:if="${orders.hasPrevious()}" th:href="@{/orders(page=${orders.number - 1})}">Previous Order</a>-->
-<!--                <a th:if="${orders.hasNext()}" th:href="@{/orders(page=${orders.number + 1})}">Next Order</a>-->
-<!--            </div>-->
-<!--        </div>-->
+        <h1 th:text="#{administrator_page}">Administrator Page</h1>
+        <h3 th:text="#{order_details}">Order Details</h3>
 
         <div th:each="order : ${orders}">
-            <p><strong>Order ID:</strong> <span th:text="${order.id}"></span></p>
-            <p><strong>Order Date:</strong> <span th:text="${order.orderDate}"></span></p>
-            <p><strong>Username:</strong> <span th:text="${order.user.username}"></span></p>
-            <p><strong>First Name:</strong> <span th:text="${order.user.firstName}"></span></p>
-            <p><strong>Last Name:</strong> <span th:text="${order.user.lastName}"></span></p>
-            <p><strong>Phone Number:</strong> <span th:text="${order.user.phoneNumber}"></span></p>
-            <p><strong>Address:</strong> <span th:text="${order.user.street}"></span>, <span th:text="${order.user.city}"></span>, <span th:text="${order.user.postalCode}"></span></p>
-            <p><strong>Email:</strong> <span th:text="${order.user.email}"></span></p>
+            <p><strong th:text="#{order_id}">Order ID</strong><span><strong>: </strong></span> <span th:text="${order.id}"></span></p>
+            <p><strong th:text="#{order_date}">Order Date</strong><span><strong>: </strong></span> <span th:text="${order.orderDate}"></span></p>
+            <p><strong th:text="#{username}">Username</strong><span><strong>: </strong></span> <span th:text="${order.user.username}"></span></p>
+            <p><strong th:text="#{first_name}">First Name</strong><span><strong>: </strong></span> <span th:text="${order.user.firstName}"></span></p>
+            <p><strong th:text="#{last_name}">Last Name</strong><span><strong>: </strong></span> <span th:text="${order.user.lastName}"></span></p>
+            <p><strong th:text="#{phone_number}">Phone Number</strong><span><strong>: </strong></span> <span th:text="${order.user.phoneNumber}"></span></p>
+            <p><strong th:text="#{address}">Address</strong><span><strong>: </strong></span> <span th:text="${order.user.street}"></span>, <span th:text="${order.user.city}"></span>, <span th:text="${order.user.postalCode}"></span></p>
+            <p><strong th:text="#{email}">Email</strong><span><strong>: </strong></span> <span th:text="${order.user.email}"></span></p>
 
-            <h3>Items:</h3>
+            <h3 th:text="#{items}">Items<span><strong>: </strong></span></h3>
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Medicine Name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total Price</th>
+                    <th th:text="#{medicine_name}">Medicine Name</th>
+                    <th th:text="#{quantity}">Quantity</th>
+                    <th th:text="#{price}">Price</th>
+                    <th th:text="#{total_price}">Total Price</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="item : ${order.orderItems}">
-                    <td th:text="${item.drug.medicineNameEn}">Medicine Name</td>
+                    <td th:text="__${#locale}__=='bg_BG' ? ${item.drug.medicineNameBg} : ${item.drug.medicineNameEn}">Medicine Name</td>
                     <td th:text="${item.quantity}">Quantity</td>
                     <td th:text="${#numbers.formatDecimal(item.itemPrice, 1, 2)}">Price</td>
                     <td th:text="${#numbers.formatDecimal(item.itemPrice * item.quantity, 1, 2)}">Total Price</td>
@@ -64,18 +40,18 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td colspan="3">Total Price of Order:</td>
+                    <td colspan="3" th:text="#{total_price}">Total Price of Order:</td>
                     <td th:text="${#numbers.formatDecimal(order.getTotalPrice(), 1, 2)}"></td>
 
                 </tr>
                 </tfoot>
             </table>
 
-            <button onclick="window.print()" class="button">Print Order</button>
+            <button onclick="window.print()" class="button" th:text="#{print_order}">Print Order</button>
 
             <div>
-                <a th:if="${orders.hasPrevious()}" th:href="@{/orders(page=${orders.number - 1})}">Previous Order</a>
-                <a th:if="${orders.hasNext()}" th:href="@{/orders(page=${orders.number + 1})}">Next Order</a>
+                <a th:if="${orders.hasPrevious()}" th:href="@{/orders(page=${orders.number - 1})}" th:text="#{previous_order}">Previous Order</a>
+                <a th:if="${orders.hasNext()}" th:href="@{/orders(page=${orders.number + 1})}" th:text="#{next_order}">Next Order</a>
             </div>
         </div>
 

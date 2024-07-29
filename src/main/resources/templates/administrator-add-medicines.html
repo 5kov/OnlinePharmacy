@@ -1,49 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head th:replace="fragments/commons::head"></head>
-<body>
+<body onload = "clear()">
 <div class="container">
     <header th:replace="fragments/commons::header"></header>
 
     <div class="form">
-        <h1>Administrator Page</h1>
-        <h3>Add new medicine</h3>
+        <h1 th:text="#{administrator_page}">Administrator Page</h1>
+        <h3 th:text="#{add_new_medicine}">Add new medicine</h3>
         <div class="input-container">
             <form th:action="@{/administrator-add-medicines}" th:object="${medicine}" method="post">
                 <div>
-                    <input type="text" class="input-field" th:field="*{medicineNameEn}" placeholder="Medicine Name (English)" />
+                    <input type="text" class="input-field" th:field="*{medicineNameEn}" th:placeholder="#{medicine_name_english}" />
                     <span class="centered-text error-message" th:if="${#fields.hasErrors('medicineNameEn')}" th:errors="*{medicineNameEn}"></span>
                 </div>
                 <div>
-                    <input type="text" class="input-field" th:field="*{medicineNameBg}" placeholder="Medicine Name (Bulgarian)" />
+                    <input type="text" class="input-field" th:field="*{medicineNameBg}" th:placeholder="#{medicine_name_bulgarian}" />
                     <span class="centered-text error-message" th:if="${#fields.hasErrors('medicineNameBg')}" th:errors="*{medicineNameBg}"></span>
                 </div>
                 <div>
-                    <input type="number" class="input-field" step="0.01" th:field="*{price}" placeholder="Price" />
+                    <input type="number" class="input-field" step="0.01" id="price" th:field="*{price}" th:placeholder="#{price}" />
                     <span class="centered-text error-message" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
                 </div>
+                <script>
+                    function clear () {
+                        var priceInput = document.getElementById('price');
+                        priceInput.value = ''
+                    }
+                </script>
                 <div>
-                    <textarea name="description en" class="description-field" th:field="*{descriptionEn}"  placeholder="Description (English)"></textarea>
+                    <textarea name="description en" class="description-field" th:field="*{descriptionEn}"  th:placeholder="#{description_english}"></textarea>
 <!--                    <input type="text" class="input-field" th:field="*{descriptionEn}" placeholder="Description (English)" />-->
                     <span class="centered-text error-message" th:if="${#fields.hasErrors('descriptionEn')}" th:errors="*{descriptionEn}"></span>
                 </div>
                 <div>
-                    <textarea name="description bg" class="description-field" th:field="*{descriptionBg}" placeholder="Description (Bulgarian)"></textarea>
+                    <textarea name="description bg" class="description-field" th:field="*{descriptionBg}" th:placeholder="#{description_bulgarian}"></textarea>
 <!--                    <input type="text" class="input-field" th:field="*{descriptionBg}" placeholder="Description (Bulgarian)" />-->
                     <span class="centered-text error-message" th:if="${#fields.hasErrors('descriptionBg')}" th:errors="*{descriptionBg}"></span>
                 </div>
                 <div>
-                    <input type="text" class="input-field" th:field="*{imageUrl}" placeholder="Image URL" />
+                    <input type="text" class="input-field" th:field="*{imageUrl}" th:placeholder="#{image_url}" />
                     <span class="centered-text error-message" th:if="${#fields.hasErrors('imageUrl')}" th:errors="*{imageUrl}"></span>
                 </div>
                 <div>
                     <select class="input-field" th:field="*{activeIngredientId}">
-                        <option value="">-- Select Active Ingredient --</option>
+                        <option value="" th:text="#{select_active_ingredient}">-- Select Active Ingredient --</option>
                         <option th:each="ingredient : ${ingredients}" th:value="${ingredient.id}" th:text="${ingredient.ingredientName}"></option>
                     </select>
                     <span class="centered-text error-message" th:if="${#fields.hasErrors('activeIngredientId')}" th:errors="*{activeIngredientId}"></span>
                 </div>
-                <button class="button" type="submit">Submit</button>
+                <button class="button" type="submit" th:text="#{submit}">Submit</button>
             </form>
         </div>
     </div>

@@ -41,7 +41,7 @@ public class AdministratorController {
 
     @GetMapping("/administrator-manage-users")
     public String showUserManagement(Model model, @RequestParam(required = false) String search) {
-        List<UserEntity> users = manageUserService.searchUsers(search == null ? "" : search);
+        List<UserEntity> users = manageUserService.searchUsers(search == null ? "" : search.trim());
         model.addAttribute("users", users);
         return "administrator-manage-users";
     }

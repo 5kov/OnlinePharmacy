@@ -155,7 +155,7 @@ public class InitializeData implements CommandLineRunner {
                 medicine.setDescriptionBg(value5);
                 medicine.setImageUrl("pack_mockup.gif");
                 medicine.setFavourite(false);
-                medicine.setVotes(random.nextInt(100)); // votes from 0 to 99
+                medicine.setVotes(0); // votes from 0 to 99
 
                 long ingredientId = Long.valueOf(i + 1);
                 ActiveIngredient ingredient = activeIngredientRepository.findById(ingredientId).orElse(null);

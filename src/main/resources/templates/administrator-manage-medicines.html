@@ -6,45 +6,45 @@
     <header th:replace="fragments/commons::header"></header>
 
     <div class="form">
-        <h1>Administrator Page</h1>
-        <h3>Manage medicines</h3>
+        <h1 th:text="#{administrator_page}">Administrator Page</h1>
+        <h3 th:text="#{manage_medicine}">Manage medicines</h3>
         <div class="input-container">
-            <form th:action="@{/administrator-manage-medicines}" method="get">
-                <input type="text" class="input-field" name="search" placeholder="Search by Name"/>
-                <button type="submit" class="button">Search</button>
+            <form class="medicines-list" th:action="@{/administrator-manage-medicines}" method="get">
+                <input type="text" class="input-field" name="search"  th:placeholder="#{search_by_name}" placeholder="Search by Name"/>
+                <button type="submit" class="button" th:text="#{search}">Search</button>
             </form>
 
-            <div th:each="medicine : ${medicines}">
+            <div class="medicines-list" th:each="medicine : ${medicines}">
                 <p th:text="${medicine.medicineNameEn}"></p>
-                <button th:attr="onclick='javascript:editMedicine(' + ${medicine.id} + ');'" class="button">Edit</button>
+                <button th:attr="onclick='javascript:editMedicine(' + ${medicine.id} + ');'"  th:text="#{edit}" class="button">Edit</button>
                 <form th:action="@{/delete/{id}(id=${medicine.id})}" method="post">
-                    <button type="submit" class="button">Delete</button>
+                    <button type="submit" class="button"  th:text="#{delete}">Delete</button>
                 </form>
             </div>
 
             <!-- Edit Form -->
-            <form id="editForm" th:action="@{/save}" method="post" style="display:none;">
+            <form id="editForm" th:action="@{/save}" th:method="post" style="display:none;">
                 <input type="hidden" id="id" name="id"/>
-                <label for="medicineNameEn">Medicine Name (English):</label>
-                <input type="text" class="input-field" id="medicineNameEn" name="medicineNameEn" placeholder="Medicine Name (English)"/>
-                <label for="medicineNameBg">Medicine Name (Bulgarian):</label>
-                <input type="text" class="input-field" id="medicineNameBg" name="medicineNameBg" placeholder="Medicine Name (Bulgarian)"/>
-                <label for="price">Price:</label>
-                <input type="number" class="input-field" step="0.01" id="price" name="price" placeholder="Price"/>
-                <label for="descriptionEn">Description (English):</label>
-                <textarea class="description-field" id="descriptionEn" name="descriptionEn" placeholder="Description (English)"></textarea>
+                <label for="medicineNameEn" th:text="#{medicine_name_english}">Medicine Name (English):</label>
+                <input type="text" class="input-field" id="medicineNameEn" name="medicineNameEn" th:placeholder="#{medicine_name_english}"/>
+                <label for="medicineNameBg" th:text="#{medicine_name_bulgarian}">Medicine Name (Bulgarian):</label>
+                <input type="text" class="input-field" id="medicineNameBg" name="medicineNameBg" th:placeholder="#{medicine_name_bulgarian}"/>
+                <label for="price" th:text="#{price}">Price:</label>
+                <input type="number" class="input-field" step="0.01" id="price" name="price" th:placeholder="#{price}"/>
+                <label for="descriptionEn" th:text="#{description_english}">Description (English):</label>
+                <textarea class="description-field" id="descriptionEn" name="descriptionEn" th:placeholder="#{description_english}"></textarea>
 <!--                <input type="text" class="input-field" id="descriptionEn" name="descriptionEn" placeholder="Description (English)"/>-->
-                <label for="descriptionBg">Description (Bulgarian):</label>
-                <textarea class="description-field" id="descriptionBg" name="descriptionBg" placeholder="Description (Bulgarian)"></textarea>
+                <label for="descriptionBg" th:text="#{description_bulgarian}">Description (Bulgarian):</label>
+                <textarea class="description-field" id="descriptionBg" name="descriptionBg" th:placeholder="#{description_bulgarian}"></textarea>
 <!--                <input type="text" class="input-field" id="descriptionBg" name="descriptionBg" placeholder="Description (Bulgarian)"/>-->
-                <label for="imageUrl">Image URL:</label>
-                <input type="text" class="input-field" id="imageUrl" name="imageUrl" placeholder="Image URL"/>
-                <label for="activeIngredientId">Active Ingredient:</label>
+                <label for="imageUrl" th:text="#{image_url}">Image URL:</label>
+                <input type="text" class="input-field" id="imageUrl" name="imageUrl" th:placeholder="#{image_url}"/>
+                <label for="activeIngredientId" th:text="#{select_active_ingredient}">Active Ingredient:</label>
                 <select id="activeIngredientId" class="input-field" name="activeIngredientId">
-                    <option value="">-- Select Active Ingredient --</option>
+                    <option value="" th:text="#{select_active_ingredient}">-- Select Active Ingredient --</option>
                     <option th:each="ingredient : ${ingredients}" th:value="${ingredient.id}" th:text="${ingredient.ingredientName}"></option>
                 </select>
-                <button type="submit" class="button">Save Changes</button>
+                <button type="submit" class="button" th:text="#{save_changes}" >Save Changes</button>
             </form>
 
             <script>
@@ -56,7 +56,12 @@
                         })
                         .then(data => {
                             const form = document.getElementById('editForm');
+                            var list = document.getElementsByClassName('medicines-list');
                             form.style.display = 'block';
+                            for(var index=0;index < list.length;index++){
+                                list[index].style.display= 'none';
+                            }
+
                             document.getElementById('id').value = data.id;
                             document.getElementById('medicineNameEn').value = data.medicineNameEn;
                             document.getElementById('medicineNameBg').value = data.medicineNameBg;

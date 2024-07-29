@@ -6,67 +6,67 @@
     <header th:replace="fragments/commons::header"></header>
 
     <div class="form">
-        <h1>Administrator Page</h1>
-        <h3>User settings</h3>
+        <h1 th:text="#{administrator_page}">Administrator Page</h1>
+        <h3 th:text="#{user_settings}">User settings</h3>
         <div class="input-container">
 
             <form th:action="@{/user-settings}" th:object="${updateUserDTO}" method="post">
                 <div>
-                     <input type="text" id="id" name="id" th:field="*{id}" class="input-field"/>
+                     <input type="hidden" id="id" name="id" th:field="*{id}" class="input-field"/>
                 </div>
                 <div>
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" th:field="*{username}" class="input-field" />
+                    <label for="username" th:text="#{username}">Username:</label>
+                    <input type="text" id="username" th:field="*{username}" class="input-field" th:placeholder="#{username}"/>
                     <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></span>
                     <div th:if="${usernameExists}" class="error-message">
                         <div>Username already exist</div>
                     </div>
                 </div>
                 <div>
-                    <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName" th:field="*{firstName}" class="input-field" />
+                    <label for="firstName" th:text="#{first_name}">First Name:</label>
+                    <input type="text" id="firstName" th:field="*{firstName}" class="input-field" th:placeholder="#{first_name}"/>
                     <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-message"></span>
                 </div>
                 <div>
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" id="lastName" th:field="*{lastName}" class="input-field" />
+                    <label for="lastName" th:text="#{last_name}">Last Name:</label>
+                    <input type="text" id="lastName" th:field="*{lastName}" class="input-field" th:placeholder="#{last_name}"/>
                     <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-message"></span>
                 </div>
                 <div>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" th:field="*{email}" class="input-field" />
+                    <label for="email" th:text="#{email}">Email:</label>
+                    <input type="email" id="email" th:field="*{email}" class="input-field" th:placeholder="#{email}"/>
                     <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></span>
                     <div th:if="${emailExists}" class="error-message">
                         <div>Email already exist</div>
                     </div>
                 </div>
                 <div>
-                    <label for="country">Country:</label>
-                    <input type="text" id="country" th:field="*{country}" class="input-field" />
+                    <label for="country" th:text="#{country}">Country:</label>
+                    <input type="text" id="country" th:field="*{country}" class="input-field" th:placeholder="#{country}"/>
                     <span th:if="${#fields.hasErrors('country')}" th:errors="*{country}" class="error-message"></span>
                 </div>
                 <div>
-                    <label for="city">City:</label>
-                    <input type="text" id="city" th:field="*{city}" class="input-field" />
+                    <label for="city" th:text="#{city}">City:</label>
+                    <input type="text" id="city" th:field="*{city}" class="input-field" th:placeholder="#{city}"/>
                     <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="error-message"></span>
                 </div>
                 <div>
-                    <label for="street">Street:</label>
-                    <input type="text" id="street" th:field="*{street}" class="input-field" />
+                    <label for="street" th:text="#{street}">Street:</label>
+                    <input type="text" id="street" th:field="*{street}" class="input-field" th:placeholder="#{street}"/>
                     <span th:if="${#fields.hasErrors('street')}" th:errors="*{street}" class="error-message"></span>
                 </div>
                 <div>
-                    <label for="postalCode">Postal Code:</label>
-                    <input type="text" id="postalCode" th:field="*{postalCode}" class="input-field" />
+                    <label for="postalCode" th:text="#{postal_code}">Postal Code:</label>
+                    <input type="text" id="postalCode" th:field="*{postalCode}" class="input-field" th:placeholder="#{postal_code}"/>
                     <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}" class="error-message"></span>
                 </div>
                 <div>
-                    <label for="phoneNumber">Phone Number:</label>
-                    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="input-field" />
+                    <label for="phoneNumber" th:text="#{phone_number}">Phone Number:</label>
+                    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" class="input-field" th:placeholder="#{phone_number}"/>
                     <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="error-message"></span>
                 </div>
-                <a href="/change-password">Change Password</a>
-                <button type="submit" class="button">Save</button>
+                <a href="/change-password" th:text="#{change_password}">Change Password</a>
+                <button type="submit" class="button" th:text="#{save}">Save</button>
             </form>
 
 

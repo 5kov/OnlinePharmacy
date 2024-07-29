@@ -6,13 +6,13 @@
     <header th:replace="fragments/commons::header"></header>
 
     <div class="form">
-    <h1>Administrator Page</h1>
-    <h3>Manage active ingredients</h3>
+    <h1 th:text="#{administrator_page}">Administrator Page</h1>
+    <h3 th:text="#{manage_active_ingredient.message}">Manage active ingredients</h3>
 
     <div th:each="ingredient : ${ingredients}" class="ingredient-row">
         <p class="ingredient-name" th:text="${ingredient.ingredientName}">Ingredient Name</p>
         <form th:action="@{/deleteIngredient/{id}(id=${ingredient.id})}" method="post">
-            <button class="button buttonSmall" type="submit">Delete</button>
+            <button class="button buttonSmall" type="submit" th:text="#{delete}">Delete</button>
         </form>
     </div>
     </div>

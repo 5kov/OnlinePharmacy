@@ -9,11 +9,11 @@ public class MedicineDTO {
 
     private long id;
     @NotBlank(message = "The name in English must not be blank.")
-    @Size(min = 3, max = 20, message = "The name in English must be between 3 and 20 characters.")
+    @Size(min = 3, max = 120, message = "The name in English must be between 3 and 120 characters.")
     private String medicineNameEn;
 
     @NotBlank(message = "The name in Bulgarian must not be blank.")
-    @Size(min = 3, max = 20, message = "The name in Bulgarian must be between 3 and 20 characters.")
+    @Size(min = 3, max = 120, message = "The name in Bulgarian must be between 3 and 120 characters.")
     private String medicineNameBg;
 
     @Positive(message = "Price must be a positive number.")
@@ -44,19 +44,19 @@ public class MedicineDTO {
         this.id = id;
     }
 
-    public @NotBlank(message = "The name in English must not be blank.") @Size(min = 3, max = 20, message = "The name in English must be between 3 and 20 characters.") String getMedicineNameEn() {
+    public @NotBlank(message = "The name in English must not be blank.") @Size(min = 3, max = 120, message = "The name in English must be between 3 and 120 characters.") String getMedicineNameEn() {
         return medicineNameEn;
     }
 
-    public void setMedicineNameEn(@NotBlank(message = "The name in English must not be blank.") @Size(min = 3, max = 20, message = "The name in English must be between 3 and 20 characters.") String medicineNameEn) {
+    public void setMedicineNameEn(@NotBlank(message = "The name in English must not be blank.") @Size(min = 3, max = 120, message = "The name in English must be between 3 and 120 characters.") String medicineNameEn) {
         this.medicineNameEn = medicineNameEn;
     }
 
-    public @NotBlank(message = "The name in Bulgarian must not be blank.") @Size(min = 3, max = 20, message = "The name in Bulgarian must be between 3 and 20 characters.") String getMedicineNameBg() {
+    public @NotBlank(message = "The name in Bulgarian must not be blank.") @Size(min = 3, max = 120, message = "The name in Bulgarian must be between 3 and 120 characters.") String getMedicineNameBg() {
         return medicineNameBg;
     }
 
-    public void setMedicineNameBg(@NotBlank(message = "The name in Bulgarian must not be blank.") @Size(min = 3, max = 20, message = "The name in Bulgarian must be between 3 and 20 characters.") String medicineNameBg) {
+    public void setMedicineNameBg(@NotBlank(message = "The name in Bulgarian must not be blank.") @Size(min = 3, max = 120, message = "The name in Bulgarian must be between 3 and 120 characters.") String medicineNameBg) {
         this.medicineNameBg = medicineNameBg;
     }
 

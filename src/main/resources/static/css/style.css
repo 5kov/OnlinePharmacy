@@ -759,4 +759,8 @@ ul.my-list li {
     font-family: "PT Sans", sans-serif;
     text-transform: uppercase;
     cursor: pointer;
+    margin-right: 1em;
+}
+.display {
+    display: none!important;
 }

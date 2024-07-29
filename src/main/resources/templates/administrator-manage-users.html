@@ -4,37 +4,28 @@
 <body>
 <div class="container">
     <header th:replace="fragments/commons::header"></header>
-
     <div class="form">
-        <h1>Administrator Page</h1>
-        <h3>Manage userEntities</h3>
+        <h1 th:text="#{administrator_page}">Administrator Page</h1>
+        <h3 th:text="#{manage_users.message}">Manage users</h3>
         <div class="input-container">
             <form th:action="@{/administrator-manage-users}" method="get">
-                <input type="text" name="search" placeholder="Search users..." class="input-field">
-                <button type="submit" class="button">Search</button>
+                <input type="text" name="search" th:placeholder="#{search_users}" class="input-field">
+                <button type="submit" class="button" th:text="#{search}">Search</button>
             </form>
-
             <div th:each="user : ${users}">
-                <p th:text="'User: ' + ${user.username} + ' Role: ' + ${user.getRoles().get(0).getRole()}">Username</p>
+                <p th:text="#{user} + ' ' + ${user.username} + ' ' + #{role} + ' ' + ${user.getRoles().get(0).getRole()}">Username</p>
                 <form th:action="@{/delete-user}" method="post">
                     <input type="hidden" th:value="${user.id}" name="userId"/>
-                    <button type="submit">Delete</button>
+                    <button type="submit" th:text="#{delete}">Delete</button>
                 </form>
                 <form th:action="@{/toggle-role}" method="post">
                     <input type="hidden" th:value="${user.id}" name="userId"/>
-                    <button type="submit">Toggle Role</button>
+                    <button type="submit" th:text="#{toggle_role}">Toggle Role</button>
                 </form>
             </div>
-
             <div th:if="${error}" th:text="${error}">Error Message</div>
-
-
-
         </div>
     </div>
-
-
-
     <footer th:replace="fragments/commons::footer"></footer>
 </div>
 </body>

@@ -7,41 +7,38 @@
     <header th:replace="fragments/commons::header"></header>
 
     <div class="form">
-        <h1>Administrator Page</h1>
-        <h3>Add interaction</h3>
+        <h1 th:text="#{administrator_page}">Administrator Page</h1>
+        <h3 th:text="#{add_interaction}">Add interaction</h3>
         <div class="input-container">
 
 
             <form id="interactionForm" th:action="@{/administrator-add-interactions}" method="post">
                 <div th:if="${errorMessage}" class="error-message" th:text="${errorMessage}"></div>
                 <div>
-                    <label for="drugNameId">Drug Name:</label>
                     <select id="drugNameId" name="drugNameId" class="input-field">
-                        <option value="" disabled selected>Select Drug Name</option>
+                        <option value="" disabled selected th:text="#{select_drug_name}">Select Drug Name</option>
                         <option th:each="ingredient : ${ingredients}"
                                 th:value="${ingredient.id}"
                                 th:text="${ingredient.ingredientName}"></option>
                     </select>
                 </div>
                 <div>
-                    <label for="interactionDrugId">Interaction Drug:</label>
                     <select id="interactionDrugId" name="interactionDrugId" class="input-field">
-                        <option value="" disabled selected>Select Interaction Drug</option>
+                        <option value="" disabled selected th:text="#{select_interaction_medicine}">Select Interaction Drug</option>
                         <option th:each="ingredient : ${ingredients}"
                                 th:value="${ingredient.id}"
                                 th:text="${ingredient.ingredientName}"></option>
                     </select>
                 </div>
                 <div>
-                    <label for="interactionType">Interaction Type:</label>
                     <select id="interactionType" name="interactionType" class="input-field">
-                        <option value="" disabled selected>Select Interaction Type</option>
+                        <option value="" disabled selected th:text="#{select_interaction_type}">Select Interaction Type</option>
                         <option th:each="type : ${interactionTypes}"
                                 th:value="${type}"
                                 th:text="${type}"></option>
                     </select>
                 </div>
-                <button type="submit" class="button">Save</button>
+                <button type="submit" class="button" th:text="#{submit}">Save</button>
             </form>
 
             <script>
