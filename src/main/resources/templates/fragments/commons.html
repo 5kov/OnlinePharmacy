@@ -50,11 +50,11 @@
                     window.onload = function() {
                         const urlParams = new URLSearchParams(window.location.search);
                         if (urlParams.get('medicineId')) {
-                            const newDiv = document.createElement("input");
-                            newDiv.name='medicineId';
-                            newDiv.value=urlParams.get('medicineId');
-                            newDiv.type='hidden';
-                            document.getElementById('select-lang').appendChild(newDiv);
+                            const input = document.createElement("input");
+                            input.name='medicineId';
+                            input.value=urlParams.get('medicineId');
+                            input.type='hidden';
+                            document.getElementById('select-lang').appendChild(input);
                         }
                     }
                         function submit()
