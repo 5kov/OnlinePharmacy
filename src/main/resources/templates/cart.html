@@ -26,7 +26,7 @@
                             </form>
                         </div>
                     </div>
-                    <p th:text="#{total_price}">Total Price<span>: </span><span th:text="${#numbers.formatDecimal(totalPrice, 1, 2)}"></span></p>
+                    <p><span th:text="#{total_price}">Total Price</span><span>: </span><span th:text="${#numbers.formatDecimal(totalPrice, 1, 2)}"></span></p>
 
                     <form th:action="@{/order}" method="post">
                         <button type="submit" class="button" th:text="#{place_order}">Place Order</button>
