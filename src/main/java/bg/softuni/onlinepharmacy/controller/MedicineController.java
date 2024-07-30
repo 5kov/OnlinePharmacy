@@ -17,14 +17,14 @@ public class MedicineController {
     private MedicineRepository medicineRepository;
 
     @GetMapping("/item")
-    public String showMedicineDetails(@RequestParam Long medicineId, Model model, HttpServletRequest request) {
+    public String showMedicineDetails(@RequestParam Long medicineId, Model model) {
         Medicine medicine = medicineRepository.findById(medicineId).orElse(null);
         if (medicine == null) {
             model.addAttribute("error", "Medicine not found");
             return "errorPage"; // Redirect to a generic error page or back to list
         }
         model.addAttribute("medicine", medicine);
-        model.addAttribute("request", request);
+
         return "item";
     }
 }

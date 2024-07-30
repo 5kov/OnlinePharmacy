@@ -38,17 +38,33 @@
                 <input type="submit" th:value="#{sign_out.message}" class="logout"/>
             </form></li>
             <li>
-<!--                <div th:text="${param.medicineId}>Search Query</div>-->
 
-                <form th:method="get">
-                    <select
-                            id="lang"
-                            name="lang"
-                            onchange="this.form.submit()">
+                <form id="select-lang" th:method="get">
+                    <select id="lang" name="lang" onchange="submit()">
                         <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">English</option>
                         <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">Български</option>
                     </select>
                 </form>
+
+                <script language="javascript" type="text/javascript">
+                    window.onload = function() {
+                        const urlParams = new URLSearchParams(window.location.search);
+                        if (urlParams.get('medicineId')) {
+                            const newDiv = document.createElement("input");
+                            newDiv.name='medicineId';
+                            newDiv.value=urlParams.get('medicineId');
+                            newDiv.type='hidden';
+                            document.getElementById('select-lang').appendChild(newDiv);
+                        }
+                    }
+                        function submit()
+                    {
+                        const url = window.location.toString();
+                        document.getElementById('select-lang').action = url.split('?')[0];
+                        document.getElementById('select-lang').submit();
+                    }
+                </script>
+
             </li>
         </ul>
     </nav>
