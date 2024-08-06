@@ -25,7 +25,7 @@
 
                 <div class="medicine-container">
                     <div th:each="medicine : ${medicines}" class="medicine-card">
-                        <a th:href="@{/item(medicineId=${medicine.id})}"><img th:src="@{'/img/' + ${medicine.imageUrl}}" alt="Medicine Image" style="width:100px; height:100px;"/></a>
+                        <a th:href="@{/item(medicineId=${medicine.id})}"><img th:src="@{'/images/' + ${medicine.imageUrl}}" alt="Medicine Image" style="width:100px; height:100px;"/></a>
                         <p th:text="__${#locale}__=='bg_BG' ? ${medicine.medicineNameBg} : ${medicine.medicineNameEn}">Medicine Name</p>
                         <p th:text="${#numbers.formatDecimal(medicine.price, 1, 2)}">Price</p>
                         <form th:action="@{/add-to-cart}" method="post">

@@ -9,7 +9,7 @@
 
         <div class ="flex-container">
             <div class="medicine-picture">
-                <img th:src="@{'/img/' + ${medicine.imageUrl}}" alt="Mock">
+                <img th:src="@{'/images/' + ${medicine.imageUrl}}" alt="Mock">
             </div>
             <div>
                 <p th:text="__${#locale}__=='bg_BG' ? ${medicine.medicineNameBg} : ${medicine.medicineNameEn}"></p>

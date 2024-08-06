@@ -15,6 +15,7 @@
     <nav>
         <ul>
             <li><a href="/pharmacy" sec:authorize="hasRole('USER')" th:text="#{online_pharmacy.message}">OnlinePharmacy</a></li>
+            <li><a href="/news" sec:authorize="hasRole('USER')" th:text="#{news.message}">News</a></li>
 
 
             <li><a href="/administrator-manage-users" sec:authorize="hasRole('ADMIN')" th:text="#{manage_users.message}">Manage users</a></li>
@@ -24,6 +25,8 @@
             <li><a href="/administrator-manage-medicines" sec:authorize="hasRole('ADMIN')" th:text="#{manage_medicine.message}">Manage medicines</a></li>
             <li><a href="/administrator-add-interactions" sec:authorize="hasRole('ADMIN')" th:text="#{add_interaction.message}">Add interaction</a></li>
             <li><a href="/administrator-manage-interactions" sec:authorize="hasRole('ADMIN')" th:text="#{manage_interactions.message}">Manage interactions</a></li>
+            <li><a href="/news/add" sec:authorize="hasRole('ADMIN')" th:text="#{add_news.message}">Add News</a></li>
+            <li><a href="/news/delete" sec:authorize="hasRole('ADMIN')" th:text="#{delete_news.message}">Delete News</a></li>
             <li><a href="/orders" sec:authorize="hasRole('ADMIN')" th:text="#{view_orders.message}">View orders</a></li>
 
             <li><a href="/about" sec:authorize="hasRole('USER')" th:text="#{about.message}">About</a></li>
@@ -32,7 +35,7 @@
             <li><a href="/cart" sec:authorize="hasRole('USER')"th:text="#{view_cart.message}">View Cart</a></li>
             <li><a href="/login" sec:authorize="!isAuthenticated()" th:text="#{sign_in.message}">Sign in</a></li>
 
-            <li><a href="/user-settings" sec:authorize="hasRole('USER')" th:text="#{user_settings}">User settings</a></li>
+            <li><a href="/user-settings" sec:authorize="isAuthenticated()" th:text="#{user_settings}">User settings</a></li>
             <li><form th:method="post"
                       th:action="@{/logout}" sec:authorize="isAuthenticated()">
                 <input type="submit" th:value="#{sign_out.message}" class="logout"/>

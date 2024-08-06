@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<div class="container">
+    <header th:replace="fragments/commons::header"></header>
+
+    <div class="form">
+        <h1 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Delete News</h1>
+        <h1 th:class="__${#locale}__=='en_US' ? 'display' : ''">Изтриване на Новина</h1>
+
+            <div class="input-container">
+
+                <!-- Search Form -->
+                <form th:action="@{/news/delete}" method="get">
+                    <input type="text" class="input-field" name="title" th:value="${title}" th:placeholder="#{search_by_title}">
+                    <button type="submit" class="button" th:text="#{search}">Search</button>
+                </form>
+
+                <!-- News List -->
+                <div th:each="news : ${newsPage.content}" style="display:flex;">
+                    <span th:text="${news.titleEn}" th:class="__${#locale}__=='bg_BG' ? 'display' : ''">News Title</span>
+                    <span th:text="${news.titleBg}" th:class="__${#locale}__=='en_US' ? 'display' : ''">News Title</span>
+                    <form th:action="@{/news/delete}" method="post" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${news.id}">
+                        <input type="hidden" name="title" th:value="${title}">
+                        <input type="hidden" name="page" th:value="${newsPage.number}">
+                        <input type="hidden" name="size" th:value="${newsPage.size}">
+                        <button type="submit" class="button buttonSmall" th:text="#{delete}">Delete</button>
+                    </form>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" th:if="${newsPage.totalPages > 1}">
+                    <ul class="pagination-form" >
+                        <li th:if="${newsPage.hasPrevious()}" th:classappend="${newsPage.hasPrevious()} ? '' : 'disabled'">
+                            <a th:href="@{ /news/delete(title=${title}, page=${newsPage.number - 1}, size=${newsPage.size}) }" class="pagination">&laquo; Previous</a>
+                        </li>
+                        <li th:each="i : ${#numbers.sequence(0, newsPage.totalPages - 1)}"
+                            th:classappend="${i == newsPage.number} ? 'active'">
+                            <a th:href="@{ /news/delete(title=${title}, page=${i}, size=${newsPage.size}) }"
+                               th:text="${i + 1}" class="pagination">1</a>
+                        </li>
+                        <li th:if="${newsPage.hasNext()}" th:classappend="${newsPage.hasNext()} ? '' : 'disabled'">
+                            <a th:href="@{ /news/delete(title=${title}, page=${newsPage.number + 1}, size=${newsPage.size}) }" class="pagination">Next &raquo;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+    </div>
+    <footer th:replace="fragments/commons::footer"></footer>
+</div>
+</body>
+</html>

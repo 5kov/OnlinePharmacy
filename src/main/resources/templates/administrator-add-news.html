@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<div class="container">
+    <header th:replace="fragments/commons::header"></header>
+
+    <div class="form">
+        <h1 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Add News</h1>
+        <h1 th:class="__${#locale}__=='en_US' ? 'display' : ''">Добавяне на новина</h1>
+            <div class="input-container">
+                <form th:action="@{/news/add}" th:object="${newsData}" th:method="POST">
+                    <div>
+                        <input type="text" class="input-field" id="titleEn" name="titleEn" th:placeholder="#{title_news_en}" th:field="*{titleEn}" th:errorclass="is-invalid" />
+
+
+                        <div th:if="${#fields.hasErrors('titleEn')}" class="error-message">
+                            <div>Title must be between 10 and 100 characters</div>
+                        </div>
+                        <div th:if="${titleEnExists}" class="error-message">
+                            <div>Title already exist</div>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="text" class="input-field" id="titleBg" name="titleBg" th:placeholder="#{title_news_bg}" th:field="*{titleBg}" th:errorclass="is-invalid" />
+
+
+                        <div th:if="${#fields.hasErrors('titleBg')}" class="error-message">
+                            <div>Title must be between 10 and 100 characters</div>
+                        </div>
+                        <div th:if="${titleBgExists}" class="error-message">
+                            <div>Title already exist</div>
+                        </div>
+                    </div>
+                    <div>
+                        <textarea id="contentEn" class="description-field" name="contentEn" th:placeholder="#{content_news_en}" th:field="*{contentEn}" th:errorclass="is-invalid"></textarea>
+
+
+                        <div th:if="${#fields.hasErrors('contentEn')}" class="error-message">
+                            <div>Content must be between 10 and 5000 characters</div>
+                        </div>
+                    </div>
+                    <div>
+                        <textarea id="contentBg" class="description-field" name="contentBg" th:placeholder="#{content_news_bg}" th:field="*{contentBg}" th:errorclass="is-invalid"></textarea>
+
+
+                        <div th:if="${#fields.hasErrors('contentBg')}" class="error-message">
+                            <div>Content must be between 10 and 5000 characters</div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="button" th:text="#{submit}">Submit</button>
+                    </div>
+                </form>
+            </div>
+    </div>
+    <footer th:replace="fragments/commons::footer"></footer>
+</div>
+</body>
+</html>

@@ -53,13 +53,24 @@
                 let button = document.getElementById("show-more");
 
                 function myFunction() {
+
+                    const urlParams = new URLSearchParams(window.location.search);
                     if(content.className === "open"){
                         content.className = "";
-                        button.innerHTML = "More information";
+                        if (urlParams.get('lang') === 'en_US') {
+                            button.innerHTML = "More information";
+                        } else {
+                            button.innerHTML = "Повече информация";
+                        }
+
 
                     } else {
                         content.className = "open";
-                        button.innerHTML = "Less information";
+                        if (urlParams.get('lang') === 'en_US') {
+                            button.innerHTML = "Less information";
+                        } else {
+                            button.innerHTML = "По-малко инф.";
+                        }
                     }
                 }
             </script>
@@ -94,19 +105,29 @@
 
             </div>
             <div>
-                <li><a onclick="myFunction2()" id="show-more2" class="button-show-more">More information</a></li>
+                <li><a onclick="myFunction2()" id="show-more2" class="button-show-more" th:text="#{more_information}">More information</a></li>
                 <script>
                     let content2 = document.getElementById("objectives");
                     let button2 = document.getElementById("show-more2");
 
                     function myFunction2() {
+                        const urlParams = new URLSearchParams(window.location.search);
                         if(content2.className === "open"){
                             content2.className = "";
-                            button2.innerHTML = "More information";
+                            if (urlParams.get('lang') === 'en_US') {
+                                button2.innerHTML = "More information";
+                            } else {
+                                button2.innerHTML = "Повече информация";
+                            }
+
 
                         } else {
                             content2.className = "open";
-                            button2.innerHTML = "Less information";
+                            if (urlParams.get('lang') === 'en_US') {
+                                button2.innerHTML = "Less information";
+                            } else {
+                                button2.innerHTML = "По-малко инф.";
+                            }
                         }
                     }
                 </script>

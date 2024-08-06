@@ -764,3 +764,13 @@ ul.my-list li {
 .display {
     display: none!important;
 }
+.flex-container1 {
+    display: flex;
+    flex-direction: column; /* Ducks stand in a vertical line */
+    align-items: center; /* Ducks align vertically */
+}
+.flex-container2 {
+    display: flex;
+    flex-direction: column; /* Ducks stand in a vertical line */
+    align-items: flex-start; /* Ducks align vertically */
+}
