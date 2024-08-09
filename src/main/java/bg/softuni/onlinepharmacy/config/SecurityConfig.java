@@ -43,8 +43,10 @@ public class SecurityConfig {
                 .passwordParameter("password")
                 // What will happen if the login is successful
                 .defaultSuccessUrl("/index", true)
+                .failureUrl("/login?error=true")
+
                 // What will happen if the login fails
-                .failureForwardUrl("/users/login-error")
+//                .failureForwardUrl("/users/login-error")
         )
         .logout(
             logout ->

@@ -8,40 +8,61 @@
     <div class="form">
         <div class="outer">
             <div class="content">
-                <h1 class="main-heading">About Us</h1>
-                <p>Welcome to PharmEase, your trusted online pharmacy dedicated to bringing you the highest quality medications and healthcare products. Our mission is to make healthcare accessible, convenient, and affordable for everyone.</p>
+                <h1 class="main-heading" th:class="__${#locale}__=='bg_BG' ? 'display' : ''">About Us</h1>
+                <h1 class="main-heading" th:class="__${#locale}__=='en_US' ? 'display' : ''">За нас</h1>
+
+                <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Welcome to PharmEase, your trusted online pharmacy dedicated to bringing you the highest quality medications and healthcare products. Our mission is to make healthcare accessible, convenient, and affordable for everyone.</p>
+                <p th:class="__${#locale}__=='en_US' ? 'display' : ''">Добре дошли в PharmEase, вашата надеждна онлайн аптека, посветена на предоставянето на най-качествените медикаменти и здравни продукти. Нашата мисия е да направим здравеопазването достъпно, удобно и достъпно за всеки.</p>
 
                 <div class="section">
-                    <h2 class="sub-heading">Our Mission</h2>
-                    <p>At PharmEase, we strive to improve the health and well-being of our customers by providing a seamless and reliable online pharmacy experience. We are committed to delivering top-notch customer service, ensuring that your healthcare needs are met with professionalism and care.</p>
+                    <h2 class="sub-heading" th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Our Mission</h2>
+                    <h2 class="sub-heading" th:class="__${#locale}__=='en_US' ? 'display' : ''">Нашата мисия</h2>
+                    <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">At PharmEase, we strive to improve the health and well-being of our customers by providing a seamless and reliable online pharmacy experience. We are committed to delivering top-notch customer service, ensuring that your healthcare needs are met with professionalism and care.</p>
+                    <p th:class="__${#locale}__=='en_US' ? 'display' : ''">В PharmEase се стремим да подобрим здравето и благосъстоянието на нашите клиенти, като предоставяме безпроблемен и надежден онлайн аптечен опит. Ние сме ангажирани да предоставяме висококачествено обслужване на клиенти, като гарантираме, че вашите здравни нужди са удовлетворени с професионализъм и грижа.</p>
                 </div>
 
                 <div class="section">
-                    <h2 class="sub-heading">Our Values</h2>
+                    <h2 class="sub-heading" th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Our Values</h2>
+                    <h2 class="sub-heading" th:class="__${#locale}__=='en_US' ? 'display' : ''">Нашите ценности</h2>
                     <ul>
-                        <li><strong>Quality:</strong> We offer only the best products that meet stringent quality standards.</li>
-                        <li><strong>Accessibility:</strong> We believe everyone should have access to essential medications and healthcare products.</li>
-                        <li><strong>Convenience:</strong> Our userEntity-friendly platform makes it easy to order your prescriptions and health products from the comfort of your home.</li>
-                        <li><strong>Customer Focus:</strong> Our customers are at the heart of everything we do. We prioritize your needs and feedback to continuously improve our services.</li>
+                        <li th:class="__${#locale}__=='bg_BG' ? 'display' : ''"><strong>Quality:</strong> We offer only the best products that meet stringent quality standards.</li>
+                        <li th:class="__${#locale}__=='en_US' ? 'display' : ''"><strong>Качество:</strong> Ние предлагаме само най-добрите продукти, които отговарят на строги стандарти за качество.</li>
+
+                        <li th:class="__${#locale}__=='bg_BG' ? 'display' : ''"><strong>Accessibility:</strong> We believe everyone should have access to essential medications and healthcare products.</li>
+                        <li th:class="__${#locale}__=='en_US' ? 'display' : ''"><strong>Достъпност:</strong> Вярваме, че всеки трябва да има достъп до основни лекарства и здравни продукти.</li>
+
+                        <li th:class="__${#locale}__=='bg_BG' ? 'display' : ''"><strong>Convenience:</strong> Our user-friendly platform makes it easy to order your prescriptions and health products from the comfort of your home.</li>
+                        <li th:class="__${#locale}__=='en_US' ? 'display' : ''"><strong>Удобство:</strong> Нашата удобна платформа улеснява поръчването на вашите рецепти и здравни продукти от уюта на вашия дом.</li>
+
+                        <li th:class="__${#locale}__=='bg_BG' ? 'display' : ''"><strong>Customer Focus:</strong> Our customers are at the heart of everything we do. We prioritize your needs and feedback to continuously improve our services.</li>
+                        <li th:class="__${#locale}__=='en_US' ? 'display' : ''"><strong>Фокус върху клиента:</strong> Нашите клиенти са в основата на всичко, което правим. Ние поставяме на първо място вашите нужди и обратната връзка, за да подобрим непрекъснато нашите услуги.</li>
                     </ul>
                 </div>
 
                 <div class="section">
-                    <h2 class="sub-heading">Our Story</h2>
-                    <p>PharmEase was founded with a vision to revolutionize the way people access healthcare. Our team of experienced pharmacists and healthcare professionals came together to create a platform that bridges the gap between traditional pharmacies and the digital world. Since our inception, we have been dedicated to providing a trustworthy and efficient service that our customers can rely on.</p>
+                    <h2 class="sub-heading" th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Our Story</h2>
+                    <h2 class="sub-heading" th:class="__${#locale}__=='en_US' ? 'display' : ''">Нашата история</h2>
+                    <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">PharmEase was founded with a vision to revolutionize the way people access healthcare. Our team of experienced pharmacists and healthcare professionals came together to create a platform that bridges the gap between traditional pharmacies and the digital world. Since our inception, we have been dedicated to providing a trustworthy and efficient service that our customers can rely on.</p>
+                    <p th:class="__${#locale}__=='en_US' ? 'display' : ''">PharmEase беше основан с визията да революционизира начина, по който хората получават достъп до здравеопазване. Нашият екип от опитни фармацевти и здравни специалисти се събра, за да създаде платформа, която свързва традиционните аптеки и дигиталния свят. От създаването си досега, ние сме посветени на предоставянето на надеждни и ефективни услуги, на които нашите клиенти могат да разчитат.</p>
                 </div>
 
                 <div class="section">
-                    <h2 class="sub-heading">Our Team</h2>
-                    <p>Our team is comprised of passionate individuals who are experts in their fields. From pharmacists and healthcare specialists to customer service representatives, everyone at PharmEase is dedicated to ensuring you have a positive experience. We work tirelessly to keep our services running smoothly and to provide you with the best possible care.</p>
+                    <h2 class="sub-heading" th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Our Team</h2>
+                    <h2 class="sub-heading" th:class="__${#locale}__=='en_US' ? 'display' : ''">Нашият екип</h2>
+                    <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Our team is comprised of passionate individuals who are experts in their fields. From pharmacists and healthcare specialists to customer service representatives, everyone at PharmEase is dedicated to ensuring you have a positive experience. We work tirelessly to keep our services running smoothly and to provide you with the best possible care.</p>
+                    <p th:class="__${#locale}__=='en_US' ? 'display' : ''">Нашият екип се състои от страстни специалисти, които са експерти в своите области. От фармацевти и здравни специалисти до представители на обслужване на клиенти, всеки в PharmEase е посветен на това да ви осигури положителен опит. Ние работим неуморно, за да осигурим гладко функциониране на нашите услуги и да ви предоставим най-добрата възможна грижа.</p>
                 </div>
 
                 <div class="section">
-                    <h2 class="sub-heading">Join Us</h2>
-                    <p>We are always looking for talented and dedicated individuals to join our team. If you are passionate about healthcare and want to make a difference, check out our careers page for current openings. Together, we can help improve the health and well-being of our communities.</p>
+                    <h2 class="sub-heading" th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Join Us</h2>
+                    <h2 class="sub-heading" th:class="__${#locale}__=='en_US' ? 'display' : ''">Присъединете се към нас</h2>
+                    <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">We are always looking for talented and dedicated individuals to join our team. If you are passionate about healthcare and want to make a difference, check out our careers page for current openings. Together, we can help improve the health and well-being of our communities.</p>
+                    <p th:class="__${#locale}__=='en_US' ? 'display' : ''">Ние винаги търсим талантливи и отдадени личности, които да се присъединят към нашия екип. Ако сте страстни по отношение на здравеопазването и искате да направите разлика, разгледайте нашата страница с кариери за текущи възможности. Заедно можем да помогнем за подобряването на здравето и благосъстоянието на нашите общности.</p>
                 </div>
 
-                <p>Thank you for choosing PharmEase. We look forward to serving you and meeting your healthcare needs!</p>
+                <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Thank you for choosing PharmEase. We look forward to serving you and meeting your healthcare needs!</p>
+                <p th:class="__${#locale}__=='en_US' ? 'display' : ''">Благодарим ви, че избрахте PharmEase. Очакваме с нетърпение да ви обслужим и да задоволим вашите здравни нужди!</p>
+
             </div>
         </div>
     </div>

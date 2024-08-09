@@ -90,14 +90,23 @@
 <footer>
     <div class="section-4">
         <article id="a-1">
-            <h3>Address</h3>
-            <p>PharmEase Headquarters Address in Bulgaria:<br>
+            <h3 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Address</h3>
+            <h3 th:class="__${#locale}__=='en_US' ? 'display' : ''">Адрес</h3>
+
+            <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">PharmEase Headquarters Address in Bulgaria:<br>
                 PharmEase Headquarters<br>
                 45 Zdrave Street, Floor 3, Office 7<br>
                 1000 Sofia<br>
                 Bulgaria
             </p>
-            <p>
+            <p th:class="__${#locale}__=='en_US' ? 'display' : ''">Адрес на PharmEase в България:<br>
+                Главен офис на PharmEase<br>
+                Ул. Здраве 45, Етаж 3, Офис 7<br>
+                1000 София<br>
+                България
+            </p>
+
+            <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">
                 United States:<br>
                 PharmEase USA Headquarters<br>
                 123 HealthTech Avenue<br>
@@ -105,38 +114,70 @@
                 San Francisco, CA 94105<br>
                 United States<br>
             </p>
+            <p th:class="__${#locale}__=='en_US' ? 'display' : ''">
+                Съединени щати:<br>
+                Главен офис на PharmEase в САЩ<br>
+                123 HealthTech Avenue<br>
+                Suite 400<br>
+                Сан Франциско, CA 94105<br>
+                Съединени щати<br>
+            </p>
         </article>
+
         <article id="a-2">
-            <h3>Statues and Policies</h3>
-            <p>Mission Statement:<br>
+            <h3 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Statues and Policies</h3>
+            <h3 th:class="__${#locale}__=='en_US' ? 'display' : ''">Статути и политики</h3>
+
+            <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Mission Statement:<br>
                 PharmEase is committed to enhancing healthcare accessibility through innovative digital solutions and superior customer service.</p>
-            <p>Quality Assurance:<br>
-                We adhere to strict standards of quality control to ensure the safety, efficacy, and reliability of all products offered through our platform.<br>
-            </p>
-            <p>Privacy and Data Security:<br>
-                Protecting the privacy and security of our customers' personal and medical information is paramount. We employ robust measures to safeguard data in compliance with relevant regulations.<br>
-            </p>
+            <p th:class="__${#locale}__=='en_US' ? 'display' : ''">Мисия:<br>
+                PharmEase е ангажирана с подобряване на достъпа до здравеопазване чрез иновативни цифрови решения и превъзходно обслужване на клиенти.</p>
+
+            <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Quality Assurance:<br>
+                We adhere to strict standards of quality control to ensure the safety, efficacy, and reliability of all products offered through our platform.</p>
+            <p th:class="__${#locale}__=='en_US' ? 'display' : ''">Гарантиране на качеството:<br>
+                Ние спазваме строги стандарти за контрол на качеството, за да гарантираме безопасността, ефективността и надеждността на всички продукти, предлагани чрез нашата платформа.</p>
+
+            <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Privacy and Data Security:<br>
+                Protecting the privacy and security of our customers' personal and medical information is paramount. We employ robust measures to safeguard data in compliance with relevant regulations.</p>
+            <p th:class="__${#locale}__=='en_US' ? 'display' : ''">Поверителност и сигурност на данните:<br>
+                Защитата на поверителността и сигурността на личната и медицинската информация на нашите клиенти е от първостепенно значение. Ние прилагаме надеждни мерки за защита на данните в съответствие със съответните разпоредби.</p>
         </article>
+
         <article id="a-3">
-            <h3>Resources</h3>
-            <p>PharmEase Official Website: www.pharmease.com
-            </p>
-            <p>
+            <h3 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Resources</h3>
+            <h3 th:class="__${#locale}__=='en_US' ? 'display' : ''">Ресурси</h3>
+
+            <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">PharmEase Official Website: www.pharmease.com</p>
+            <p th:class="__${#locale}__=='en_US' ? 'display' : ''">Официален уебсайт на PharmEase: www.pharmease.com</p>
+
+            <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">
                 Regulatory Agencies:<br>
                 Food and Drug Administration (FDA): www.fda.gov <br>
                 European Medicines Agency (EMA): www.ema.europa.eu <br>
                 Bulgarian Drug Agency (BDA): www.bda.bg/en <br>
             </p>
-        </article>
-        <article id="a-4">
-            <h3>Mobile Apps</h3>
-            <p>Explore the convenience of managing your healthcare with the PharmEase mobile app, available for download on Android and iPhone. Access a wide range of prescription medications, manage refills, and get personalized health advice wherever you are. Stay informed with medication reminders and securely track your health journey with ease. Download the PharmEase app today and take control of your health at your fingertips.
+            <p th:class="__${#locale}__=='en_US' ? 'display' : ''">
+                Регулаторни агенции:<br>
+                Агенция по храните и лекарствата (FDA): www.fda.gov <br>
+                Европейска агенция по лекарствата (EMA): www.ema.europa.eu <br>
+                Българска агенция по лекарствата (BDA): www.bda.bg/en <br>
             </p>
+        </article>
+
+        <article id="a-4">
+            <h3 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Mobile Apps</h3>
+            <h3 th:class="__${#locale}__=='en_US' ? 'display' : ''">Мобилни приложения</h3>
+
+            <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Explore the convenience of managing your healthcare with the PharmEase mobile app, available for download on Android and iPhone. Access a wide range of prescription medications, manage refills, and get personalized health advice wherever you are. Stay informed with medication reminders and securely track your health journey with ease. Download the PharmEase app today and take control of your health at your fingertips.</p>
+            <p th:class="__${#locale}__=='en_US' ? 'display' : ''">Изследвайте удобството на управлението на вашето здраве с мобилното приложение PharmEase, достъпно за изтегляне на Android и iPhone. Достъпвайте широка гама от лекарства по рецепта, управлявайте презареждания и получавайте персонализирани здравни съвети, където и да сте. Останете информирани с напомняния за лекарства и сигурно следете вашето здравословно състояние с лекота. Изтеглете приложението PharmEase днес и поемете контрол върху вашето здраве с един клик.</p>
         </article>
     </div>
     <div class="section-5">
-        <p>Copyright 2024</p>
+        <p th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Copyright 2024</p>
+        <p th:class="__${#locale}__=='en_US' ? 'display' : ''">Авторски права 2024</p>
     </div>
 </footer>
+
 </body>
 </html>
