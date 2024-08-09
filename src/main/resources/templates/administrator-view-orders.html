@@ -11,7 +11,7 @@
 
         <div th:each="order : ${orders}">
             <p><strong th:text="#{order_id}">Order ID</strong><span><strong>: </strong></span> <span th:text="${order.id}"></span></p>
-            <p><strong th:text="#{order_date}">Order Date</strong><span><strong>: </strong></span> <span th:text="${order.orderDate}"></span></p>
+            <p><strong th:text="#{order_date}">Order Date</strong><span><strong>: </strong></span> <span th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy HH:mm:ss')}"></span></p>
             <p><strong th:text="#{username}">Username</strong><span><strong>: </strong></span> <span th:text="${order.user.username}"></span></p>
             <p><strong th:text="#{first_name}">First Name</strong><span><strong>: </strong></span> <span th:text="${order.user.firstName}"></span></p>
             <p><strong th:text="#{last_name}">Last Name</strong><span><strong>: </strong></span> <span th:text="${order.user.lastName}"></span></p>

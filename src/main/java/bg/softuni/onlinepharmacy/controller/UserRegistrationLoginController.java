@@ -5,9 +5,8 @@ import bg.softuni.onlinepharmacy.model.dto.RegisterDTO;
 import bg.softuni.onlinepharmacy.model.dto.UpdateUserDTO;
 import bg.softuni.onlinepharmacy.model.entity.UserEntity;
 import bg.softuni.onlinepharmacy.repository.UserRepository;
-import bg.softuni.onlinepharmacy.service.ManageUserService;
-import bg.softuni.onlinepharmacy.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
+import bg.softuni.onlinepharmacy.service.impl.ManageUserServiceImpl;
+import bg.softuni.onlinepharmacy.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,19 +18,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.Locale;
-
 
 @Controller
 public class UserRegistrationLoginController {
 
-    private final UserService userService;
-    private final ManageUserService manageUserService;
+    private final UserServiceImpl userServiceImpl;
+    private final ManageUserServiceImpl manageUserServiceImpl;
     private final UserRepository userRepository;
 
-    public UserRegistrationLoginController(UserService userService, ManageUserService manageUserService, UserRepository userRepository) {
-        this.userService = userService;
-        this.manageUserService = manageUserService;
+    public UserRegistrationLoginController(UserServiceImpl userServiceImpl, ManageUserServiceImpl manageUserServiceImpl, UserRepository userRepository) {
+        this.userServiceImpl = userServiceImpl;
+        this.manageUserServiceImpl = manageUserServiceImpl;
         this.userRepository = userRepository;
     }
 
@@ -66,7 +63,7 @@ public class UserRegistrationLoginController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
             return "redirect:/register";
         }
-        String success = userService.register(data);
+        String success = userServiceImpl.register(data);
         if (success.equals("usernameExists")) {
             redirectAttributes.addFlashAttribute("registerData", data);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
@@ -87,39 +84,11 @@ public class UserRegistrationLoginController {
         return "redirect:/login";
     }
 
-//    @PostMapping("/login")
-//    public String doLogin(@Valid LoginDTO data, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-//        if(userSession.isLoggedIn()) {
-//            return "redirect:/home";
-//        }
-//        if (bindingResult.hasErrors()) {
-//            redirectAttributes.addFlashAttribute("loginData", data);
-//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginData", bindingResult);
-//            return "redirect:/login";
-//        }
-//
-//        boolean success = userService.login(data);
-//        if (!success) {
-//            redirectAttributes.addFlashAttribute("loginData", data);
-//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginData", bindingResult);
-//            redirectAttributes.addFlashAttribute("wrongUsernameOrPassword", true);
-//            return "redirect:/login";
-//        }
-//
-//        return "redirect:/index";
-//    }
-//
-//    @GetMapping("/logout")
-//    public String doLogout() {
-//        return "login";
-//    }
-
-
     @GetMapping("/user-settings")
     public String showSettingsForm(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
-        UpdateUserDTO updateUserDTO = manageUserService.findByUsername(currentPrincipalName);
+        UpdateUserDTO updateUserDTO = manageUserServiceImpl.findByUsername(currentPrincipalName);
 
 //        UpdateUserDTO updateUserDTO = manageUserService.findById(userId);
         model.addAttribute("updateUserDTO", updateUserDTO);
@@ -134,7 +103,7 @@ public class UserRegistrationLoginController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
             return "user-settings";
         }
-        String success = manageUserService.updateUser(updateUserDTO);
+        String success = manageUserServiceImpl.updateUser(updateUserDTO);
         if (success.equals("usernameExists")) {
             redirectAttributes.addFlashAttribute("updateUserDTO", updateUserDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
@@ -164,7 +133,7 @@ public class UserRegistrationLoginController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         UserEntity userEntity = userRepository.findByUsername(currentPrincipalName).get();
-        UpdateUserDTO updateUserDTO = manageUserService.findById(userEntity.getId());
+        UpdateUserDTO updateUserDTO = manageUserServiceImpl.findById(userEntity.getId());
         model.addAttribute("updateUserDTO", updateUserDTO);
         return "change-password";
     }
@@ -177,7 +146,7 @@ public class UserRegistrationLoginController {
 //            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
 //            return "change-password";
 //        }
-        String success = manageUserService.updatePassword(updateUserDTO);
+        String success = manageUserServiceImpl.updatePassword(updateUserDTO);
         if (success.equals("passwordsDoNotMatch")) {
             redirectAttributes.addFlashAttribute("updateUserDTO", updateUserDTO);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);

@@ -5,7 +5,7 @@ import bg.softuni.onlinepharmacy.model.entity.UserEntity;
 import bg.softuni.onlinepharmacy.repository.CartRepository;
 import bg.softuni.onlinepharmacy.repository.MedicineRepository;
 import bg.softuni.onlinepharmacy.repository.UserRepository;
-import bg.softuni.onlinepharmacy.service.CartService;
+import bg.softuni.onlinepharmacy.service.impl.CartServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,7 +30,7 @@ public class PharmacyController {
     @Autowired
     private MedicineRepository medicineRepository;
     @Autowired
-    private CartService cartService;
+    private CartServiceImpl cartServiceImpl;
 
     @GetMapping("/pharmacy")
     public String listMedicines(Model model,
@@ -53,7 +53,7 @@ public class PharmacyController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         UserEntity userEntity = userRepository.findByUsername(currentPrincipalName).get();
-        cartService.addToCart(userEntity, medicineId, quantity);
+        cartServiceImpl.addToCart(userEntity, medicineId, quantity);
         redirectAttributes.addFlashAttribute("message", "Item added to cart successfully!");
         return "redirect:/pharmacy";
     }

@@ -7,8 +7,8 @@ import bg.softuni.onlinepharmacy.model.entity.*;
 import bg.softuni.onlinepharmacy.repository.ActiveIngredientRepository;
 import bg.softuni.onlinepharmacy.repository.InteractionRepository;
 import bg.softuni.onlinepharmacy.repository.MedicineRepository;
-import bg.softuni.onlinepharmacy.service.ManageUserService;
-import bg.softuni.onlinepharmacy.service.UserService;
+import bg.softuni.onlinepharmacy.service.impl.ManageUserServiceImpl;
+import bg.softuni.onlinepharmacy.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +23,8 @@ import java.util.Optional;
 
 @Controller
 public class AdministratorController {
-    private final UserService userService;
-    private final ManageUserService manageUserService;
+    private final UserServiceImpl userServiceImpl;
+    private final ManageUserServiceImpl manageUserServiceImpl;
     @Autowired
     private ActiveIngredientRepository ingredientRepository;
     @Autowired
@@ -34,21 +34,21 @@ public class AdministratorController {
     @Autowired
     private InteractionRepository interactionRepository;
 
-    public AdministratorController(UserService userService, ManageUserService manageUserService) {
-        this.userService = userService;
-        this.manageUserService = manageUserService;
+    public AdministratorController(UserServiceImpl userServiceImpl, ManageUserServiceImpl manageUserServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
+        this.manageUserServiceImpl = manageUserServiceImpl;
     }
 
     @GetMapping("/administrator-manage-users")
     public String showUserManagement(Model model, @RequestParam(required = false) String search) {
-        List<UserEntity> users = manageUserService.searchUsers(search == null ? "" : search.trim());
+        List<UserEntity> users = manageUserServiceImpl.searchUsers(search == null ? "" : search.trim());
         model.addAttribute("users", users);
         return "administrator-manage-users";
     }
 
     @PostMapping("/delete-user")
     public String deleteUser(@RequestParam Long userId, RedirectAttributes redirectAttributes) {
-        boolean success = manageUserService.deleteUser(userId);
+        boolean success = manageUserServiceImpl.deleteUser(userId);
         if (!success) {
             redirectAttributes.addFlashAttribute("error", "Cannot remove the last admin.");
         }
@@ -57,7 +57,7 @@ public class AdministratorController {
 
     @PostMapping("/toggle-role")
     public String toggleRole(@RequestParam Long userId, RedirectAttributes redirectAttributes) {
-        boolean success = manageUserService.toggleUserRole(userId);
+        boolean success = manageUserServiceImpl.toggleUserRole(userId);
         if (!success) {
             redirectAttributes.addFlashAttribute("error", "Cannot remove the last admin.");
         }
@@ -89,7 +89,7 @@ public class AdministratorController {
         ingredient.setIngredientName(ingredientDTO.getIngredientName());
         ingredient.setIngredientCode(ingredientDTO.getIngredientCode());
         ingredientRepository.save(ingredient);
-        return "redirect:/administrator-add-active-ingredient";
+        return "success-medicine";
     }
 
     @GetMapping("/administrator-manage-active-ingredients")
@@ -134,7 +134,7 @@ public class AdministratorController {
 
         Medicine medicine = convertToEntity(medicineDTO);
         medicineRepository.save(medicine);
-        return "redirect:/administrator-add-medicines";
+        return "success-medicine";
     }
 
     private Medicine convertToEntity(MedicineDTO medicineDTO) {

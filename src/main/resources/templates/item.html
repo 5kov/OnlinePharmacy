@@ -27,37 +27,35 @@
             </p>
         </div>
         <div>
-            <li><a onclick="myFunction()" id="show-more3" class="button-show-more">More information</a></li>
+            <li><a onclick="myFunction()" id="show-more3" class="button-show-more" th:text="#{more_information}">More information</a></li>
             <script>
                 let content = document.getElementById("description");
                 let button = document.getElementById("show-more3");
 
                 function myFunction() {
+
+                    const dropdown = document.getElementById('lang');
+                    const selectedValue = dropdown.value;
+
                     if(content.className === "open"){
                         content.className = "";
-                        button.innerHTML = "More information";
+                        if (selectedValue === "en_US") {
+                            button.innerHTML = "More information";
+                        } else {
+                            button.innerHTML = "Повече информация";
+                        }
 
                     } else {
                         content.className = "open";
-                        button.innerHTML = "Less information";
+                        if (selectedValue === "en_US") {
+                            button.innerHTML = "Less information";
+                        } else {
+                            button.innerHTML = "По-малко инф.";
+                        }
                     }
                 }
             </script>
         </div>
-<!--&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
-<!--        <div>-->
-<!--            <img th:src="@{'/img/' + ${medicine.imageUrl}}" alt="Medicine Image" style="width:300px; height:300px;"/>-->
-<!--            <h2 th:text="${medicine.medicineNameEn}"></h2>-->
-<!--            <p th:text="${'$' + medicine.price}"></p>-->
-
-<!--            <form th:action="@{/add-to-cart}" method="post">-->
-<!--                <input type="hidden" th:value="${medicine.id}" name="medicineId" />-->
-<!--                <input type="number" name="quantity" class="input-field" value="1" min="1" />-->
-<!--                <button type="submit" class="button">Add to Cart</button>-->
-<!--            </form>-->
-
-<!--            <div th:text="${medicine.descriptionEn}"></div>-->
-<!--        </div>-->
 
     </div>
     <footer th:replace="fragments/commons::footer"></footer>

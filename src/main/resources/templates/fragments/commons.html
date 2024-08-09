@@ -59,6 +59,19 @@
                             input.type='hidden';
                             document.getElementById('select-lang').appendChild(input);
                         }
+                        if (urlParams.get('page') && urlParams.get('size')) {
+                            const input = document.createElement("input");
+                            input.name='page';
+                            input.value=urlParams.get('page');
+                            input.type='hidden';
+                            document.getElementById('select-lang').appendChild(input);
+
+                            const input2 = document.createElement("input");
+                            input2.name='size';
+                            input2.value=urlParams.get('size');
+                            input2.type='hidden';
+                            document.getElementById('select-lang').appendChild(input2);
+                        }
                     }
                         function submit()
                     {
@@ -66,6 +79,7 @@
                         document.getElementById('select-lang').action = url.split('?')[0];
                         document.getElementById('select-lang').submit();
                     }
+
                 </script>
 
             </li>

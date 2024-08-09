@@ -2,6 +2,7 @@ package bg.softuni.onlinepharmacy.model.entity;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,7 @@ public class Order {
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime orderDate;
+    private Instant orderDate = Instant.now();
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems;
 
@@ -46,11 +46,19 @@ public class Order {
         this.userEntity = userEntity;
     }
 
-    public LocalDateTime getOrderDate() {
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+
+    public Instant getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
+    public void setOrderDate(Instant orderDate) {
         this.orderDate = orderDate;
     }
 

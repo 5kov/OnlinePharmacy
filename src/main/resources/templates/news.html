@@ -12,10 +12,12 @@
         <div class="flex-container1">
             <div class="flex-container2">
                 <div th:each="news : ${newsPage.content}">
+                    <p th:text="${#dates.format(news.created, 'dd-MM-yyyy HH:mm:ss')}">Date time</p>
                     <h2 th:text="${news.titleEn}" th:class="__${#locale}__=='bg_BG' ? 'display' : ''">News Title</h2>
                     <h2 th:text="${news.titleBg}" th:class="__${#locale}__=='en_US' ? 'display' : ''">News Title</h2>
                     <p th:text="${news.contentEn}" th:class="__${#locale}__=='bg_BG' ? 'display' : ''">News Content</p>
                     <p th:text="${news.contentBg}" th:class="__${#locale}__=='en_US' ? 'display' : ''">News Content</p>
+                    <br><br><br>
                 </div>
             </div>
             <!-- News List -->
@@ -25,7 +27,7 @@
             <div th:if="${newsPage.totalPages > 1}">
                 <ul class="pagination-form" >
                     <li th:if="${newsPage.hasPrevious()}" th:classappend="${newsPage.hasPrevious()} ? '' : 'disabled'">
-                        <a th:href="@{ /news(page=${newsPage.number - 1}, size=${newsPage.size}) }" class="pagination">&laquo; Previous</a>
+                        <a th:href="@{ /news(page=${newsPage.number - 1}, size=${newsPage.size}) }" class="pagination" th:text="#{previous}">&laquo; Previous</a>
                     </li>
                     <li th:each="i : ${#numbers.sequence(0, newsPage.totalPages - 1)}"
                         th:classappend="${i == newsPage.number} ? 'active'">
@@ -33,7 +35,7 @@
                            th:text="${i + 1}" class="pagination">1</a>
                     </li>
                     <li th:if="${newsPage.hasNext()}" th:classappend="${newsPage.hasNext()} ? '' : 'disabled'">
-                        <a th:href="@{ /news(page=${newsPage.number + 1}, size=${newsPage.size}) }" class="pagination">Next &raquo;</a>
+                        <a th:href="@{ /news(page=${newsPage.number + 1}, size=${newsPage.size}) }" class="pagination" th:text="#{next}">Next &raquo;</a>
                     </li>
                 </ul>
             </div>

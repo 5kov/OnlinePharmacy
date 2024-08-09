@@ -14,7 +14,7 @@
                     </div>
                     <div th:each="item : ${cartItems}">
                         <div>
-                            <img th:src="@{'/img/' + ${item.medicine.getImageUrl()}}" alt="Product Image" style="width:100px; height:100px;"/>
+                            <img th:src="@{'/images/' + ${item.medicine.getImageUrl()}}" alt="Product Image" style="width:100px; height:100px;"/>
                             <p th:text="__${#locale}__=='bg_BG' ? ${item.medicine.medicineNameBg} : ${item.medicine.medicineNameEn}">Medicine Name</p>
                             <p th:text="${#numbers.formatDecimal(item.medicine.price, 1, 2)}">Price</p>
                             <form th:action="@{'/update-order/' + ${item.id}}" method="post">

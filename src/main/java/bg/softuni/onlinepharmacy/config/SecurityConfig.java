@@ -25,6 +25,10 @@ public class SecurityConfig {
                     .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                     // some more resources for all users
                     .requestMatchers("/", "/login", "/register", "/error").permitAll()
+                    .requestMatchers("/administrator-manage-users", "/delete-user", "/toggle-role", "/administrator-add-active-ingredient",
+                            "/administrator-manage-active-ingredients", "/deleteIngredient/{id}", "/administrator-add-medicines",
+                            "/administrator-manage-medicines", "/save", "/delete/**", "/data/**", "/administrator-add-interactions",
+                            "/administrator-manage-interactions", "/delete-interaction/**", "/orders", "/news/add", "/news/delete").hasRole("ADMIN")
                     // all other URL-s should be authenticated.
                     .anyRequest()
                     .authenticated()

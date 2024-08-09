@@ -54,19 +54,20 @@
 
                 function myFunction() {
 
-                    const urlParams = new URLSearchParams(window.location.search);
+                    const dropdown = document.getElementById('lang');
+                    const selectedValue = dropdown.value;
+
                     if(content.className === "open"){
                         content.className = "";
-                        if (urlParams.get('lang') === 'en_US') {
+                        if (selectedValue === "en_US") {
                             button.innerHTML = "More information";
                         } else {
                             button.innerHTML = "Повече информация";
                         }
 
-
                     } else {
                         content.className = "open";
-                        if (urlParams.get('lang') === 'en_US') {
+                        if (selectedValue === "en_US") {
                             button.innerHTML = "Less information";
                         } else {
                             button.innerHTML = "По-малко инф.";
@@ -111,10 +112,11 @@
                     let button2 = document.getElementById("show-more2");
 
                     function myFunction2() {
-                        const urlParams = new URLSearchParams(window.location.search);
+                        const dropdown = document.getElementById('lang');
+                        const selectedValue = dropdown.value;
                         if(content2.className === "open"){
                             content2.className = "";
-                            if (urlParams.get('lang') === 'en_US') {
+                            if (selectedValue === "en_US") {
                                 button2.innerHTML = "More information";
                             } else {
                                 button2.innerHTML = "Повече информация";
@@ -123,7 +125,7 @@
 
                         } else {
                             content2.className = "open";
-                            if (urlParams.get('lang') === 'en_US') {
+                            if (selectedValue === "en_US") {
                                 button2.innerHTML = "Less information";
                             } else {
                                 button2.innerHTML = "По-малко инф.";

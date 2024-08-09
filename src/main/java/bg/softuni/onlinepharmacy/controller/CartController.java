@@ -2,10 +2,9 @@ package bg.softuni.onlinepharmacy.controller;
 
 import bg.softuni.onlinepharmacy.model.entity.Cart;
 import bg.softuni.onlinepharmacy.model.entity.UserEntity;
-import bg.softuni.onlinepharmacy.repository.CartRepository;
 import bg.softuni.onlinepharmacy.repository.UserRepository;
-import bg.softuni.onlinepharmacy.service.CartService;
-import bg.softuni.onlinepharmacy.service.OrderService;
+import bg.softuni.onlinepharmacy.service.impl.CartServiceImpl;
+import bg.softuni.onlinepharmacy.service.impl.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,9 +21,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class CartController {
     @Autowired
-    private CartService cartService;
+    private CartServiceImpl cartServiceImpl;
     @Autowired
-    private OrderService orderService;
+    private OrderServiceImpl orderServiceImpl;
     @Autowired
     private UserRepository userRepository;
 
@@ -38,28 +37,28 @@ public class CartController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         UserEntity userEntity = userRepository.findByUsername(currentPrincipalName).get();
-        cartService.addToCart(userEntity, medicineId, quantity);
+        cartServiceImpl.addToCart(userEntity, medicineId, quantity);
         return new ModelAndView("redirect:/medicines");
     }
 
     @GetMapping("/cart")
     public String showCart(Model model) {
-        Cart cart = cartService.getCurrentCart();
+        Cart cart = cartServiceImpl.getCurrentCart();
         model.addAttribute("cartItems", cart.getCartItems());
-        model.addAttribute("totalPrice", cartService.calculateTotalPrice(cart));
+        model.addAttribute("totalPrice", cartServiceImpl.calculateTotalPrice(cart));
         return "cart";
     }
 
     @PostMapping("/update-order/{itemId}")
     public String updateItem(@PathVariable Long itemId, @RequestParam int quantity, RedirectAttributes redirectAttributes) {
-        cartService.updateCartItem(itemId, quantity);
+        cartServiceImpl.updateCartItem(itemId, quantity);
         redirectAttributes.addFlashAttribute("successMessage", "Cart updated successfully!");
         return "redirect:/cart";
     }
 
     @PostMapping("/delete-order/{itemId}")
     public String deleteItem(@PathVariable Long itemId, RedirectAttributes redirectAttributes) {
-        cartService.deleteCartItem(itemId);
+        cartServiceImpl.deleteCartItem(itemId);
         redirectAttributes.addFlashAttribute("successMessage", "Item removed successfully!");
         return "redirect:/cart";
     }
@@ -67,13 +66,13 @@ public class CartController {
     @PostMapping("/order")
     public String placeOrder(RedirectAttributes redirectAttributes) {
         try {
-            if (orderService.placeOrder()) {
+            if (orderServiceImpl.placeOrder()) {
                 redirectAttributes.addFlashAttribute("successMessage", "Order placed successfully!");
             }
         } catch (IllegalStateException e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/cart"; // Redirect back to cart if there is an interaction
         }
-        return "redirect:/cart";
+        return "success-order";
     }
 }

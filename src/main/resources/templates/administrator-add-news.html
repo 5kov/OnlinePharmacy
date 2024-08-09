@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/commons::head"></head>
+<head th:replace="fragments/commons::head"><title>none</title></head>
 <body>
 <div class="container">
     <header th:replace="fragments/commons::header"></header>
@@ -11,14 +11,14 @@
             <div class="input-container">
                 <form th:action="@{/news/add}" th:object="${newsData}" th:method="POST">
                     <div>
+                        <div th:if="${titleExist}" class="error-message">
+                            <div>Title already exist in the database</div>
+                        </div>
                         <input type="text" class="input-field" id="titleEn" name="titleEn" th:placeholder="#{title_news_en}" th:field="*{titleEn}" th:errorclass="is-invalid" />
 
 
                         <div th:if="${#fields.hasErrors('titleEn')}" class="error-message">
                             <div>Title must be between 10 and 100 characters</div>
-                        </div>
-                        <div th:if="${titleEnExists}" class="error-message">
-                            <div>Title already exist</div>
                         </div>
                     </div>
                     <div>
@@ -27,9 +27,6 @@
 
                         <div th:if="${#fields.hasErrors('titleBg')}" class="error-message">
                             <div>Title must be between 10 and 100 characters</div>
-                        </div>
-                        <div th:if="${titleBgExists}" class="error-message">
-                            <div>Title already exist</div>
                         </div>
                     </div>
                     <div>

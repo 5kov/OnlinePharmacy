@@ -26,17 +26,12 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-
-forex:
+news:
   api:
-    key: ${FOREX_API_KEY:}
-    url: "https://openexchangerates.org/api/latest.json?app_id={app_id}"
-    base: "USD"
-  init-ex-rates: ${INIT_EX_RATES:false}
-
-offers:
-  api:
-    baseUrl: "${OFFERS_BASE_URL:http://localhost:8081}"
-
+    baseUrl: "http://localhost:8081/"
 jwt:
+  secret: ${JWT_KEY:WSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8IWSdv1kEE1tCT1a8ihRSqfwMNzlPBq8I}
+  expiration: ${JWT_EXPIRATION:60000}
+
+
 

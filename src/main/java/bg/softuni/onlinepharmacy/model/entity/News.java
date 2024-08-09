@@ -2,6 +2,8 @@ package bg.softuni.onlinepharmacy.model.entity;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
+
 @Entity
 @Table(name = "news")
 public class News {
@@ -16,6 +18,8 @@ public class News {
     private String contentEn;
     @Column(nullable = false, columnDefinition="TEXT")
     private String contentBg;
+    @Column
+    private Instant created = Instant.now();
 
     public News() {
     }
@@ -58,5 +62,13 @@ public class News {
 
     public void setContentBg(String contentBg) {
         this.contentBg = contentBg;
+    }
+
+    public Instant getCreated() {
+        return created;
+    }
+
+    public void setCreated(Instant created) {
+        this.created = created;
     }
 }
