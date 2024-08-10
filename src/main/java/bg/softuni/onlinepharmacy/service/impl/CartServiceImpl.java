@@ -37,7 +37,9 @@ public class CartServiceImpl implements CartService {
     public void addToCart(UserEntity userEntity, Long medicineId, int quantity) {
 
         Cart cart = userEntity.getCart();
-        Medicine medicine = medicineRepository.findById(medicineId).orElseThrow();
+        Optional<Medicine> optionalMedicine = medicineRepository.findById(medicineId);
+
+        Medicine medicine = optionalMedicine.get();
 
         Optional<CartItem> result = cartItemRepository.findCartItemByCartIdAndMedicineId(cart.getId(), medicineId);
         if (!result.isPresent()) {
