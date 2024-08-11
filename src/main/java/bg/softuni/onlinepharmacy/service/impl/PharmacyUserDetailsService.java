@@ -43,7 +43,7 @@ public class PharmacyUserDetailsService implements UserDetailsService {
         );
     }
 
-    private static GrantedAuthority map(UserRoleEnum role) {
+    public static GrantedAuthority map(UserRoleEnum role) {
         return new SimpleGrantedAuthority(
                 "ROLE_" + role
         );
