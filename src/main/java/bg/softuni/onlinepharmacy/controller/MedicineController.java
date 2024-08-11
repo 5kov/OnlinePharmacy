@@ -2,7 +2,6 @@ package bg.softuni.onlinepharmacy.controller;
 
 import bg.softuni.onlinepharmacy.model.entity.Medicine;
 import bg.softuni.onlinepharmacy.repository.MedicineRepository;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

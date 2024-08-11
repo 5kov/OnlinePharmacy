@@ -34,4 +34,3 @@ jwt:
   expiration: ${JWT_EXPIRATION:60000}
 
 
-

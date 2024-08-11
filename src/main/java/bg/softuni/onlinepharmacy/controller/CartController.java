@@ -73,6 +73,6 @@ public class CartController {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/cart"; // Redirect back to cart if there is an interaction
         }
-        return "success-order";
+        return "redirect:/order-finished";
     }
 }

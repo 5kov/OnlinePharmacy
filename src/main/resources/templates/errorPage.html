@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/commons::head"></head>
+<head th:replace="fragments/commons::head"><title>Error</title></head>
 <body>
 <div class="container">
     <header th:replace="fragments/commons::header"></header>
-
-    <div class="form">
-        <h1>Administrator Page</h1>
-        <br><br>
-        <h3>Your order has been placed successfully!</h3>
-    </div>
-
+        <h1>Error</h1>
+        <p th:text="${error}"></p>
     <footer th:replace="fragments/commons::footer"></footer>
 </div>
 </body>
