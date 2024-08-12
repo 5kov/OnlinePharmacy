@@ -19,16 +19,20 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     List<UserEntity> findByUsernameContaining(String username);
 
-    @Transactional
-    @Modifying
-    @Query("DELETE FROM UserEntity u WHERE u.id = :id")
-    void deleteUserById(@Param("id") long id);
+//    @Transactional
+//    @Modifying
+//    @Query("DELETE FROM UserEntity u WHERE u.id = :id")
+//    void deleteUserById(@Param("id") long id);
 
     @Transactional
     @Modifying
-    @Query("UPDATE UserEntity u SET u.administrator = :adminStatus WHERE u.id = :id")
-    void updateUserAdminStatus(@Param("id") Long id, @Param("adminStatus") boolean adminStatus);
+    void deleteById(Long id);
 
-    long countByAdministrator(boolean b);
+//    @Transactional
+//    @Modifying
+//    @Query("UPDATE UserEntity u SET u.administrator = :adminStatus WHERE u.id = :id")
+//    void updateUserAdminStatus(@Param("id") Long id, @Param("adminStatus") boolean adminStatus);
+//
+//    long countByAdministrator(boolean b);
 
 }
