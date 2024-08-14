@@ -90,7 +90,6 @@ public class UserRegistrationLoginController {
         String currentPrincipalName = authentication.getName();
         UpdateUserDTO updateUserDTO = manageUserServiceImpl.findByUsername(currentPrincipalName);
 
-//        UpdateUserDTO updateUserDTO = manageUserService.findById(userId);
         model.addAttribute("updateUserDTO", updateUserDTO);
         return "user-settings";
     }

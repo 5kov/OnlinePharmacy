@@ -75,4 +75,3 @@ class JwtServiceImplTest {
         assertEquals(signingKey.getEncoded().length, expectedKeyBytes.length);
     }
 }
-

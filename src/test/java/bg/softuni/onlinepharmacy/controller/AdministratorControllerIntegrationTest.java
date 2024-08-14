@@ -263,4 +263,6 @@ public class AdministratorControllerIntegrationTest {
                 .andExpect(redirectedUrl("/administrator-manage-interactions"));
     }
 
+
+
 }
