@@ -13,11 +13,11 @@
                     <p th:text="#{login.error}">Invalid username or password</p>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="username" name="username" th:placeholder="#{username}"/>
+                    <input type="text" class="form-control" id="username" name="username" th:placeholder="#{username}" required minlength="3" maxlength="20" />
                 </div>
 
                 <div class="form-group">
-                    <input type="password" class="form-control" id="password" name="password" th:placeholder="#{password}"/>
+                    <input type="password" class="form-control" id="password" name="password" th:placeholder="#{password}" required minlength="3" maxlength="20"/>
                 </div>
 
                 <div class="form-group">
