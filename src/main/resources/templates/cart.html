@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/commons::head"></head>
+<head th:replace="~{fragments/commons :: head}"><title>None</title></head>
 <body>
 <div class="container">
-    <header th:replace="fragments/commons::header"></header>
+    <header th:replace="~{fragments/commons :: header}"></header>
 
         <div class="form">
             <div class="flex-container-cart">
@@ -26,8 +26,12 @@
                             </form>
                         </div>
                     </div>
-                    <p><span th:text="#{total_price}">Total Price</span><span>: </span><span th:text="${#numbers.formatDecimal(totalPrice, 1, 2)}"></span></p>
-
+                    <div th:if="${#lists.isEmpty(cartItems)}">
+                        <p th:text="#{cart_is_empty}">Cart is empty!</p>
+                    </div>
+                    <div th:if="${!#lists.isEmpty(cartItems)}">
+                        <p><span th:text="#{total_price}">Total Price</span><span>: </span><span th:text="${#numbers.formatDecimal(totalPrice, 1, 2)}"></span></p>
+                    </div>
                     <form th:action="@{/order}" method="post">
                         <button type="submit" class="button" th:text="#{place_order}">Place Order</button>
                     </form>
@@ -36,7 +40,7 @@
         </div>
 
 
-    <footer th:replace="fragments/commons::footer"></footer>
+    <footer th:replace="~{fragments/commons :: footer}"></footer>
 </div>
 </body>
 </html>

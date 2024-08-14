@@ -140,12 +140,7 @@ public class UserRegistrationLoginController {
 
     @PostMapping("/change-password")
     public String updateChangePassword(@ModelAttribute("updateUserDTO") @Valid UpdateUserDTO updateUserDTO,
-                                 BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
-//        if (bindingResult.hasErrors()) {
-//            redirectAttributes.addFlashAttribute("updateUserDTO", updateUserDTO);
-//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerData", bindingResult);
-//            return "change-password";
-//        }
+                                 BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         String success = manageUserServiceImpl.updatePassword(updateUserDTO);
         if (success.equals("passwordsDoNotMatch")) {
             redirectAttributes.addFlashAttribute("updateUserDTO", updateUserDTO);

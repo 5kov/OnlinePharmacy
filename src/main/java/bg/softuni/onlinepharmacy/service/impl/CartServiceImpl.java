@@ -21,10 +21,6 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private CartRepository cartRepository;
     @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
-    private OrderItemRepository orderItemRepository;
-    @Autowired
     private CartItemRepository cartItemRepository;
 
     @Autowired
@@ -63,6 +59,7 @@ public class CartServiceImpl implements CartService {
     public void updateCartItem(Long itemId, int quantity) {
         CartItem item = cartItemRepository.findById(itemId).orElseThrow();
         item.setQuantity(quantity);
+        item.setItemPrice((item.getItemPrice()/item.getQuantity()) * quantity);
         cartItemRepository.save(item);
     }
 

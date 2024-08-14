@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/commons::head"><title>none</title></head>
+<head th:replace="~{fragments/commons :: head}"><title>None</title></head>
 <body>
 <div class="container">
-    <header th:replace="fragments/commons::header"></header>
+    <header th:replace="~{fragments/commons :: header}"></header>
 
     <div class="form">
         <h1 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Add News</h1>
@@ -51,7 +51,7 @@
                 </form>
             </div>
     </div>
-    <footer th:replace="fragments/commons::footer"></footer>
+    <footer th:replace="~{fragments/commons :: footer}"></footer>
 </div>
 </body>
 </html>

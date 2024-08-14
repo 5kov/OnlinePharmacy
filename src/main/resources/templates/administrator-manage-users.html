@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/commons::head"></head>
+<html lang="en">
+<head th:replace="~{fragments/commons :: head}"><title>None</title></head>
 <body>
 <div class="container">
-    <header th:replace="fragments/commons::header"></header>
+    <header th:replace="~{fragments/commons :: header}"></header>
     <div class="form">
         <h1 th:text="#{administrator_page}">Administrator Page</h1>
         <h3 th:text="#{manage_users.message}">Manage users</h3>
@@ -26,7 +26,7 @@
             <div th:if="${error}" th:text="${error}">Error Message</div>
         </div>
     </div>
-    <footer th:replace="fragments/commons::footer"></footer>
+    <footer th:replace="~{fragments/commons :: footer}"></footer>
 </div>
 </body>
 </html>

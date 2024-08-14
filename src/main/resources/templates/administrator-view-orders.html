@@ -1,65 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/commons::head"></head>
+<head th:replace="~{fragments/commons :: head}"><title>None</title></head>
 <body>
 <div class="container">
-    <header th:replace="fragments/commons::header"></header>
+    <header th:replace="~{fragments/commons :: header}"></header>
 
-    <div class="form printable">
-        <h1 th:text="#{administrator_page}">Administrator Page</h1>
-        <h3 th:text="#{order_details}">Order Details</h3>
+    <div class="form">
+            <h1 th:text="#{administrator_page}">Administrator Page</h1>
+            <h3 th:text="#{order_details}">Order Details</h3>
 
-        <div th:each="order : ${orders}">
-            <p><strong th:text="#{order_id}">Order ID</strong><span><strong>: </strong></span> <span th:text="${order.id}"></span></p>
-            <p><strong th:text="#{order_date}">Order Date</strong><span><strong>: </strong></span> <span th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy HH:mm:ss')}"></span></p>
-            <p><strong th:text="#{username}">Username</strong><span><strong>: </strong></span> <span th:text="${order.user.username}"></span></p>
-            <p><strong th:text="#{first_name}">First Name</strong><span><strong>: </strong></span> <span th:text="${order.user.firstName}"></span></p>
-            <p><strong th:text="#{last_name}">Last Name</strong><span><strong>: </strong></span> <span th:text="${order.user.lastName}"></span></p>
-            <p><strong th:text="#{phone_number}">Phone Number</strong><span><strong>: </strong></span> <span th:text="${order.user.phoneNumber}"></span></p>
-            <p><strong th:text="#{address}">Address</strong><span><strong>: </strong></span> <span th:text="${order.user.street}"></span>, <span th:text="${order.user.city}"></span>, <span th:text="${order.user.postalCode}"></span></p>
-            <p><strong th:text="#{email}">Email</strong><span><strong>: </strong></span> <span th:text="${order.user.email}"></span></p>
+        <div class="printable">
+            <div th:each="order : ${orders}">
+                <p><strong th:text="#{order_id}">Order ID</strong><span><strong>: </strong></span> <span th:text="${order.id}"></span></p>
+                <p><strong th:text="#{order_date}">Order Date</strong><span><strong>: </strong></span> <span th:text="${#dates.format(order.orderDate, 'dd-MM-yyyy HH:mm:ss')}"></span></p>
+                <p><strong th:text="#{username}">Username</strong><span><strong>: </strong></span> <span th:text="${order.user.username}"></span></p>
+                <p><strong th:text="#{first_name}">First Name</strong><span><strong>: </strong></span> <span th:text="${order.user.firstName}"></span></p>
+                <p><strong th:text="#{last_name}">Last Name</strong><span><strong>: </strong></span> <span th:text="${order.user.lastName}"></span></p>
+                <p><strong th:text="#{phone_number}">Phone Number</strong><span><strong>: </strong></span> <span th:text="${order.user.phoneNumber}"></span></p>
+                <p><strong th:text="#{address}">Address</strong><span><strong>: </strong></span> <span th:text="${order.user.street}"></span>, <span th:text="${order.user.city}"></span>, <span th:text="${order.user.postalCode}"></span></p>
+                <p><strong th:text="#{email}">Email</strong><span><strong>: </strong></span> <span th:text="${order.user.email}"></span></p>
 
-            <h3 th:text="#{items}">Items<span><strong>: </strong></span></h3>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th th:text="#{medicine_name}">Medicine Name</th>
-                    <th th:text="#{quantity}">Quantity</th>
-                    <th th:text="#{price}">Price</th>
-                    <th th:text="#{total_price}">Total Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="item : ${order.orderItems}">
-                    <td th:text="__${#locale}__=='bg_BG' ? ${item.drug.medicineNameBg} : ${item.drug.medicineNameEn}">Medicine Name</td>
-                    <td th:text="${item.quantity}">Quantity</td>
-                    <td th:text="${#numbers.formatDecimal(item.itemPrice, 1, 2)}">Price</td>
-                    <td th:text="${#numbers.formatDecimal(item.itemPrice * item.quantity, 1, 2)}">Total Price</td>
+                <h3 th:text="#{items}">Items<span><strong>: </strong></span></h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th th:text="#{medicine_name}">Medicine Name</th>
+                        <th th:text="#{quantity}">Quantity</th>
+                        <th th:text="#{price}">Price</th>
+                        <th th:text="#{total_price}">Total Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${order.orderItems}">
+                        <td th:text="__${#locale}__=='bg_BG' ? ${item.drug.medicineNameBg} : ${item.drug.medicineNameEn}">Medicine Name</td>
+                        <td th:text="${item.quantity}">Quantity</td>
+                        <td th:text="${#numbers.formatDecimal(item.itemPrice, 1, 2)}">Price</td>
+                        <td th:text="${#numbers.formatDecimal(item.itemPrice * item.quantity, 1, 2)}">Total Price</td>
 
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="3" th:text="#{total_price}">Total Price of Order:</td>
-                    <td th:text="${#numbers.formatDecimal(order.getTotalPrice(), 1, 2)}"></td>
-
-                </tr>
-                </tfoot>
-            </table>
-
-            <button onclick="window.print()" class="button" th:text="#{print_order}">Print Order</button>
-
-            <div>
-                <a th:if="${orders.hasPrevious()}" th:href="@{/orders(page=${orders.number - 1})}" th:text="#{previous_order}">Previous Order</a>
-                <a th:if="${orders.hasNext()}" th:href="@{/orders(page=${orders.number + 1})}" th:text="#{next_order}">Next Order</a>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="3" th:text="#{total_price}">Total Price of Order:</td>
+                        <td th:text="${#numbers.formatDecimal(order.getTotalPrice(), 1, 2)}"></td>
+                    </tr>
+                    </tfoot>
+                </table>
             </div>
         </div>
+        <button onclick="window.print()" class="button-search" th:text="#{print_order}">Print Order</button>
+        <div>
+            <a th:if="${orders.hasPrevious()}" th:href="@{/orders(page=${orders.number - 1})}" th:text="#{previous_order}">Previous Order</a>
+            <a th:if="${orders.hasNext()}" th:href="@{/orders(page=${orders.number + 1})}" th:text="#{next_order}">Next Order</a>
+        </div>
+    </div>
+
 
     </div>
 
 
 
-    <footer th:replace="fragments/commons::footer"></footer>
+    <footer th:replace="~{fragments/commons :: footer}"></footer>
 </div>
 </body>
 </html>

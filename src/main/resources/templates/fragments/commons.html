@@ -38,7 +38,7 @@
             <li><a href="/user-settings" sec:authorize="isAuthenticated()" th:text="#{user_settings}">User settings</a></li>
             <li><form th:method="post"
                       th:action="@{/logout}" sec:authorize="isAuthenticated()">
-                <input type="submit" th:value="#{sign_out.message}" class="logout"/>
+                <input id="logout" type="submit" th:value="#{sign_out.message}" class="logout"/>
             </form></li>
             <li>
 

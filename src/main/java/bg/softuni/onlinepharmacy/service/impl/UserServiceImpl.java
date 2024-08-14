@@ -49,9 +49,7 @@ public class UserServiceImpl implements UserService {
         UserEntity mapped = modelMapper.map(data, UserEntity.class);
         mapped.setPassword(passwordEncoder.encode(data.getPassword()));
 
-        boolean firstUser = userRepository.findAll().stream()
-                .filter(u -> u.getRoles().stream().anyMatch(r -> r.getRole().equals(UserRoleEnum.ADMIN)))
-                .count() == 0;
+        boolean firstUser = userRepository.findAll().stream().noneMatch(u -> u.getRoles().stream().anyMatch(r -> r.getRole().equals(UserRoleEnum.ADMIN)));
         if(firstUser) {
             mapped.getRoles().add(adminRole);
         } else {

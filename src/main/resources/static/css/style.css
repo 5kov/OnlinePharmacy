@@ -261,6 +261,7 @@ li::marker {
 
     padding-top: 5em;
     padding-bottom: 5em;
+
     font-family: "PT Serif", serif;
     background-color: white;
 
@@ -773,4 +774,8 @@ ul.my-list li {
     display: flex;
     flex-direction: column; /* Ducks stand in a vertical line */
     align-items: flex-start; /* Ducks align vertically */
+}
+
+.button-width {
+    width: 10em;
 }

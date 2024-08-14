@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/commons::head"></head>
+<head th:replace="~{fragments/commons :: head}"><title>None</title></head>
 <body>
 <div class="container">
-    <header th:replace="fragments/commons::header"></header>
+    <header th:replace="~{fragments/commons :: header}"></header>
 
     <div class="form">
         <h1>Administrator Page</h1>
         <br><br>
-        <h3>New record is added successfully!</h3>
+        <h3 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">New record is added successfully!</h3>
+        <h3 th:class="__${#locale}__=='en_US' ? 'display' : ''">Добавен е нов запис успешно!</h3>
     </div>
 
-    <footer th:replace="fragments/commons::footer"></footer>
+    <footer th:replace="~{fragments/commons :: footer}"></footer>
 </div>
 </body>
 </html>

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/commons::head"></head>
+<head th:replace="~{fragments/commons :: head}"><title>None</title></head>
 <body>
 <div class="container">
-    <header th:replace="fragments/commons::header"></header>
+    <header th:replace="~{fragments/commons :: header}"></header>
 
     <div class="form">
-        <div><span>Your order has been placed successfully!</span></div>
+        <div th:class="__${#locale}__=='bg_BG' ? 'display' : ''"><span>Your order has been placed successfully!</span></div>
+        <div th:class="__${#locale}__=='en_US' ? 'display' : ''"><span>Заявката е дадена успешно!</span></div>
     </div>
-    <footer th:replace="fragments/commons::footer"></footer>
+    <footer th:replace="~{fragments/commons :: footer}"></footer>
 </div>
 </body>
 </html>

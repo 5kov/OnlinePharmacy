@@ -1,31 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/commons::head"></head>
+<head th:replace="~{fragments/commons :: head}"><title>None</title></head>
 <body>
 <div class="container">
-    <header th:replace="fragments/commons::header"></header>
+    <header th:replace="~{fragments/commons :: header}"></header>
 
     <div class="form">
         <h1>Administrator Page</h1>
         <h3>Manage medicines</h3>
-<!--        <div class="input-container">-->
-<!--            <input type="text" class="input-field" placeholder="Search Medicine" />-->
-<!--            <button class="button">Search</button>-->
-<!--            <input type="text" class="input-field" placeholder="Medicine Name in English" />-->
-<!--            <input type="text" class="input-field" placeholder="Medicine Name in Bulgarian" />-->
-<!--            <input type="number" step="0.01" class="input-field" placeholder="Price" />-->
-<!--            <input type="text" class="input-field" placeholder="Active Ingredient" />-->
-<!--            <input type="text" class="input-field" placeholder="Description in English" />-->
-<!--            <input type="text" class="input-field" placeholder="Description in Bulgarian" />-->
-<!--            <input type="text" class="input-field" placeholder="Image URL" />-->
-<!--            <button class="button">Save</button>-->
-<!--            <button class="button">Delete</button>-->
-<!--        </div>-->
-<!--    </div>-->
-
-
-
-        <h1>Manage Medicines</h1>
         <form th:action="@{/administrator-manage-medicines}" method="get">
             <input type="text" name="search" placeholder="Search by Name"/>
             <button type="submit">Search</button>
@@ -65,7 +47,8 @@
         </script>
 
 
-    <footer th:replace="fragments/commons::footer"></footer>
+        <footer th:replace="~{fragments/commons :: footer}"></footer>
+</div>
 </div>
 </body>
 </html>

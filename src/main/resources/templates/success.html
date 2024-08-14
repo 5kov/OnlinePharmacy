@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/commons::head"></head>
+<head th:replace="~{fragments/commons :: head}"><title>None</title>
+
+</head>
 <body>
 <div class="container">
-    <header th:replace="fragments/commons::header"></header>
+    <header th:replace="~{fragments/commons :: header}"></header>
 
     <div class="form">
-        <h1>Administrator Page</h1>
-        <h3>User settings</h3><br><br>
-        <h3>Settings are changed successfully!</h3>
+        <h3 th:class="__${#locale}__=='bg_BG' ? 'display' : ''">Settings are changed successfully!</h3>
+        <h3 th:class="__${#locale}__=='en_US' ? 'display' : ''">Настройките са променени успешно!</h3>
     </div>
 
-    <footer th:replace="fragments/commons::footer"></footer>
+    <script>
+        // Function to submit the form after 3 seconds
+        function submitFormAfterDelay() {
+            setTimeout(function() {
+                document.getElementById('logout').click();
+            }, 2000); // 3000 milliseconds = 3 seconds
+        }
+
+        // Automatically submit the form 3 seconds after the page is loaded
+        window.onload = function() {
+            submitFormAfterDelay();
+        };
+    </script>
+
+    <footer th:replace="~{fragments/commons :: footer}"></footer>
 </div>
 </body>
 </html>

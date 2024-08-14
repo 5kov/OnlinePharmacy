@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/commons::head"><title>Error</title></head>
+<head th:replace="~{fragments/commons :: head}"><title>None</title></head>
 <body>
 <div class="container">
-    <header th:replace="fragments/commons::header"></header>
+    <header th:replace="~{fragments/commons :: header}"></header>
         <h1>Error</h1>
         <p th:text="${error}"></p>
-    <footer th:replace="fragments/commons::footer"></footer>
+    <footer th:replace="~{fragments/commons :: footer}"></footer>
 </div>
 </body>
 </html>

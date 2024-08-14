@@ -8,8 +8,8 @@ import bg.softuni.onlinepharmacy.repository.ActiveIngredientRepository;
 import bg.softuni.onlinepharmacy.repository.InteractionRepository;
 import bg.softuni.onlinepharmacy.repository.MedicineRepository;
 import bg.softuni.onlinepharmacy.service.impl.ManageUserServiceImpl;
-import bg.softuni.onlinepharmacy.service.impl.UserServiceImpl;
 import jakarta.validation.Valid;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,8 +23,8 @@ import java.util.Optional;
 
 @Controller
 public class AdministratorController {
-    private final UserServiceImpl userServiceImpl;
     private final ManageUserServiceImpl manageUserServiceImpl;
+    private final ModelMapper modelMapper;
     @Autowired
     private ActiveIngredientRepository ingredientRepository;
     @Autowired
@@ -34,9 +34,9 @@ public class AdministratorController {
     @Autowired
     private InteractionRepository interactionRepository;
 
-    public AdministratorController(UserServiceImpl userServiceImpl, ManageUserServiceImpl manageUserServiceImpl) {
-        this.userServiceImpl = userServiceImpl;
+    public AdministratorController(ManageUserServiceImpl manageUserServiceImpl, ModelMapper modelMapper) {
         this.manageUserServiceImpl = manageUserServiceImpl;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/administrator-manage-users")
@@ -72,7 +72,7 @@ public class AdministratorController {
     }
 
     @PostMapping("/administrator-add-active-ingredient")
-    public String addIngredient(@ModelAttribute("ingredient") @Valid ActiveIngredientDTO ingredientDTO, BindingResult result, Model model) {
+    public String addIngredient(@ModelAttribute("ingredient") @Valid ActiveIngredientDTO ingredientDTO, BindingResult result) {
         if (ingredientRepository.existsByIngredientName(ingredientDTO.getIngredientName())) {
             result.rejectValue("ingredientName", "ingredientName.exist", "Active ingredient with this name already exists");
         }
@@ -84,11 +84,7 @@ public class AdministratorController {
             return "administrator-add-active-ingredient";
         }
 
-        // Conversion to entity and save logic goes here if validation passes
-        ActiveIngredient ingredient = new ActiveIngredient();
-        ingredient.setIngredientName(ingredientDTO.getIngredientName());
-        ingredient.setIngredientCode(ingredientDTO.getIngredientCode());
-        ingredientRepository.save(ingredient);
+        ingredientRepository.save(modelMapper.map(ingredientDTO, ActiveIngredient.class));
         return "success-medicine";
     }
 
@@ -138,14 +134,17 @@ public class AdministratorController {
     }
 
     private Medicine convertToEntity(MedicineDTO medicineDTO) {
-        Medicine medicine = medicineRepository.findById(medicineDTO.getId())
-                .orElse(new Medicine()); // Only create a new instance if the ID does not exist
-        medicine.setMedicineNameEn(medicineDTO.getMedicineNameEn());
-        medicine.setMedicineNameBg(medicineDTO.getMedicineNameBg());
-        medicine.setPrice(medicineDTO.getPrice());
-        medicine.setDescriptionEn(medicineDTO.getDescriptionEn());
-        medicine.setDescriptionBg(medicineDTO.getDescriptionBg());
-        medicine.setImageUrl(medicineDTO.getImageUrl());
+        Medicine medicine = modelMapper.map(medicineDTO, Medicine.class);
+        if (medicineRepository.findById(medicineDTO.getId()).isPresent()) {
+            medicine = medicineRepository.findById(medicineDTO.getId()).get();
+            medicine.setMedicineNameEn(medicineDTO.getMedicineNameEn());
+            medicine.setMedicineNameBg(medicineDTO.getMedicineNameBg());
+            medicine.setPrice(medicineDTO.getPrice());
+            medicine.setDescriptionEn(medicineDTO.getDescriptionEn());
+            medicine.setDescriptionBg(medicineDTO.getDescriptionBg());
+            medicine.setImageUrl(medicineDTO.getImageUrl());
+        }
+
         if (medicineDTO.getActiveIngredientId() != null) {
             ActiveIngredient ingredient = ingredientRepository.findById(medicineDTO.getActiveIngredientId())
                     .orElse(null);
@@ -194,14 +193,7 @@ public class AdministratorController {
     }
 
     private MedicineDTO convertToDto(Medicine medicine) {
-        MedicineDTO dto = new MedicineDTO();
-        dto.setId(medicine.getId());
-        dto.setMedicineNameEn(medicine.getMedicineNameEn());
-        dto.setMedicineNameBg(medicine.getMedicineNameBg());
-        dto.setPrice(medicine.getPrice());
-        dto.setDescriptionEn(medicine.getDescriptionEn());
-        dto.setDescriptionBg(medicine.getDescriptionBg());
-        dto.setImageUrl(medicine.getImageUrl());
+        MedicineDTO dto = modelMapper.map(medicine, MedicineDTO.class);
         dto.setActiveIngredientId(medicine.getActiveIngredient().getId());
         return dto;
     }

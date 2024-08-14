@@ -1,12 +1,6 @@
 spring:
   application:
     name: onlinepharmacy
-#  thymeleaf:
-#    check-template-location: true
-#    cache: false
-#    prefix: file:./src/main/resources/templates/
-#server:
-#  port: 8081
   datasource:
     url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/pharmacy?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
     username: root
